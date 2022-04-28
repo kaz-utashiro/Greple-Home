@@ -1,0 +1,66 @@
+[submodule "subst"]
+	path = subst
+	url = git@github.com:kaz-utashiro/greple-subst.git
+[submodule "wordle"]
+	path = wordle
+	url = git@github.com:kaz-utashiro/greple-wordle.git
+[submodule "ical"]
+	path = ical
+	url = git@github.com:kaz-utashiro/greple-ical.git
+[submodule "sccc2"]
+	path = sccc2
+	url = git@github.com:kaz-utashiro/greple-sccc2.git
+[submodule "frame"]
+	path = frame
+	url = git@github.com:kaz-utashiro/greple-frame.git
+[submodule "greple"]
+	path = greple
+	url = git@github.com:kaz-utashiro/greple.git
+[submodule "pw"]
+	path = pw
+	url = git@github.com:kaz-utashiro/greple-pw
+[submodule "aozora"]
+	path = aozora
+	url = git@github.com:kaz-utashiro/greple-aozora
+[submodule "ppi"]
+	path = ppi
+	url = github.com:kaz-utashiro/greple-ppi.git
+[submodule "subst-desumasu"]
+	path = subst-desumasu
+	url = git@github.com:kaz-utashiro/greple-subst-desumasu.git
+[submodule "jq"]
+	path = jq
+	url = git@github.com:kaz-utashiro/greple-jq.git
+[submodule "xp"]
+	path = xp
+	url = git@github.com:kaz-utashiro/greple-xp.git
+[submodule "git"]
+	path = git
+	url = git@github.com:kaz-utashiro/greple-git.git
+[submodule "daemon3"]
+	path = daemon3
+	url = git@github.com:kaz-utashiro/greple-daemon3.git
+[submodule "docx"]
+	path = docx
+	url = git@github.com:kaz-utashiro/greple-docx.git
+[submodule "fbsd2"]
+	path = fbsd2
+	url = git@github.com:kaz-utashiro/greple-fbsd2.git
+[submodule "mecab"]
+	path = mecab
+	url = git@github.com:kaz-utashiro/greple-mecab.git
+[submodule "tel"]
+	path = tel
+	url = git@github.com:kaz-utashiro/greple-tel.git
+[submodule "msdoc"]
+	path = msdoc
+	url = git@github.com:kaz-utashiro/greple-msdoc.git
+[submodule "p5-script-runner"]
+	path = p5-script-runner
+	url = git@github.com:kaz-utashiro/p5-script-runner.git
+[submodule "type"]
+	path = type
+	url = git@github.com:kaz-utashiro/greple-type.git
+[submodule "cm"]
+	path = cm
+	url = git@github.com:kaz-utashiro/greple-cm.git
