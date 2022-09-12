@@ -64,3 +64,6 @@
 [submodule "cm"]
 	path = cm
 	url = git@github.com:kaz-utashiro/greple-cm.git
+[submodule "update"]
+	path = update
+	url = git@github.com:kaz-utashiro/greple-update.git
