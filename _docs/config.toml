@@ -61,8 +61,8 @@ id = "UA-00000000-0"
 
 [languages]
 [languages.en]
-title = "Goldydocs"
-description = "A Docsy example site"
+title = "Greple Home"
+description = "All about Greple command"
 languageName ="English"
 # Weight used for sorting.
 weight = 1
@@ -92,7 +92,7 @@ section = ["HTML", "print", "RSS"]
 
 [params]
 copyright = "tecolicom"
-privacy_policy = "https://tecoli.com/privacy"
+#privacy_policy = "https://tecoli.com/privacy"
 
 # First one is picked as the Twitter card image if not set on page.
 # images = ["images/project-illustration.png"]
