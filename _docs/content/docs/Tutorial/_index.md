@@ -1,7 +1,7 @@
 ---
 title: "Tutorial"
 linkTitle: "Japanese Tutorial"
-weight: 8
+weight: 2
 date: 2022-11-23
 ---
 

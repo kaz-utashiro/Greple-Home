@@ -22,8 +22,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - uses: peaceiris/actions-hugo@v2
         with:
           hugo-version: latest
           extended: true
@@ -35,10 +34,11 @@ jobs:
             ${{ runner.os }}-hugomod-
 
       - uses: tecolicom/actions-install-node-modules@v1
-      - name: Build
-        run: cd _docs; hugo version; hugo --minify
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v1
+      - run: |
+          cd _docs
+          hugo version
+          hugo --minify
+      - uses: actions/upload-pages-artifact@v1
         with:
           path: ./_docs/public/
 
@@ -49,6 +49,5 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
+      - id: deployment
         uses: actions/deploy-pages@v1

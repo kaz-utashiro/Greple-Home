@@ -6,12 +6,11 @@ description: "Greple Home pages"
 author: Kaz Utashiro
 ---
 
-Created Greple command home using Hugo and Docsy theme.
-
-Cover photo was taked from here.
-
 Hugo と Docsy テーマを使って Greple コマンドのホームページを作りました。
+まだ、デフォルトのまますぎるので、ぼちぼちカスタマイズして行きましょう。
 
-使用したカバー写真はこちらから利用させてもらいました。
+{{< figure src="greple-home.png" link="http://kaz-utashiro.github.io/Greple-Home/" >}}
 
+カバー写真はこちらから。
 - [https://pixabay.com/images/id-2037286/](https://pixabay.com/images/id-2037286/)
+
