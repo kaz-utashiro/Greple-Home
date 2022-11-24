@@ -24,6 +24,7 @@ jobs:
       - uses: tecolicom/actions-use-apt-tools@v1
         with:
           tools: hugo
+          method: timestamp
       - uses: tecolicom/actions-install-node-modules@v1
       - name: Build
         run: cd _docs; hugo version; hugo --minify
