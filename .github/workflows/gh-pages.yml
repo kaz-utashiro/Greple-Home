@@ -21,11 +21,19 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-      - run: sudo apt update
-      - uses: tecolicom/actions-use-apt-tools@v1
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
         with:
-          tools: hugo
-          method: timestamp
+          hugo-version: latest
+          extended: true
+      - uses: actions/cache@v3
+        with:
+          path: /tmp/hugo_cache
+          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugomod-
+
       - uses: tecolicom/actions-install-node-modules@v1
       - name: Build
         run: cd _docs; hugo version; hugo --minify
