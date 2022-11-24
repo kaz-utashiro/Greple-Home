@@ -1,0 +1,781 @@
+<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=en class=no-js><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=generator content="Hugo 0.106.0"><meta name=robots content="index, follow"><link rel="shortcut icon" href=/Greple-Home/favicons/favicon.ico><link rel=apple-touch-icon href=/Greple-Home/favicons/apple-touch-icon-180x180.png sizes=180x180><link rel=icon type=image/png href=/Greple-Home/favicons/favicon-16x16.png sizes=16x16><link rel=icon type=image/png href=/Greple-Home/favicons/favicon-32x32.png sizes=32x32><link rel=icon type=image/png href=/Greple-Home/favicons/android-36x36.png sizes=36x36><link rel=icon type=image/png href=/Greple-Home/favicons/android-48x48.png sizes=48x48><link rel=icon type=image/png href=/Greple-Home/favicons/android-72x72.png sizes=72x72><link rel=icon type=image/png href=/Greple-Home/favicons/android-96x96.png sizes=96x96><link rel=icon type=image/png href=/Greple-Home/favicons/android-144x144.png sizes=144x144><link rel=icon type=image/png href=/Greple-Home/favicons/android-192x192.png sizes=192x192><title>greple | Greple Home</title><meta name=description content="extensible grep with lexical expression and region control"><meta property="og:title" content="greple"><meta property="og:description" content="extensible grep with lexical expression and region control"><meta property="og:type" content="article"><meta property="og:url" content="http://kaz-utashiro.github.io/Greple-Home/docs/manuals/greple/"><meta property="article:section" content="docs"><meta property="article:modified_time" content="2022-11-24T09:12:11+09:00"><meta itemprop=name content="greple"><meta itemprop=description content="extensible grep with lexical expression and region control"><meta itemprop=dateModified content="2022-11-24T09:12:11+09:00"><meta itemprop=wordCount content="7680"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="greple"><meta name=twitter:description content="extensible grep with lexical expression and region control"><link rel=preload href=/Greple-Home/scss/main.min.def2cdda5cfcd95d9660c969a68946395435ad5fc75402be473d9995c7e926b3.css as=style><link href=/Greple-Home/scss/main.min.def2cdda5cfcd95d9660c969a68946395435ad5fc75402be473d9995c7e926b3.css rel=stylesheet integrity><script src=https://code.jquery.com/jquery-3.6.0.min.js integrity=sha384-vtXRMe3mGCbOeY7l30aIg8H9p3GdeSe4IFlP6G8JMa7o7lXvnz3GFKzPxzJdPfGK crossorigin=anonymous></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-00000000-0"></script>
+<script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag("js",new Date),gtag("config","UA-00000000-0")}</script></head><body class=td-page><header><nav class="js-navbar-scroll navbar navbar-expand navbar-dark flex-column flex-md-row td-navbar"><a class=navbar-brand href=/Greple-Home/><span class="navbar-brand__logo navbar-logo"><svg id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 500 500" style="enable-background:new 0 0 500 500"><g><path style="fill:#fff" d="M116.8525 421.9722c-5.7041.0-10.3442-4.3127-10.3442-9.6129V88.183c0-5.3002 4.6401-9.6117 10.3442-9.6117H320.858c3.0347.0 9.3959.5498 11.7506 2.6302l.3545.3442 58.905 63.2912c2.3101 2.491 2.9202 8.4928 2.9202 11.3184v256.2039c0 5.3002-4.6407 9.6129-10.3436 9.6129H116.8525z"/><g><g><g><path style="fill:#767676" d="M384.4445 423.2066H116.852c-6.3839.0-11.5786-4.8658-11.5786-10.8474V88.1831c0-5.9804 5.1947-10.8461 11.5786-10.8461h204.0062c.377.0 9.2786.0329 12.568 2.9389l.3947.3833 58.9508 63.337c3.2135 3.4652 3.2514 11.7924 3.2514 12.1593v256.2036C396.0231 418.3408 390.8284 423.2066 384.4445 423.2066zM116.5079 411.9189c.0848.0278.1999.0531.3441.0531h267.5925c.1442.0.2581-.0253.3441-.0531V156.1556c-.0076-.9033-.3593-3.7347-.7034-5.0037l-57.6527-61.9416c-1.4651-.3176-4.4533-.6389-5.5742-.6389H116.852c-.143.0-.2594.024-.3441.0531V411.9189zm267.4533-261.149zM327.0321 89.371v.0013V89.371z"/></g></g></g><g><g><path style="fill:#5b7fc0" d="M189.0874 210.1754l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.025 2.454-11.4897 6.4116-15.4473C177.5953 212.627 183.0601 210.1742 189.0874 210.1754zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403S197.0816 234.1722 197.0804 232.033z"/><path style="opacity:.3;fill:#fff" d="M189.0898 210.176c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 212.6276 183.0612 210.176 189.0898 210.176zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 236.239 197.0839 234.2399 197.0839 232.0372z"/><g><defs><path id="SVGID_1_" d="M194.7376 237.6875c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.999 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 234.2399 196.1861 236.239 194.7376 237.6875z"/></defs><clipPath id="SVGID_2_"><use xlink:href="#SVGID_1_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_2_);fill:#fff" d="M190.0704 225.0237c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 225.7247 191.9774 225.0237 190.0704 225.0237z"/><path style="opacity:.13;clip-path:url(#SVGID_2_);fill:#020202" d="M190.0704 225.0237c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 225.7247 191.9774 225.0237 190.0704 225.0237z"/></g><g><defs><path id="SVGID_3_" d="M189.0898 210.176c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 212.6276 183.0612 210.176 189.0898 210.176zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 236.239 197.0839 234.2399 197.0839 232.0372z"/></defs><clipPath id="SVGID_4_"><use xlink:href="#SVGID_3_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_4_);fill:#5b7fc0" d="M172.6595 215.6045c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8612 12.0547.0024 21.8636-9.797 21.8613-21.8612.0024-3.8475-1.0151-7.6326-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 209.1953 176.6171 211.647 172.6595 215.6045z"/></g></g><rect x="198.8952" y="225.1043" style="fill:#5b7fc0" width="122.6266" height="13.8671"/></g><g><path style="fill:#d95140" d="M189.0874 155.7611l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.0249 2.454-11.4897 6.4116-15.4473C177.5953 158.2128 183.0601 155.7599 189.0874 155.7611zm7.993 21.8577c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403C196.2508 181.7667 197.0816 179.758 197.0804 177.6188z"/><path style="opacity:.3;fill:#fff" d="M189.0898 155.7617c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 158.2134 183.0612 155.7617 189.0898 155.7617zm7.9941 21.8613c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 181.8248 197.0839 179.8256 197.0839 177.623z"/><g><defs><path id="SVGID_5_" d="M194.7376 183.2733c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.9989 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 179.8256 196.1861 181.8248 194.7376 183.2733z"/></defs><clipPath id="SVGID_6_"><use xlink:href="#SVGID_5_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_6_);fill:#fff" d="M190.0704 170.6095c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 171.3104 191.9774 170.6095 190.0704 170.6095z"/><path style="opacity:.13;clip-path:url(#SVGID_6_);fill:#020202" d="M190.0704 170.6095c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9546.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.663-2.8588-6.116.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C193.7885 171.3104 191.9774 170.6095 190.0704 170.6095z"/></g><g><defs><path id="SVGID_7_" d="M189.0898 155.7617c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8066-21.8612-21.8613.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 158.2134 183.0612 155.7617 189.0898 155.7617zm7.9941 21.8613c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 181.8248 197.0839 179.8256 197.0839 177.623z"/></defs><clipPath id="SVGID_8_"><use xlink:href="#SVGID_7_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_8_);fill:#d95140" d="M172.6595 161.1903c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8613 12.0547.0024 21.8636-9.797 21.8613-21.8613.0024-3.8474-1.0151-7.6326-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 154.7811 176.6171 157.2327 172.6595 161.1903z"/></g><rect x="198.8952" y="170.69" style="fill:#d95140" width="122.6266" height="13.8671"/></g><g><g><path style="fill:#56a55c" d="M189.5379 264.6147l.0012-.0012c7.7751.0012 15.0294 4.1862 18.932 10.9235 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3304-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032-5.8394.0-11.3281-2.2733-15.458-6.4032-4.13-4.13-6.4032-9.6186-6.4056-15.4628.0012-6.0249 2.454-11.4897 6.4116-15.4472C178.0458 267.0663 183.5105 264.6135 189.5379 264.6147zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6538 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403C196.7013 290.6202 197.5321 288.6115 197.5309 286.4723z"/><path style="opacity:.3;fill:#fff" d="M189.5403 264.6153c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8065-21.8612-21.8613.0-6.0285 2.4516-11.492 6.4116-15.452C178.0482 267.0669 183.5117 264.6153 189.5403 264.6153zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.6366 290.6783 197.5344 288.6792 197.5344 286.4765z"/><g><defs><path id="SVGID_9_" d="M195.1881 292.1268c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.9989 7.9942-7.9941 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.5344 288.6792 196.6366 290.6783 195.1881 292.1268z"/></defs><clipPath id="SVGID_10_"><use xlink:href="#SVGID_9_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_10_);fill:#fff" d="M190.5209 279.463c-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7446-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9941 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C194.239 280.164 192.4279 279.463 190.5209 279.463z"/><path style="opacity:.13;clip-path:url(#SVGID_10_);fill:#020202" d="M190.5209 279.463c-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7446-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9941 2.3802-1e-4 4.616 1.0833 6.1218 2.8788C194.239 280.164 192.4279 279.463 190.5209 279.463z"/></g><g><defs><path id="SVGID_11_" d="M189.5403 264.6153c7.7763.0 15.0283 4.1826 18.926 10.9151 1.9201 3.3135 2.9377 7.0987 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8613-12.0547.0024-21.8636-9.8065-21.8612-21.8613.0-6.0285 2.4516-11.492 6.4116-15.452C178.0482 267.0669 183.5117 264.6153 189.5403 264.6153zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9941.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.6366 290.6783 197.5344 288.6792 197.5344 286.4765z"/></defs><clipPath id="SVGID_12_"><use xlink:href="#SVGID_11_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_12_);fill:#56a55c" d="M173.11 270.0439c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8613 12.0547.0024 21.8636-9.797 21.8613-21.8613.0024-3.8474-1.0151-7.6326-2.9353-10.9462-3.8977-6.7325-11.1497-10.9151-18.926-10.9151C182.5311 263.6346 177.0676 266.0863 173.11 270.0439z"/></g></g><rect x="199.3456" y="279.5436" style="fill:#56a55c" width="122.6266" height="13.8671"/></g><g><g><path style="fill:#f1bc42" d="M189.0874 318.7208l.0012-.0012c7.7751.0012 15.0295 4.1862 18.932 10.9234 1.9177 3.3159 2.9305 7.1011 2.9293 10.9378.0 5.8394-2.2733 11.3305-6.4032 15.4604-4.1288 4.1288-9.6186 6.4032-15.458 6.4032s-11.328-2.2733-15.458-6.4032-6.4032-9.6186-6.4056-15.4628c.0012-6.025 2.454-11.4897 6.4116-15.4472C177.5953 321.1724 183.0601 318.7196 189.0874 318.7208zm7.993 21.8576c.0012-1.4042-.3687-2.7868-1.063-3.9887-1.4293-2.4684-4.0833-3.9995-6.9299-4.0019-4.4077.0024-7.993 3.5877-7.993 7.993.0 2.1356.832 4.1431 2.3427 5.6539 1.5083 1.5083 3.5159 2.3403 5.6503 2.3415 2.1356.0 4.1443-.8308 5.6539-2.3403S197.0816 342.7176 197.0804 340.5784z"/><path style="opacity:.3;fill:#fff" d="M189.0898 318.7214c7.7763.0 15.0283 4.1826 18.926 10.915 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8612-12.0547.0024-21.8636-9.8065-21.8612-21.8612.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 321.173 183.0612 318.7214 189.0898 318.7214zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 344.7844 197.0839 342.7853 197.0839 340.5826z"/><g><defs><path id="SVGID_13_" d="M194.7376 346.2329c-1.4461 1.4461-3.4452 2.3439-5.6479 2.3439-4.4077-.0024-7.9918-3.5865-7.9942-7.9942.0024-4.4125 3.5937-7.999 7.9942-7.9942 2.8443.0 5.497 1.5323 6.924 3.9983.6991 1.2067 1.0702 2.5881 1.0702 3.9959C197.0839 342.7853 196.1861 344.7844 194.7376 346.2329z"/></defs><clipPath id="SVGID_14_"><use xlink:href="#SVGID_13_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_14_);fill:#fff" d="M190.0704 333.5691c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0834 6.1218 2.8788C193.7885 334.2701 191.9774 333.5691 190.0704 333.5691z"/><path style="opacity:.13;clip-path:url(#SVGID_14_);fill:#020202" d="M190.0704 333.5691c-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0011 1.9547.7088 3.7452 1.8782 5.1354-1.7447-1.4674-2.8575-3.6631-2.8588-6.1161.0024-4.4125 3.5936-7.999 7.9942-7.9942 2.3802-1e-4 4.616 1.0834 6.1218 2.8788C193.7885 334.2701 191.9774 333.5691 190.0704 333.5691z"/></g><g><defs><path id="SVGID_15_" d="M189.0898 318.7214c7.7763.0 15.0283 4.1826 18.926 10.915 1.9201 3.3136 2.9377 7.0988 2.9353 10.9462.0024 12.0643-9.8065 21.8636-21.8613 21.8612-12.0547.0024-21.8636-9.8065-21.8612-21.8612.0-6.0285 2.4516-11.4921 6.4116-15.452C177.5977 321.173 183.0612 318.7214 189.0898 318.7214zm7.9941 21.8612c0-1.4078-.3711-2.7892-1.0702-3.9959-1.4269-2.466-4.0797-3.9983-6.924-3.9983-4.4005-.0048-7.9918 3.5817-7.9942 7.9942.0024 4.4077 3.5865 7.9918 7.9942 7.9942 2.2027.0 4.2018-.8978 5.6479-2.3439C196.1861 344.7844 197.0839 342.7853 197.0839 340.5826z"/></defs><clipPath id="SVGID_16_"><use xlink:href="#SVGID_15_" style="overflow:visible"/></clipPath><path style="clip-path:url(#SVGID_16_);fill:#f1bc42" d="M172.6595 324.15c-3.96 3.96-6.4116 9.4235-6.4116 15.452-.0024 12.0547 9.8066 21.8636 21.8613 21.8612 12.0547.0024 21.8636-9.797 21.8613-21.8612.0024-3.8474-1.0151-7.6327-2.9353-10.9462-3.8977-6.7324-11.1497-10.9151-18.926-10.9151C182.0806 317.7407 176.6171 320.1924 172.6595 324.15z"/></g></g><rect x="198.8952" y="333.6497" style="fill:#f1bc42" width="122.6266" height="13.8671"/></g></g></svg></span><span class=navbar-brand__name>Greple Home</span></a><div class="td-navbar-nav-scroll ml-md-auto" id=main_navbar><ul class="navbar-nav mt-2 mt-lg-0"><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/Greple-Home/about/><span>About</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class="nav-link active" href=/Greple-Home/docs/><span class=active>Documentation</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/Greple-Home/blog/><span>Blog</span></a></li><li class="nav-item mr-4 mb-2 mb-lg-0"><a class=nav-link href=/Greple-Home/community/><span>Community</span></a></li></ul></div><div class="navbar-nav d-none d-lg-block"></div></nav></header><div class="container-fluid td-outer"><div class=td-main><div class="row flex-xl-nowrap"><aside class="col-12 col-md-3 col-xl-2 td-sidebar d-print-none"><div id=td-sidebar-menu class=td-sidebar__inner><form class="td-sidebar__search d-flex align-items-center"><button class="btn btn-link td-sidebar__toggle d-md-none p-0 ml-3 fas fa-bars" type=button data-toggle=collapse data-target=#td-section-nav aria-controls=td-section-nav aria-expanded=false aria-label="Toggle section navigation"></button></form><nav class="collapse td-sidebar-nav" id=td-section-nav><ul class="td-sidebar-nav__section pr-md-3 ul-0"><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-greple-homedocs-li><a href=/Greple-Home/docs/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section tree-root" id=m-greple-homedocs><span>Documentation</span></a><ul class=ul-1><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child active-path" id=m-greple-homedocsmanuals-li><a href=/Greple-Home/docs/manuals/ class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-greple-homedocsmanuals><span>Manuals</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child active-path" id=m-greple-homedocsmanualsgreple-li><a href=/Greple-Home/docs/manuals/greple/ class="align-left pl-0 active td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsgreple><span class=td-sidebar-nav-active-item>greple</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsaozora-li><a href=/Greple-Home/docs/manuals/aozora/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsaozora><span>greple -Maozora</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualscm-li><a href=/Greple-Home/docs/manuals/cm/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualscm><span>greple -Mcm</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsdaemon3-li><a href=/Greple-Home/docs/manuals/daemon3/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsdaemon3><span>greple -Mdaemon3</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsfbsd2-li><a href=/Greple-Home/docs/manuals/fbsd2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsfbsd2><span>greple -Mfbsd2</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsframe-li><a href=/Greple-Home/docs/manuals/frame/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsframe><span>greple -Mframe</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsgit-li><a href=/Greple-Home/docs/manuals/git/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsgit><span>greple -Mgit</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsical-li><a href=/Greple-Home/docs/manuals/ical/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsical><span>greple -Mical</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsjq-li><a href=/Greple-Home/docs/manuals/jq/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsjq><span>greple -Mjq</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsmecab-li><a href=/Greple-Home/docs/manuals/mecab/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsmecab><span>greple -Mmecab</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsmsdoc-li><a href=/Greple-Home/docs/manuals/msdoc/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsmsdoc><span>greple -Mmsdoc</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsppi-li><a href=/Greple-Home/docs/manuals/ppi/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsppi><span>greple -Mppi</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualspw-li><a href=/Greple-Home/docs/manuals/pw/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualspw><span>greple -Mpw</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualssccc2-li><a href=/Greple-Home/docs/manuals/sccc2/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualssccc2><span>greple -Msccc2</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualssubst-li><a href=/Greple-Home/docs/manuals/subst/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualssubst><span>greple -Msubst</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualssubst-desumasu-li><a href=/Greple-Home/docs/manuals/subst-desumasu/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualssubst-desumasu><span>greple -Msubst-desumasu</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualstel-li><a href=/Greple-Home/docs/manuals/tel/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualstel><span>greple -Mtel</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualstype-li><a href=/Greple-Home/docs/manuals/type/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualstype><span>greple -Mtype</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsupdate-li><a href=/Greple-Home/docs/manuals/update/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsupdate><span>greple -Mupdate</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualswordle-li><a href=/Greple-Home/docs/manuals/wordle/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualswordle><span>greple -Mwordle</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocsmanualsxp-li><a href=/Greple-Home/docs/manuals/xp/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocsmanualsxp><span>greple -Mxp</span></a></li></ul></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section with-child" id=m-greple-homedocstutorial-li><a href=/Greple-Home/docs/tutorial/ title=Tutorial class="align-left pl-0 td-sidebar-link td-sidebar-link__section" id=m-greple-homedocstutorial><span>Japanese Tutorial</span></a><ul class="ul-2 foldable"><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_01-li><a href=/Greple-Home/docs/tutorial/tut_01/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_01><span>はじめに</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_02-li><a href=/Greple-Home/docs/tutorial/tut_02/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_02><span>単純な検索</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_03-li><a href=/Greple-Home/docs/tutorial/tut_03/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_03><span>複数キーワードによる検索</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_04-li><a href=/Greple-Home/docs/tutorial/tut_04/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_04><span>複数キーワード検索 OR</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_05-li><a href=/Greple-Home/docs/tutorial/tut_05/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_05><span>複数キーワード検索 NOT</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_06-li><a href=/Greple-Home/docs/tutorial/tut_06/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_06><span>複数キーワード検索 MUST</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_07-li><a href=/Greple-Home/docs/tutorial/tut_07/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_07><span>複数キーワード検索 単独オプション</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_08-li><a href=/Greple-Home/docs/tutorial/tut_08/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_08><span>検索範囲指定 --inside/--outside</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_09-li><a href=/Greple-Home/docs/tutorial/tut_09/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_09><span>検索範囲指定 --include/--exclude</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_10-li><a href=/Greple-Home/docs/tutorial/tut_10/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_10><span>検索ブロック指定</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_11-li><a href=/Greple-Home/docs/tutorial/tut_11/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_11><span>拡張モジュールの使用法</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_12-li><a href=/Greple-Home/docs/tutorial/tut_12/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_12><span>初期設定ファイル .greplerc</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_13-li><a href=/Greple-Home/docs/tutorial/tut_13/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_13><span>カラーオプション</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_14-li><a href=/Greple-Home/docs/tutorial/tut_14/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_14><span>カラーオプション（続き）</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_15-li><a href=/Greple-Home/docs/tutorial/tut_15/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_15><span>カラーマップの切り替え</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_16-li><a href=/Greple-Home/docs/tutorial/tut_16/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_16><span>入出力フィルター</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_17-li><a href=/Greple-Home/docs/tutorial/tut_17/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_17><span>関数インタフェース</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_18-li><a href=/Greple-Home/docs/tutorial/tut_18/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_18><span>関数オプション</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_19-li><a href=/Greple-Home/docs/tutorial/tut_19/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_19><span>モジュールの作り方 (1)</span></a></li><li class="td-sidebar-nav__section-title td-sidebar-nav__section without-child" id=m-greple-homedocstutorialtut_20-li><a href=/Greple-Home/docs/tutorial/tut_20/ class="align-left pl-0 td-sidebar-link td-sidebar-link__page" id=m-greple-homedocstutorialtut_20><span>モジュールの作り方 (2)</span></a></li></ul></li></ul></li></ul></nav></div></aside><aside class="d-none d-xl-block col-xl-2 td-sidebar-toc d-print-none"><div class="td-page-meta ml-2 pb-1 pt-2 mb-0"><a href=https://github.com/kaz-utashiro/Greple-Home/tree/master/content/en/docs/Manuals/greple/index.md class=td-page-meta--view target=_blank rel=noopener><i class="fa-solid fa-file-lines fa-fw"></i> View page source</a>
+<a href=https://github.com/kaz-utashiro/Greple-Home/edit/master/content/en/docs/Manuals/greple/index.md class=td-page-meta--edit target=_blank rel=noopener><i class="fa-solid fa-pen-to-square fa-fw"></i> Edit this page</a>
+<a href="https://github.com/kaz-utashiro/Greple-Home/new/master/content/en/docs/Manuals/greple/index.md?filename=change-me.md&value=---%0Atitle%3A+%22Long+Page+Title%22%0AlinkTitle%3A+%22Short+Nav+Title%22%0Aweight%3A+100%0Adescription%3A+%3E-%0A+++++Page+description+for+heading+and+indexes.%0A---%0A%0A%23%23+Heading%0A%0AEdit+this+template+to+create+your+new+page.%0A%0A%2A+Give+it+a+good+name%2C+ending+in+%60.md%60+-+e.g.+%60getting-started.md%60%0A%2A+Edit+the+%22front+matter%22+section+at+the+top+of+the+page+%28weight+controls+how+its+ordered+amongst+other+pages+in+the+same+directory%3B+lowest+number+first%29.%0A%2A+Add+a+good+commit+message+at+the+bottom+of+the+page+%28%3C80+characters%3B+use+the+extended+description+field+for+more+detail%29.%0A%2A+Create+a+new+branch+so+you+can+preview+your+new+file+and+request+a+review+via+Pull+Request.%0A" class=td-page-meta--child target=_blank rel=noopener><i class="fa-solid fa-pen-to-square fa-fw"></i> Create child page</a>
+<a href="https://github.com/kaz-utashiro/Greple-Home/issues/new?title=greple" class=td-page-meta--issue target=_blank rel=noopener><i class="fa-solid fa-list-check fa-fw"></i> Create documentation issue</a>
+<a href=https://github.com/kaz-utashiro/Greple-Home/issues/new class=td-page-meta--project-issue target=_blank rel=noopener><i class="fa-solid fa-list-check fa-fw"></i> Create project issue</a>
+<a id=print href=http://kaz-utashiro.github.io/Greple-Home/docs/manuals/_print/><i class="fa-solid fa-print fa-fw"></i> Print entire section</a></div><div class=td-toc><nav id=TableOfContents><ul><li><a href=#name>NAME</a></li><li><a href=#version>VERSION</a></li><li><a href=#synopsis>SYNOPSIS</a></li><li><a href=#install>INSTALL</a><ul><li><a href=#cpanminus>CPANMINUS</a></li></ul></li><li><a href=#description>DESCRIPTION</a><ul><li><a href=#multiple-keywords>MULTIPLE KEYWORDS</a></li><li><a href=#flexible-blocks>FLEXIBLE BLOCKS</a></li><li><a href=#match-area-control>MATCH AREA CONTROL</a></li><li><a href=#line-across-match>LINE ACROSS MATCH</a></li><li><a href=#module-and-customization>MODULE AND CUSTOMIZATION</a></li><li><a href=#included-modues>INCLUDED MODUES</a></li></ul></li><li><a href=#options>OPTIONS</a><ul><li><a href=#patterns>PATTERNS</a></li><li><a href=#styles>STYLES</a></li><li><a href=#files>FILES</a></li><li><a href=#colors>COLORS</a></li><li><a href=#blocks>BLOCKS</a></li><li><a href=#regions>REGIONS</a></li><li><a href=#character-code>CHARACTER CODE</a></li><li><a href=#filter>FILTER</a></li><li><a href=#runtime-functions>RUNTIME FUNCTIONS</a></li><li><a href=#others>OTHERS</a></li></ul></li><li><a href=#environment-and-startup-file>ENVIRONMENT and STARTUP FILE</a></li><li><a href=#module>MODULE</a></li><li><a href=#history>HISTORY</a></li><li><a href=#see-also>SEE ALSO</a></li><li><a href=#author>AUTHOR</a></li><li><a href=#license>LICENSE</a></li></ul></nav></div></aside><main class="col-12 col-md-9 col-xl-8 pl-md-5" role=main><nav aria-label=breadcrumb class=td-breadcrumbs><ol class=breadcrumb><li class=breadcrumb-item><a href=http://kaz-utashiro.github.io/Greple-Home/docs/>Documentation</a></li><li class=breadcrumb-item><a href=http://kaz-utashiro.github.io/Greple-Home/docs/manuals/>Manuals</a></li><li class="breadcrumb-item active" aria-current=page><a href=http://kaz-utashiro.github.io/Greple-Home/docs/manuals/greple/ aria-disabled=true class="btn-link disabled">greple</a></li></ol></nav><div class=td-content><h1>greple</h1><div class=lead>extensible grep with lexical expression and region control</div><header class=article-meta></header><p><a href=https://github.com/kaz-utashiro/greple/actions><img src=https://github.com/kaz-utashiro/greple/workflows/test/badge.svg alt="Actions Status"></a> <a href=https://metacpan.org/release/App-Greple><img src=https://badge.fury.io/pl/App-Greple.svg alt="MetaCPAN Release"></a></p><h2 id=name>NAME</h2><p>greple - extensible grep with lexical expression and region control</p><h2 id=version>VERSION</h2><p>Version 8.59</p><h2 id=synopsis>SYNOPSIS</h2><p><strong>greple</strong> [<strong>-M</strong><em>module</em>] [ <strong>-options</strong> ] pattern [ file&mldr; ]</p><pre><code>PATTERN
+  pattern              'and +must -not ?alternative &amp;function'
+  -x, --le   pattern   lexical expression (same as bare pattern)
+  -e, --and  pattern   pattern match across line boundary
+  -r, --must pattern   pattern cannot be compromised
+  -v, --not  pattern   pattern not to be matched
+      --or   pattern   alternative pattern group
+      --re   pattern   regular expression
+      --fe   pattern   fixed expression
+  -f, --file file      file contains search pattern
+  --select index       select indexed pattern from -f file
+MATCH
+  -i                   ignore case
+  --need=[+-]n         required positive match count
+  --allow=[+-]n        acceptable negative match count
+  --matchcount=n[,m]   required match count for each block
+STYLE
+  -l                   list filename only
+  -c                   print count of matched block only
+  -n                   print line number
+  -H, -h               do or do not display filenames
+  -o                   print only the matching part
+  --all                print entire data
+  -m, --max=n[,m]      max count of blocks to be shown
+  -A,-B,-C [n]         after/before/both match context
+  --join               delete newline in the matched part
+  --joinby=string      replace newline in the matched text by string
+  --nonewline          do not add newline character at block end
+  --filestyle=style    how filename printed (once, separate, line)
+  --linestyle=style    how line number printed (separate, line)
+  --separate           set filestyle and linestyle both &quot;separate&quot;
+  --format LABEL=...   define line number and file name format
+  --frame-top          top frame
+  --frame-middle       middle frame
+  --frame-bottom       bottom frame
+FILE
+  --glob=glob          glob target files
+  --chdir=dir          change directory before search
+  --readlist           get filenames from stdin
+COLOR
+  --color=when         use terminal color (auto, always, never)
+  --nocolor            same as --color=never
+  --colormap=color     R, G, B, C, M, Y etc.
+  --colorful           use default multiple colors
+  --colorindex=flags   color index method: Ascend/Descend/Block/Random
+  --ansicolor=s        ANSI color 16, 256 or 24bit
+  --[no]256            same as --ansicolor 256 or 16
+  --regioncolor        use different color for inside/outside regions
+  --uniqcolor          use different color for unique string
+  --uniqsub=func       preprocess function before check uniqueness
+  --random             use random color each time
+  --face               set/unset visual effects
+BLOCK
+  -p, --paragraph      paragraph mode
+  --border=pattern     border pattern
+  --block=pattern      block of records
+  --blockend=s         block end mark (Default: &quot;--&quot;)
+  --join-blocks        join back-to-back consecutive blocks
+REGION
+  --inside=pattern     select matches inside of pattern
+  --outside=pattern    select matches outside of pattern
+  --include=pattern    reduce matches to the area
+  --exclude=pattern    reduce matches to outside of the area
+  --strict             strict mode for --inside/outside --block
+CHARACTER CODE
+  --icode=name         file encoding
+  --ocode=name         output encoding
+FILTER
+  --if,--of=filter     input/output filter command
+  --pf=filter          post process filter command
+  --noif               disable default input filter
+RUNTIME FUNCTION
+  --print=func         print function
+  --continue           continue after print function
+  --callback=func      callback function for matched string
+  --begin=func         call function before search
+  --end=func           call function after search
+  --prologue=func      call function before command execution
+  --epilogue=func      call function after command execution
+OTHER
+  --usage[=expand]     show this message
+  --exit=n             command exit status
+  --norc               skip reading startup file
+  --man                display command or module manual page
+  --show               display module file
+  --path               show module file path
+  --persist            same as --error=retry
+  --error=action       action after read error
+  --warn=type          run time error control
+  --alert [name=#]     set alert parameter (size/time)
+  -d flags             display info (f:file d:dir c:color m:misc s:stat)
+</code></pre><h2 id=install>INSTALL</h2><h3 id=cpanminus>CPANMINUS</h3><pre><code>$ cpanm App::Greple
+</code></pre><h2 id=description>DESCRIPTION</h2><h3 id=multiple-keywords>MULTIPLE KEYWORDS</h3><p><strong>greple</strong> has almost same function as Unix command <a href=http://man.he.net/man1/egrep>egrep(1)</a> but
+search is done in a manner similar to Internet search engine. For
+example, next command print lines those contain all of <code>foo</code> and
+<code>bar</code> and <code>baz</code>.</p><pre><code>greple 'foo bar baz' ...
+</code></pre><p>Each word can appear in any order and any place in the string. So
+this command find all of following lines.</p><pre><code>foo bar baz
+baz bar foo
+the foo, bar and baz
+</code></pre><p>If you want to use OR syntax, prepend question mark (<code>?</code>) on each
+token, or use regular expression.</p><pre><code>greple 'foo bar baz ?yabba ?dabba ?doo'
+greple 'foo bar baz yabba|dabba|doo'
+</code></pre><p>This command will print lines those contains all of <code>foo</code>, <code>bar</code> and
+<code>baz</code> and one or more of <code>yabba</code>, <code>dabba</code> or <code>doo</code>.</p><p>NOT operator can be specified by prefixing the token by minus sign
+(<code>-</code>). Next example will show lines those contain both <code>foo</code> and
+<code>bar</code> but none of <code>yabba</code>, <code>dabba</code> or <code>doo</code>.</p><pre><code>greple 'foo bar -yabba -dabba -doo'
+</code></pre><p>This can be written as this using <strong>-e</strong> and <strong>-v</strong> option.</p><pre><code>greple -e foo -e bar -v yabba -v dabba -v doo
+greple -e foo -e bar -v 'yabba|dabba|doo'
+</code></pre><p>If <code>+</code> is placed to positive matching pattern, that pattern is marked
+as required, and required match count is automatically set to the
+number of required patterns. So</p><pre><code>greple '+foo bar baz'
+</code></pre><p>commands implicitly set the option <code>--need 1</code>, and consequently print
+all lines including <code>foo</code>. In other words, it makes other patterns
+optional, but they are highlighted if exist. If you want to search
+lines which includes <code>foo</code> and either or both of <code>bar</code> and <code>baz</code>,
+use like this:</p><pre><code>greple '+foo bar baz' --need 2
+greple '+foo bar baz' --need +1
+greple 'foo bar|baz'
+</code></pre><h3 id=flexible-blocks>FLEXIBLE BLOCKS</h3><p>Default data block <strong>greple</strong> search and print is a line. Using
+<strong>&ndash;paragraph</strong> (or <strong>-p</strong> in short) option, series of text separated by
+empty line is taken as a record block. So next command will print
+whole paragraph which contains the word <code>foo</code>, <code>bar</code> and <code>baz</code>.</p><pre><code>greple -p 'foo bar baz'
+</code></pre><p>Block also can be defined by pattern. Next command treat the data as
+a series of 10-line unit.</p><pre><code>greple -n --border='(.*\n){1,10}'
+</code></pre><p>You can also define arbitrary complex blocks by writing script.</p><pre><code>greple --block '&amp;your_original_function' ...
+</code></pre><h3 id=match-area-control>MATCH AREA CONTROL</h3><p>Using option <strong>&ndash;inside</strong> and <strong>&ndash;outside</strong>, you can specify the text
+area to be matched. Next commands search only in mail header and body
+area respectively. In these cases, data block is not changed, so
+print lines which contains the pattern in the specified area.</p><pre><code>greple --inside '\A(.+\n)+' pattern
+
+greple --outside '\A(.+\n)+' pattern
+</code></pre><p>Option <strong>&ndash;inside</strong>/<strong>&ndash;outside</strong> can be used repeatedly to enhance the
+area to be matched. There are similar option
+<strong>&ndash;include</strong>/<strong>&ndash;exclude</strong>, but they are used to trim down the area.</p><p>These four options also take user defined function and any complex
+region can be used.</p><h3 id=line-across-match>LINE ACROSS MATCH</h3><p><strong>greple</strong> search a given pattern across line boundaries. This is
+especially useful to handle Asian multi-byte text, more specifically
+Japanese. Japanese text can be separated by newline almost any place
+in the text. So the search pattern may spread out onto multiple
+lines.</p><p>As for ascii word list, space character in the pattern matches any
+kind of space including newline. Next example will search the word
+sequence of <code>foo</code>, <code>bar</code> and <code>baz</code>, even they spread out to
+multiple lines.</p><pre><code>greple -e 'foo bar baz'
+</code></pre><p>Option <strong>-e</strong> is necessary because space is taken as a token separator
+in the bare or <strong>&ndash;le</strong> pattern.</p><h3 id=module-and-customization>MODULE AND CUSTOMIZATION</h3><p>User can define default and original options in <code>~/.greplerc</code>. Next
+example enables colored output always, and define new option using
+macro processing.</p><pre><code>option default --color=always
+
+define :re1 complex-regex-1
+define :re2 complex-regex-2
+define :re3 complex-regex-3
+option --newopt --inside :re1 --exclude :re2 --re :re3
+</code></pre><p>Specific set of function and option interface can be implemented as
+module. Modules are invoked by <strong>-M</strong> option immediately after command
+name.</p><p>For example, <strong>greple</strong> does not have recursive search option, but it
+can be implemented by <strong>&ndash;readlist</strong> option which accept target file
+list from standard input. Using <strong>find</strong> module, it can be written
+like this:</p><pre><code>greple -Mfind . -type f -- pattern
+</code></pre><p>Also <strong>dig</strong> module implements more complex search. It can be used as
+simple as this:</p><pre><code>greple -Mdig pattern --dig .
+</code></pre><p>but this command is finally translated into following option list.</p><pre><code>greple -Mfind . ( -name .git -o -name .svn -o -name RCS ) -prune -o
+    -type f ! -name .* ! -name *,v ! -name *~
+    ! -iname *.jpg ! -iname *.jpeg ! -iname *.gif ! -iname *.png
+    ! -iname *.tar ! -iname *.tbz  ! -iname *.tgz ! -iname *.pdf
+    -print -- pattern
+</code></pre><h3 id=included-modues>INCLUDED MODUES</h3><p>This release include some sample modules. Read document in each
+modules for detail. You can read the document by <strong>&ndash;man</strong> option or
+<a href=https://metacpan.org/pod/perldoc>perldoc</a> command.</p><pre><code>greple -Mdig --man
+
+perldoc App::Greple::dig
+</code></pre><p>When it does not work, use <code>perldoc App::Greple::dig</code>.</p><ul><li><p><strong>colors</strong></p><p>Color variation module.
+See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Acolors>App::Greple::colors</a>.</p></li><li><p><strong>find</strong></p><p>Module to use <a href=http://man.he.net/man1/find>find(1)</a> command to help recursive search.
+See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Afind>App::Greple::find</a>.</p></li><li><p><strong>dig</strong></p><p>Module for recursive search using <strong>find</strong> module. Defines <strong>&ndash;dig</strong>,
+<strong>&ndash;git</strong> and <strong>&ndash;git-r</strong> options. See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Adig>App::Greple::dig</a>.</p></li><li><p><strong>pgp</strong></p><p>Module to search <strong>pgp</strong> files.
+See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Apgp>App::Greple::pgp</a>.</p></li><li><p><strong>select</strong></p><p>Module to select files.
+See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Aselect>App::Greple::select</a>.</p></li><li><p><strong>perl</strong></p><p>Sample module to search from perl source files.
+See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Aperl>App::Greple::perl</a>.</p></li></ul><p>Other modules are available at CPAN, or git repository
+<a href=https://github.com/kaz-utashiro/>https://github.com/kaz-utashiro/</a>.</p><h2 id=options>OPTIONS</h2><h3 id=patterns>PATTERNS</h3><p>If no specific option is given, <strong>greple</strong> takes the first argument as
+a search pattern specified by <strong>&ndash;le</strong> option. All of these patterns
+can be specified multiple times.</p><p>Command itself is written in Perl, and any kind of Perl style regular
+expression can be used in patterns. See <a href=http://man.he.net/man1/perlre>perlre(1)</a> for detail.</p><p>Note that multiple line modifier (<code>m</code>) is set when executed, so put
+<code>(?-m)</code> at the beginning of regex if you want to explicitly disable
+it.</p><p>Order of capture group in the pattern is not guaranteed. Please avoid
+to use direct index, and use relative or named capture group instead.
+For example, if you want to search repeated characters, use
+<code>(\w)\g{-1}</code> or <code>(?&lt;c>\w)\g{c}</code> rather than
+<code>(\w)\1</code>.</p><ul><li><p><strong>-x</strong> <em>pattern</em>, <strong>&ndash;le</strong>=<em>pattern</em></p><p>Treat the string as a collection of tokens separated by spaces. Each
+token is interpreted by the first character. Token start with <code>-</code>
+means negative pattern, <code>?</code> means alternative, and <code>+</code> does
+required.</p><p>Next example print lines which contains <code>foo</code> and <code>bar</code>, and one or
+more of <code>yabba</code> and <code>dabba</code>, and none of <code>baz</code> and <code>doo</code>.</p><pre><code>  greple --le='foo bar -baz ?yabba ?dabba -doo'
+</code></pre><p>Multiple <code>?</code> preceded tokens are treated all mixed together. That
+means <code>?A|B ?C|D</code> is equivalent to <code>?A|B|C|D</code>. If you
+want to mean <code>(A or B)</code> and <code>(C or D)</code>, use AND syntax
+instead: <code>A|B C|D</code>.</p><p>This is the summary of start character for <strong>&ndash;le</strong> option:</p><pre><code>  +  Required pattern
+  -  Negative match pattern
+  ?  Alternative pattern
+  &amp;  Function call (see next section)
+</code></pre></li><li><p><strong>-x</strong>=[<strong>+-</strong>]<strong>&</strong><em>function</em>, <strong>&ndash;le</strong>=[<strong>+-</strong>]<strong>&</strong><em>function</em></p><p>If the pattern start with ampersand (<code>&</code>), it is treated as a
+function, and the function is called instead of searching pattern.
+Function call interface is same as the one for block/region options.</p><p>If you have a definition of <em>odd_line</em> function in you <code>.greplerc</code>,
+which is described in this manual later, you can print odd number
+lines like this:</p><pre><code>  greple -n '&amp;odd_line' file
+</code></pre><p>Required (<code>+</code>) and negative (<code>-</code>) mark can be used for function
+pattern.</p><p>This version experimentally support callback function for each
+pattern. Region list returned by function can have two extra element
+besides start/end position. Third element is index. Fourth element
+is callback function pointer which is called to produce string to be
+shown in command output. Callback function takes four argument (start
+position, end position, index, matched string) and returns replacement
+string.</p></li><li><p><strong>-e</strong> <em>pattern</em>, <strong>&ndash;and</strong>=<em>pattern</em></p><p>Specify positive match token. Next two commands are equivalent.</p><pre><code>  greple 'foo bar baz'
+  greple -e foo -e bar -e baz
+</code></pre><p>First character is not interpreted, so next commands will search the
+pattern <code>-baz</code>.</p><pre><code>  greple -e -baz
+</code></pre><p>Space characters are treated specially by <strong>-e</strong> and <strong>-v</strong> options.
+They are replaced by the pattern which matches any number of white
+spaces including newline. So the pattern can be expand to multiple
+lines. Next commands search the series of word <code>foo</code>, <code>bar</code> and
+<code>baz</code> even if they are separated by newlines.</p><pre><code>  greple -e 'foo bar baz'
+</code></pre></li><li><p><strong>-r</strong> <em>pattern</em>, <strong>&ndash;must</strong>=<em>pattern</em></p><p>Specify required match token. Next two commands are equivalent.</p><pre><code>  greple '+foo bar baz'
+  greple -r foo -e bar -e baz
+</code></pre></li><li><p><strong>-v</strong> <em>pattern</em>, <strong>&ndash;not</strong>=<em>pattern</em></p><p>Specify negative match token. Because it does not affect to the bare
+pattern argument, you can narrow down the search result like this.</p><pre><code>  greple foo file
+  greple foo file -v bar
+  greple foo file -v bar -v baz
+</code></pre></li><li><p><strong>&ndash;or</strong>=<em>pattern</em></p><p>Specify logical-or match token group. Same as <code>?</code> marked token in
+<strong>&ndash;le</strong> option. Next commands are all equivalent.</p><pre><code>  greple --le 'foo bar ?yabba ?dabba'
+  greple --and foo --and bar --or yabba --or dabba
+  greple -e foo -e bar -e 'yabba|dabba'
+</code></pre><p>Option <strong>&ndash;or</strong> group and each <strong>&ndash;le</strong> pattern makes individual
+pattern. So</p><pre><code>  greple --le '?foo ?yabba' --le '?bar ?dabba' --or baz --or doo
+</code></pre><p>is same as:</p><pre><code>  greple -e 'foo|yabba' -e 'bar|dabba' -e 'baz|doo'
+</code></pre></li><li><p><strong>&ndash;re</strong>=<em>pattern</em></p><p>Specify regular expression. No special treatment for space and wide
+characters.</p></li><li><p><strong>&ndash;fe</strong>=<em>pattern</em></p><p>Specify fixed string pattern, like fgrep.</p></li><li><p><strong>-i</strong>, <strong>&ndash;ignore-case</strong></p><p>Ignore case.</p></li><li><p><strong>&ndash;need</strong>=<em>n</em></p></li><li><p><strong>&ndash;allow</strong>=<em>n</em></p><p>Option to compromise matching condition. Option <strong>&ndash;need</strong> specifies
+the required match count, and <strong>&ndash;allow</strong> the number of negative
+condition to be overlooked.</p><pre><code>  greple --need=2 --allow=1 'foo bar baz -yabba -dabba -doo'
+</code></pre><p>Above command prints the line which contains two or more from <code>foo</code>,
+<code>bar</code> and <code>baz</code>, and does not include more than one of <code>yabba</code>,
+<code>dabba</code> or <code>doo</code>.</p><p>Using option <strong>&ndash;need</strong>=<em>1</em>, <strong>greple</strong> produces same result as <strong>grep</strong>
+command.</p><pre><code>  grep   -e foo -e bar -e baz
+  greple -e foo -e bar -e baz --need=1
+</code></pre><p>When the count <em>n</em> is negative value, it is subtracted from default
+value.</p><p>If the option <strong>&ndash;need=0</strong> is specified and no pattern was found,
+entire data is printed. This is true even for required pattern.</p></li><li><p><strong>&ndash;matchcount</strong>=<em>count</em>|<em>min</em>,<em>max</em>, <strong>&ndash;mc</strong>=&mldr;</p><p>When option <strong>&ndash;matchcount</strong> is specified, only blocks which have given
+match count will be shown. Minimum and maximum number can be given,
+connecting by comma, and they can be omitted. Next commands print
+lines including semicolons; 3 or more, exactly 3, and 3 or less,
+respectively.</p><pre><code>  greple --matchcount=3, ';' file
+
+  greple --matchcount=3  ';' file
+
+  greple --matchcount=,3 ';' file
+</code></pre><p>In fact, <em>min</em> and <em>max</em> can repeat to represent multiple range.
+Missing, negative or zero <em>max</em> means infinite. Next command find
+match count 0 to 10, 20 to 30, and 40-or-greater.</p><pre><code>  greple --matchcount=,10,20,30,40
+</code></pre></li><li><p><strong>-f</strong> <em>file</em>, <strong>&ndash;file</strong>=<em>file</em></p><p>Specify the file which contains search pattern. When file contains
+multiple lines, patterns are mixed together by OR context.</p><p>Blank line and the line starting with sharp (#) character is ignored.
+Two slashes (//) and following string are taken as a comment and
+removed with preceding spaces.</p><p>When multiple files specified, each file produces individual pattern.</p><p>If the file name is followed by <code>[index]</code> string, it is treated as
+specified by <strong>&ndash;select</strong> option. Next two commands are equivalent.</p><pre><code>  greple -f pattern_file'[1,5:7]'
+
+  greple -f pattern_file --select 1,5:7
+</code></pre><p>See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Asubst>App::Greple::subst</a> module.</p></li><li><p><strong>&ndash;select</strong>=<em>index</em></p><p>When you want to choose specific pattern in the pattern file provided
+by <strong>-f</strong> option, use <strong>&ndash;select</strong> option. <em>index</em> is number list
+separated by comma (,) character and each number is interpreted by
+<a href=https://metacpan.org/pod/Getopt%3A%3AEX%3A%3ANumbers>Getopt::EX::Numbers</a> module. Take a look at the module document for
+detail.</p><p>Next command use 1st and 5,6,7th pattern in the file.</p><pre><code>  greple -f pattern_file --select 1,5:7
+</code></pre></li></ul><h3 id=styles>STYLES</h3><ul><li><p><strong>-l</strong></p><p>List filename only.</p></li><li><p><strong>-c</strong>, <strong>&ndash;count</strong></p><p>Print count of matched block.</p></li><li><p><strong>-n</strong>, <strong>&ndash;line-number</strong></p><p>Show line number.</p></li><li><p><strong>-h</strong>, <strong>&ndash;no-filename</strong></p><p>Do not display filename.</p></li><li><p><strong>-H</strong></p><p>Display filename always.</p></li><li><p><strong>-o</strong>, <strong>&ndash;only-matching</strong></p><p>Print matched string only. Newline character is printed after matched
+string if it does not end with newline. Use <strong>&ndash;no-newline</strong> option if
+you don&rsquo;t need extra newline.</p></li><li><p><strong>&ndash;all</strong></p><p>Print entire file. This option does not affect to seach behavior or
+block treatment. Just print all contents.</p></li><li><p><strong>-m</strong> <em>n</em>[,<em>m</em>], <strong>&ndash;max-count</strong>=<em>n</em>[,<em>m</em>]</p><p>Set the maximum count of blocks to be shown to <em>n</em>.</p><p>Actually <em>n</em> and <em>m</em> are simply passed to perl <a href=https://metacpan.org/pod/splice>splice</a> function as
+<em>offset</em> and <em>length</em>. Works like this:</p><pre><code>  greple -m  10      # get first 10 blocks
+  greple -m   0,-10  # get last 10 blocks
+  greple -m   0,10   # remove first 10 blocks
+  greple -m -10      # remove last 10 blocks
+  greple -m  10,10   # remove 10 blocks from 10th (10-19)
+</code></pre><p>This option does not affect to search performance and command exit
+status.</p><p>Note that <strong>grep</strong> command also has same option, but it&rsquo;s behavior is
+different when invoked to multiple files. <strong>greple</strong> produces given
+number of output for each file, while <strong>grep</strong> takes it as a total
+number of output.</p></li><li><p><strong>-m</strong> <em>*</em>, <strong>&ndash;max-count</strong>=<em>*</em></p><p>In fact, <em>n</em> and <em>m</em> can repeat as many as possible. Next example
+removes first 10 blocks (by <code>0,10</code>), then get first 10 blocks from
+the result (by <code>10</code>). Consequently, get 10 blocks from 10th (10-19).</p><pre><code>  greple -m 0,10,10
+</code></pre><p>Next command get first 20 (by <code>20,</code>) and get last 10 (by <code>,-10</code>),
+producing same result. Empty string behaves like absence for
+<em>length</em> and zero for <em>offset</em>.</p><pre><code>  greple -m 20,,,-10
+</code></pre></li><li><p><strong>-A</strong>[<em>n</em>], <strong>&ndash;after-context</strong>[=<em>n</em>]</p></li><li><p><strong>-B</strong>[<em>n</em>], <strong>&ndash;before-context</strong>[=<em>n</em>]</p></li><li><p><strong>-C</strong>[<em>n</em>], <strong>&ndash;context</strong>[=<em>n</em>]</p><p>Print <em>n</em>-blocks before/after matched string. The value <em>n</em> can be
+omitted and the default is 2. When used with <strong>&ndash;paragraph</strong> or
+<strong>&ndash;block</strong> option, <em>n</em> means number of paragraph or block.</p><p>Actually, these options expand the area of logical operation. It
+means</p><pre><code>  greple -C1 'foo bar baz'
+</code></pre><p>matches following text.</p><pre><code>  foo
+  bar
+  baz
+</code></pre><p>Moreover</p><pre><code>  greple -C1 'foo baz'
+</code></pre><p>also matches this text, because matching blocks around <code>foo</code> and
+<code>bar</code> overlaps each other and makes single block.</p></li><li><p><strong>&ndash;join</strong></p></li><li><p><strong>&ndash;joinby</strong>=<em>string</em></p><p>Convert newline character found in matched string to empty or specified
+<em>string</em>. Using <strong>&ndash;join</strong> with <strong>-o</strong> (only-matching) option, you can
+collect searching sentence list in one per line form. This is
+sometimes useful for Japanese text processing. For example, next
+command prints the list of KATAKANA words, including those spread
+across multiple lines.</p><pre><code>  greple -ho --join '\p{InKatakana}+(\n\p{InKatakana}+)*'
+</code></pre><p>Space separated word sequence can be processed with <strong>&ndash;joinby</strong>
+option. Next example prints all <code>for *something*</code> pattern in pod
+documents within Perl script.</p><pre><code>  greple -Mperl --pod -ioe '\bfor \w+' --joinby ' '
+</code></pre></li><li><p><strong>&ndash;[no]newline</strong></p><p>Since <strong>greple</strong> can handle arbitrary blocks other than normal text
+lines, they sometimes do not end with newline character. Option <strong>-o</strong>
+makes similar situation. In that case, extra newline is appended at
+the end of block to be shown. Option <strong>&ndash;no-newline</strong> disables this
+behavior.</p></li><li><p><strong>&ndash;filestyle</strong>=<em>line</em>|<em>once</em>|<em>separate</em>, <strong>&ndash;fs</strong></p><p>Default style is <em>line</em>, and <strong>greple</strong> prints filename at the
+beginning of each line. Style <em>once</em> prints the filename only once
+at the first time. Style <em>separate</em> prints filename in the separate
+line before each line or block.</p></li><li><p><strong>&ndash;linestyle</strong>=<em>line</em>|<em>separate</em>, <strong>&ndash;ls</strong></p><p>Default style is <em>line</em>, and <strong>greple</strong> prints line numbers at the
+beginning of each line. Style <em>separate</em> prints line number in the
+separate line before each line or block.</p></li><li><p><strong>&ndash;separate</strong></p><p>Shortcut for <strong>&ndash;filestyle</strong>=<em>separate</em> <strong>&ndash;linestyle</strong>=<em>separate</em>.
+This is convenient to use block mode search and visiting each location
+from supporting tool, such as Emacs.</p></li><li><p><strong>&ndash;format</strong> <strong>LABEL</strong>=<em>format</em></p><p>Define the format string of line number (LINE) and file name (FILE) to
+be displayed. Default is:</p><pre><code>  --format LINE='%d:'
+
+  --format FILE='%s:'
+</code></pre><p>Format string is passed to <code>sprintf</code> function. Tab character can be
+expressed as <code>\t</code>.</p><p>Next example will show line numbers in five digits with tab space:</p><pre><code>  --format LINE='%05d\t'
+</code></pre></li><li><p><strong>&ndash;frame-top</strong>=<em>string</em></p></li><li><p><strong>&ndash;frame-middle</strong>=<em>string</em></p></li><li><p><strong>&ndash;frame-bottom</strong>=<em>string</em></p><p>Print surrounding frames before and after each block. <code>top</code> frame is
+printed at the beginning, <code>bottom</code> frame at the end, <code>middle</code> frame
+between blocks.</p></li></ul><h3 id=files>FILES</h3><ul><li><p><strong>&ndash;glob</strong>=<em>pattern</em></p><p>Get files matches to specified pattern and use them as a target files.
+Using <strong>&ndash;chdir</strong> and <strong>&ndash;glob</strong> makes easy to use <strong>greple</strong> for fixed
+common job.</p></li><li><p><strong>&ndash;chdir</strong>=<em>directory</em></p><p>Change directory before processing files. When multiple directories
+are specified in <strong>&ndash;chdir</strong> option, by using wildcard form or
+repeating option, <strong>&ndash;glob</strong> file expansion will be done for every
+directories.</p><pre><code>  greple --chdir '/usr/man/man?' --glob '*.[0-9]' ...
+</code></pre></li><li><p><strong>&ndash;readlist</strong></p><p>Get filenames from standard input. Read standard input and use each
+line as a filename for searching. You can feed the output from other
+command like <a href=http://man.he.net/man1/find>find(1)</a> for <strong>greple</strong> with this option. Next example
+searches string from files modified within 7 days:</p><pre><code>  find . -mtime -7 -print | greple --readlist pattern
+</code></pre><p>Using <strong>find</strong> module, this can be done like:</p><pre><code>  greple -Mfind . -mtime -7 -- pattern
+</code></pre></li></ul><h3 id=colors>COLORS</h3><ul><li><p><strong>&ndash;color</strong>=[<code>auto</code>,<code>always</code>,<code>never</code>], <strong>&ndash;nocolor</strong></p><p>Use terminal color capability to emphasize the matched text. Default
+is <code>auto</code>: effective when STDOUT is a terminal and option <strong>-o</strong> is
+not given, not otherwise. Option value <code>always</code> and <code>never</code> will
+work as expected.</p><p>Option <strong>&ndash;nocolor</strong> is alias for <strong>&ndash;color</strong>=<em>never</em>.</p><p>When color output is disabled, ANSI terminal sequence is not produced,
+but functional colormap, such as <code>--cm sub{...}</code>, still works.</p></li><li><p><strong>&ndash;colormap</strong>=<em>spec</em></p><p>Specify color map. Because this option is mostly implemented by
+<a href=https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AColormap>Getopt::EX::Colormap</a> module, consult its document for detail and
+up-to-date specification.</p><p>Color specification is combination of single uppercase character
+representing basic colors, and (usually brighter) alternative colors in
+lowercase:</p><pre><code>  R  r   Red
+  G  g   Green
+  B  b   Blue
+  C  c   Cyan
+  M  m   Magenta
+  Y  y   Yellow
+  K  k   Black
+  W  w   White
+</code></pre><p>or RGB value and 24 grey levels if using ANSI 256 color terminal:</p><pre><code>  (255,255,255)      : 24bit decimal RGB colors
+  #000000 .. #FFFFFF : 24bit hex RGB colors
+  #000    .. #FFF    : 12bit hex RGB 4096 colors
+  000 .. 555         : 6x6x6 RGB 216 colors
+  L00 .. L25         : Black (L00), 24 grey levels, White (L25)
+</code></pre><blockquote><pre><code>Beginning # can be omitted in 24bit RGB notation.
+
+When values are all same in 24bit or 12bit RGB, it is converted to 24
+grey level, otherwise 6x6x6 216 color.
+</code></pre></blockquote><p>or color names enclosed by angle bracket:</p><pre><code>  &lt;red&gt; &lt;blue&gt; &lt;green&gt; &lt;cyan&gt; &lt;magenta&gt; &lt;yellow&gt;
+  &lt;aliceblue&gt; &lt;honeydue&gt; &lt;hotpink&gt; &lt;mooccasin&gt;
+  &lt;medium_aqua_marine&gt;
+</code></pre><p>with other special effects:</p><pre><code>  N    None
+  Z  0 Zero (reset)
+  D  1 Double strike (boldface)
+  P  2 Pale (dark)
+  I  3 Italic
+  U  4 Underline
+  F  5 Flash (blink: slow)
+  Q  6 Quick (blink: rapid)
+  S  7 Stand out (reverse video)
+  H  8 Hide (concealed)
+  X  9 Cross out
+  E    Erase Line
+
+  ;    No effect
+  /    Toggle foreground/background
+  ^    Reset to foreground
+</code></pre><p>If the spec includes <code>/</code>, left side is considered as foreground color
+and right side as background. If multiple colors are given in same
+spec, all indicators are produced in the order of their presence. As
+a result, the last one takes effect.</p><p>Effect characters are case insensitive, and can be found anywhere and
+in any order in color spec string. Character <code>;</code> does nothing and
+can be used just for readability, like <code>SD;K/544</code>.</p><p>Example:</p><pre><code>  RGB  6x6x6    12bit      24bit           color name
+  ===  =======  =========  =============  ==================
+  B    005      #00F       (0,0,255)      &lt;blue&gt;
+   /M     /505      /#F0F   /(255,0,255)  /&lt;magenta&gt;
+  K/W  000/555  #000/#FFF  000000/FFFFFF  &lt;black&gt;/&lt;white&gt;
+  R/G  500/050  #F00/#0F0  FF0000/00FF00  &lt;red&gt;/&lt;green&gt;
+  W/w  L03/L20  #333/#ccc  303030/c6c6c6  &lt;dimgrey&gt;/&lt;lightgrey&gt;
+</code></pre><p>Multiple colors can be specified separating by white space or comma,
+or by repeating options. Those colors will be applied for each
+pattern keywords. Next command will show word <code>foo</code> in red, <code>bar</code>
+in green and <code>baz</code> in blue.</p><pre><code>  greple --colormap='R G B' 'foo bar baz'
+
+  greple --cm R -e foo --cm G -e bar --cm B -e baz
+</code></pre><p>Coloring capability is implemented in <a href=https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AColormap>Getopt::EX::Colormap</a> module.</p></li><li><p><strong>&ndash;colormap</strong>=<em>field</em>=<em>spec</em>,&mldr;</p><p>Another form of colormap option to specify the color for fields:</p><pre><code>  FILE      File name
+  LINE      Line number
+  TEXT      Unmatched normal text
+  BLOCKEND  Block end mark
+  PROGRESS  Progress status with -dnf option
+</code></pre><p>In current release, <code>BLOCKEND</code> mark is colored with <code>E</code> effect
+recently implemented in <a href=https://metacpan.org/pod/Getopt%3A%3AEX>Getopt::EX</a> module, which allows to fill up
+the line with background color. This effect uses irregular escape
+sequence, and you may need to define <code>LESSANSIENDCHARS</code> environment
+as &ldquo;mK&rdquo; to see the result with <a href=https://metacpan.org/pod/less>less</a> command.</p></li><li><p><strong>&ndash;colormap</strong>=<code>&func</code></p></li><li><p><strong>&ndash;colormap</strong>=<code>sub{...}</code></p><p>You can also set the name of perl subroutine name or definition to be
+called handling matched words. Target word is passed as variable
+<code>$_</code>, and the return value of the subroutine will be displayed.</p><p>Next command convert all words in C comment to upper case.</p><pre><code>  greple --all '/\*(?s:.*?)\*/' --cm 'sub{uc}'
+</code></pre><p>You can quote matched string instead of coloring (this emulates
+deprecated option <strong>&ndash;quote</strong>):</p><pre><code>  greple --cm 'sub{&quot;&lt;&quot;.$_.&quot;&gt;&quot;}' ...
+</code></pre><p>It is possible to use this definition with field names. Next example
+print line numbers in seven digits.</p><pre><code>  greple -n --cm 'LINE=sub{s/(\d+)/sprintf(&quot;%07d&quot;,$1)/e;$_}'
+</code></pre><p>Experimentally, function can be combined with other normal color
+specifications. Also the form <code>&amp;func;</code> can be repeated.</p><pre><code>  greple --cm 'BF/544;sub{uc}'
+
+  greple --cm 'R;&amp;func1;&amp;func2;&amp;func3'
+</code></pre><p>When color for &lsquo;TEXT&rsquo; field is specified, whole text including matched
+part is passed to the function, exceptionally. It is not recommended
+to use user defined function for &lsquo;TEXT&rsquo; field.</p></li><li><p><strong>&ndash;[no]colorful</strong></p><p>Shortcut for <strong>&ndash;colormap</strong>=&rsquo;<code>RD GD BD CD MD YD</code>&rsquo; in ANSI 16 colors
+mode, and <strong>&ndash;colormap</strong>=&rsquo;<code>D/544 D/454 D/445 D/455 D/454 D/554</code>&rsquo; and
+other combination of 3, 4, 5 for 256 colors mode. Enabled by default.</p><p>When single pattern is specified, first color in colormap is used for
+the pattern. If multiple patterns and multiple colors are specified,
+each pattern is colored with corresponding color cyclically.</p><p>Option <strong>&ndash;regioncolor</strong>, <strong>&ndash;uniqcolor</strong> and <strong>&ndash;colorindex</strong> change
+this behavior.</p></li><li><p><strong>&ndash;colorindex</strong>=<em>spec</em>, <strong>&ndash;ci</strong>=<em>spec</em></p><p>Specify color index method by combination of spec characters. <strong>A</strong>
+(ascend) and <strong>D</strong> (descend) can be mixed with <strong>B</strong> (block) and/or <strong>S</strong>
+(shuffle) like <strong>&ndash;ci=ABS</strong>. <strong>R</strong> (random) can be too but it does not
+make sense. When <strong>S</strong> is used alone, colormap is shuffled with normal
+behavior.</p><ul><li><p>A (Ascending)</p><p>Apply different color sequentially according to the order of
+appearance.</p></li><li><p>D (Descending)</p><p>Apply different color sequentially according to the reverse order of
+appearance.</p></li><li><p>B (Block)</p><p>Reset sequential index on every block.</p></li><li><p>S (Shuffle)</p><p>Shuffle indexed color.</p></li><li><p>R (Random)</p><p>Use random color index every time.</p></li><li><p>N (Normal)</p><p>Reset to normal behavior. Because the last option takes effect,
+<strong>&ndash;ci=N</strong> can be used to reset the behavior set by previous options.</p></li></ul></li><li><p><strong>&ndash;random</strong></p><p>Shortcut for <strong>&ndash;colorindex=R</strong>.</p></li><li><p><strong>&ndash;ansicolor</strong>=[<code>16</code>,<code>256</code>,<code>24bit</code>]</p><p>If set as <code>16</code>, use ANSI 16 colors as a default color set, otherwise
+ANSI 256 colors. When set as <code>24bit</code>, 6 hex digits notation produces
+24bit color sequence. Default is <code>256</code>.</p></li><li><p><strong>&ndash;[no]256</strong></p><p>Shortcut for <strong>&ndash;ansicolor</strong>=<code>256</code> or <code>16</code>.</p></li><li><p><strong>&ndash;[no]regioncolor</strong>, <strong>&ndash;[no]rc</strong></p><p>Use different colors for each <strong>&ndash;inside</strong>/<strong>outside</strong> region.</p><p>Disabled by default, but automatically enabled when only single search
+pattern is specified. Use <strong>&ndash;no-regioncolor</strong> to cancel automatic
+action.</p></li><li><p><strong>&ndash;[no]uniqcolor</strong>, <strong>&ndash;[no]uc</strong></p><p>Use different colors for different string matched.
+Disabled by default.</p><p>Next example prints all words start by <code>color</code> and display them all
+in different colors.</p><pre><code>  greple --uniqcolor 'colou?r\w*'
+</code></pre><p>When used with option <strong>-i</strong>, color is selected still in case-sensitive
+fashion. If you want case-insensitive color selection, use next
+<strong>&ndash;uniqsub</strong> option.</p></li><li><p><strong>&ndash;uniqsub</strong>=<em>function</em>, <strong>&ndash;us</strong>=<em>function</em></p><p>Above option <strong>&ndash;uniqcolor</strong> set same color for same literal string.
+Option <strong>&ndash;uniqsub</strong> specify the preprocessor code applied before
+comparison. <em>function</em> get matched string by <code>$_</code> and returns the
+result. For example, next command will choose unique colors for each
+word by their length.</p><pre><code>  greple --uniqcolor --uniqsub 'sub{length}' '\w+' file
+</code></pre><p>If you want case-insensitive color selection, do like this.</p><pre><code>  greple -i pattern --uc --uniqsub 'sub{lc}'
+</code></pre><p>Next command read the output from <code>git blame</code> command and set unique
+color for each entire line by their commit ids.</p><pre><code>  git blame ... | greple .+ --uc --us='sub{s/\s.*//r}' --face=E-D
+</code></pre></li><li><p><strong>&ndash;face</strong>=[-+]<em>effect</em></p><p>Set or unset specified <em>effect</em> for all indexed color specs. Use
+<code>+</code> (optional) to set, and <code>-</code> to unset. Effect is a single
+character expressing S (Stand-out), U (Underline), D (Double-struck),
+F (Flash) and such.</p><p>Next example remove D (double-struck) effect.</p><pre><code>  greple --face -D
+</code></pre><p>Multiple effects can be set/unset at once.</p><pre><code>  greple --face SF-D
+</code></pre></li></ul><h3 id=blocks>BLOCKS</h3><ul><li><p><strong>-p</strong>, <strong>&ndash;paragraph</strong></p><p>Print a paragraph which contains the pattern. Each paragraph is
+delimited by two or more successive newlines by default. Be aware
+that an empty line is not a paragraph delimiter if which contains
+space characters. Example:</p><pre><code>  greple -np 'setuid script' /usr/man/catl/perl.l
+
+  greple -pe '^struct sockaddr' /usr/include/sys/socket.h
+</code></pre><p>It changes the unit of context specified by <strong>-A</strong>, <strong>-B</strong>, <strong>-C</strong>
+options. Space gap between paragraphs are also treated as block
+unit. Thus, option <strong>-pC2</strong> will print with previous and next
+paragraph, while <strong>-pC1</strong> will print with just surrounding spaces.</p><p>You can create original paragraph pattern by <strong>&ndash;border</strong> option.</p></li><li><p><strong>&ndash;border</strong>=<em>pattern</em></p><p>Specify record block border pattern. Pattern match is done in the
+context of multiple line mode.</p><p>Default block is a single line and use <code>/^/m</code> as a pattern.
+Paragraph mode uses <code>/(?:\A|\R)\K\R+/</code>, which means continuous
+newlines at the beginning of text or following another newline (<code>\R</code>
+means more general linebreaks including <code>\r\n</code>; consult
+<a href=https://metacpan.org/pod/perlrebackslash>perlrebackslash</a> for detail).</p><p>Next command treat the data as a series of 10-line unit.</p><pre><code>  greple -n --border='(.*\n){1,10}'
+</code></pre><p>Contrary to the next <strong>&ndash;block</strong> option, <strong>&ndash;border</strong> never produce
+disjoint records.</p><p>If you want to treat entire file as a single block, setting border to
+start or end of whole data is efficient way. Next commands works
+same.</p><pre><code>  greple --border '\A'    # beginning of file
+  greple --border '\z'    # end of file
+</code></pre></li><li><p><strong>&ndash;block</strong>=<em>pattern</em></p></li><li><p><strong>&ndash;block</strong>=<em>&sub</em></p><p>Specify the record block to display. Default block is a single line.</p><p>Empty blocks are ignored. When blocks are not continuous, the match
+occurred outside blocks are ignored.</p><p>If multiple block options are given, overlapping blocks are merged
+into a single block.</p><p>Please be aware that this option is sometimes quite time consuming,
+because it finds all blocks before processing.</p></li><li><p><strong>&ndash;blockend</strong>=<em>string</em></p><p>Change the end mark displayed after <strong>-pABC</strong> or <strong>&ndash;block</strong> options.
+Default value is &ldquo;&ndash;&rdquo;.</p></li><li><p><strong>&ndash;join-blocks</strong></p><p>Join consecutive blocks together. Logical operation is done for each
+individual blocks, but if the results are back-to-back connected, make
+them single block for final output.</p></li></ul><h3 id=regions>REGIONS</h3><ul><li><p><strong>&ndash;inside</strong>=<em>pattern</em></p></li><li><p><strong>&ndash;outside</strong>=<em>pattern</em></p><p>Option <strong>&ndash;inside</strong> and <strong>&ndash;outside</strong> limit the text area to be matched.
+For simple example, if you want to find string <code>and</code> not in the word
+<code>command</code>, it can be done like this.</p><pre><code>  greple --outside=command and
+</code></pre><p>The block can be larger and expand to multiple lines. Next command
+searches from C source, excluding comment part.</p><pre><code>  greple --outside '(?s)/\*.*?\*/'
+</code></pre><p>Next command searches only from POD part of the perl script.</p><pre><code>  greple --inside='(?s)^=.*?(^=cut|\Z)'
+</code></pre><p>When multiple <strong>inside</strong> and <strong>outside</strong> regions are specified, those
+regions are mixed up in union way.</p><p>In multiple color environment, and if single keyword is specified,
+matches in each <strong>&ndash;inside</strong>/<strong>outside</strong> region is printed in different
+color. Forcing this operation with multiple keywords, use
+<strong>&ndash;regioncolor</strong> option.</p></li><li><p><strong>&ndash;inside</strong>=<em>&function</em></p></li><li><p><strong>&ndash;outside</strong>=<em>&function</em></p><p>If the pattern name begins by ampersand (&) character, it is treated
+as a name of subroutine which returns a list of blocks. Using this
+option, user can use arbitrary function to determine from what part of
+the text they want to search. User defined function can be defined in
+<code>.greplerc</code> file or by module option.</p></li><li><p><strong>&ndash;include</strong>=<em>pattern</em></p></li><li><p><strong>&ndash;exclude</strong>=<em>pattern</em></p></li><li><p><strong>&ndash;include</strong>=<em>&function</em></p></li><li><p><strong>&ndash;exclude</strong>=<em>&function</em></p><p><strong>&ndash;include</strong>/<strong>exclude</strong> option behave exactly same as
+<strong>&ndash;inside</strong>/<strong>outside</strong> when used alone.</p><p>When used in combination, <strong>&ndash;include</strong>/<strong>exclude</strong> are mixed in AND
+manner, while <strong>&ndash;inside</strong>/<strong>outside</strong> are in OR.</p><p>Thus, in the next example, first line prints all matches, and second
+does none.</p><pre><code>  greple --inside PATTERN --outside PATTERN
+
+  greple --include PATTERN --exclude PATTERN
+</code></pre><p>You can make up desired matches using <strong>&ndash;inside</strong>/<strong>outside</strong> option,
+then remove unnecessary part by <strong>&ndash;include</strong>/<strong>exclude</strong></p></li><li><p><strong>&ndash;strict</strong></p><p>Limit the match area strictly.</p><p>By default, <strong>&ndash;block</strong>, <strong>&ndash;inside</strong>/<strong>outside</strong>,
+<strong>&ndash;include</strong>/<strong>exclude</strong> option allows partial match within the
+specified area. For instance,</p><pre><code>  greple --inside and command
+</code></pre><p>matches pattern <code>command</code> because the part of matched string is
+included in specified inside-area. Partial match fails when option
+<strong>&ndash;strict</strong> provided, and longer string never matches within shorter
+area.</p><p>Interestingly enough, above example</p><pre><code>  greple --include PATTERN --exclude PATTERN
+</code></pre><p>produces output, as a matter of fact. Think of the situation
+searching, say, <code>' PATTERN '</code> with this condition. Matched area
+includes surrounding spaces, and satisfies both conditions partially.
+This match does not occur when option <strong>&ndash;strict</strong> is given, either.</p></li></ul><h3 id=character-code>CHARACTER CODE</h3><ul><li><p><strong>&ndash;icode</strong>=<em>code</em></p><p>Target file is assumed to be encoded in utf8 by default. Use this
+option to set specific encoding. When handling Japanese text, you may
+choose from 7bit-jis (jis), euc-jp or shiftjis (sjis). Multiple code
+can be supplied using multiple option or combined code names with
+space or comma, then file encoding is guessed from those code sets.
+Use encoding name <code>guess</code> for automatic recognition from default code
+list which is euc-jp and 7bit-jis. Following commands are all
+equivalent.</p><pre><code>  greple --icode=guess ...
+  greple --icode=euc-jp,7bit-jis ...
+  greple --icode=euc-jp --icode=7bit-jis ...
+</code></pre><p>Default code set are always included suspect code list. If you have
+just one code adding to suspect list, put + mark before the code name.
+Next example does automatic code detection from euc-kr, ascii, utf8
+and UTF-16/32.</p><pre><code>  greple --icode=+euc-kr ...
+</code></pre><p>If the string &ldquo;<strong>binary</strong>&rdquo; is given as encoding name, no character
+encoding is expected and all files are processed as binary data.</p></li><li><p><strong>&ndash;ocode</strong>=<em>code</em></p><p>Specify output code. Default is utf8.</p></li></ul><h3 id=filter>FILTER</h3><ul><li><p><strong>&ndash;if</strong>=<em>filter</em>, <strong>&ndash;if</strong>=<em>EXP</em>:<em>filter</em></p><p>You can specify filter command which is applied to each file before
+search. If only one filter command is specified, it is applied to all
+files. If filter information include colon, first field will be perl
+expression to check the filename saved in variable $_. If it
+successes, next filter command is pushed.</p><pre><code>  greple --if=rev perg
+  greple --if='/\.tar$/:tar tvf -'
+</code></pre><p>If the command doesn&rsquo;t accept standard input as processing data, you
+may be able to use special device:</p><pre><code>  greple --if='nm /dev/stdin' crypt /usr/lib/lib*
+</code></pre><p>Filters for compressed and gzipped file is set by default unless
+<strong>&ndash;noif</strong> option is given. Default action is like this:</p><pre><code>  greple --if='s/\.Z$//:zcat' --if='s/\.g?z$//:gunzip -c'
+</code></pre><p>File with <code>.gpg</code> suffix is filtered by <strong>gpg</strong> command. In that case,
+pass-phrase is asked for each file. If you want to input pass-phrase
+only once to find from multiple files, use <strong>-Mpgp</strong> module.</p><p>If the filter start with <code>&</code>, perl subroutine is called instead of
+external command. You can define the subroutine in <code>.greplerc</code> or
+modules. <strong>Greple</strong> simply call the subroutine, so it should be
+responsible for process control.</p></li><li><p><strong>&ndash;noif</strong></p><p>Disable default input filter. Which means compressed files will not
+be decompressed automatically.</p></li><li><p><strong>&ndash;of</strong>=<em>filter</em></p></li><li><p><strong>&ndash;of</strong>=<em>&func</em></p><p>Specify output filter which process the output of <strong>greple</strong> command.
+Filter command can be specified in multiple times, and they are
+invoked for each file to be processed. So next command reset the line
+number for each file.</p><pre><code>  greple --of 'cat -n' string file1 file2 ...
+</code></pre><p>If the filter start with <code>&</code>, perl subroutine is called instead of
+external command. You can define the subroutine in <code>.greplerc</code> or
+modules.</p><p>Output filter command is executed only when matched string exists to
+avoid invoking many unnecessary processes. No effect for option
+<strong>-l</strong> and <strong>-c</strong>.</p></li><li><p><strong>&ndash;pf</strong>=<em>filter</em></p></li><li><p><strong>&ndash;pf</strong>=<em>&func</em></p><p>Similar to <strong>&ndash;of</strong> filter but invoked just once and takes care of
+entire output from <strong>greple</strong> command.</p></li></ul><h3 id=runtime-functions>RUNTIME FUNCTIONS</h3><ul><li><p><strong>&ndash;print</strong>=<em>function</em></p></li><li><p><strong>&ndash;print</strong>=<em>sub{&mldr;}</em></p><p>Specify user defined function executed before data print. Text to be
+printed is replaced by the result of the function. Arbitrary function
+can be defined in <code>.greplerc</code> file or module. Matched data is placed
+in variable <code>$_</code>. Filename is passed by <code>&FILELABEL</code> key, as
+described later.</p><p>It is possible to use multiple <strong>&ndash;print</strong> options. In that case,
+second function will get the result of the first function. The
+command will print the final result of the last function.</p></li><li><p><strong>&ndash;continue</strong></p><p>When <strong>&ndash;print</strong> option is given, <strong>greple</strong> will immediately print the
+result returned from print function and finish the cycle. Option
+<strong>&ndash;continue</strong> forces to continue normal printing process after print
+function called. So please be sure that all data being consistent.</p></li><li><p><strong>&ndash;callback</strong>=<em>function</em>(<em>&mldr;</em>)</p><p>Callback function is called before printing every matched pattern with
+four labeled parameters: <strong>start</strong>, <strong>end</strong>, <strong>index</strong> and <strong>match</strong>,
+which corresponds to start and end position in the text, pattern
+index, and the matched string. Matched string in the text is replaced
+by returned string from the function.</p></li><li><p><strong>&ndash;begin</strong>=<em>function</em>(<em>&mldr;</em>)</p></li><li><p><strong>&ndash;begin</strong>=<em>function</em>=<em>&mldr;</em></p><p>Option <strong>&ndash;begin</strong> specify the function executed at the beginning of
+each file processing. This <em>function</em> have to be called from <strong>main</strong>
+package. So if you define the function in the module package, use the
+full package name or export properly.</p><p>If the function dies with a message starting with a word &ldquo;SKIP&rdquo;
+(<code>/^SKIP/i</code>), that file is simply skipped. So you can control if the
+file is to be processed using the file name or content. To see the
+message, use <strong>&ndash;warn begin=1</strong> option.</p><p>For example, using next function, only perl related files will be
+processed.</p><pre><code>  sub is_perl {
+      my %arg = @_;
+      my $name = delete $arg{&amp;FILELABEL} or die;
+      $name =~ /\.(?:pm|pl|PL|pod)$/ or /\A#!.*\bperl/
+          or die &quot;skip $name\n&quot;;
+  }
+
+  1;
+
+  __DATA__
+
+  option default --filestyle=once --format FILE='\n%s:\n'
+
+  autoload -Mdig --dig
+  option --perl $&lt;move&gt; --begin &amp;__PACKAGE__::is_perl --dig .
+</code></pre></li><li><p><strong>&ndash;end</strong>=<em>function</em>(<em>&mldr;</em>)</p></li><li><p><strong>&ndash;end</strong>=<em>function</em>=<em>&mldr;</em></p><p>Option <strong>&ndash;end</strong> is almost same as <strong>&ndash;begin</strong>, except that the function
+is called after the file processing.</p></li><li><p><strong>&ndash;prologue</strong>=<em>function</em>(<em>&mldr;</em>)</p></li><li><p><strong>&ndash;prologue</strong>=<em>function</em>=<em>&mldr;</em></p></li><li><p><strong>&ndash;epilogue</strong>=<em>function</em>(<em>&mldr;</em>)</p></li><li><p><strong>&ndash;epilogue</strong>=<em>function</em>=<em>&mldr;</em></p><p>Option <strong>&ndash;prologue</strong> and <strong>&ndash;epilogue</strong> specify functions called before
+and after processing. During the execution, file is not opened and
+therefore, file name is not given to those functions.</p></li><li><p><strong>-M</strong><em>module</em>::<em>function(&mldr;)</em></p></li><li><p><strong>-M</strong><em>module</em>::<em>function=&mldr;</em></p><p>Function can be given with module option, following module name. In
+this form, the function will be called with module package name. So
+you don&rsquo;t have to export it. Because it is called only once at the
+beginning of command execution, before starting file processing,
+<code>FILELABEL</code> parameter is not given exceptionally.</p></li></ul><p>For these run-time functions, optional argument list can be set in the
+form of <code>key</code> or <code>key=value</code>, connected by comma. These arguments
+will be passed to the function in key => value list. Sole key will
+have the value one. Also processing file name is passed with the key
+of <code>FILELABEL</code> constant. As a result, the option in the next form:</p><pre><code>--begin function(key1,key2=val2)
+--begin function=key1,key2=val2
+</code></pre><p>will be transformed into following function call:</p><pre><code>function(&amp;FILELABEL =&gt; &quot;filename&quot;, key1 =&gt; 1, key2 =&gt; &quot;val2&quot;)
+</code></pre><p>As described earlier, <code>FILELABEL</code> parameter is not given to the
+function specified with module option. So</p><pre><code>-Mmodule::function(key1,key2=val2)
+-Mmodule::function=key1,key2=val2
+</code></pre><p>simply becomes:</p><pre><code>function(key1 =&gt; 1, key2 =&gt; &quot;val2&quot;)
+</code></pre><p>The function can be defined in <code>.greplerc</code> or modules. Assign the
+arguments into hash, then you can access argument list as member of
+the hash. It&rsquo;s safe to delete FILELABEL key if you expect random
+parameter is given. Content of the target file can be accessed by
+<code>$_</code>. Ampersand (<code>&</code>) is required to avoid the hash key is
+interpreted as a bare word.</p><pre><code>sub function {
+    my %arg = @_;
+    my $filename = delete $arg{&amp;FILELABEL};
+    $arg{key1};             # 1
+    $arg{key2};             # &quot;val2&quot;
+    $_;                     # contents
+}
+</code></pre><h3 id=others>OTHERS</h3><ul><li><p><strong>&ndash;usage</strong>[=<em>expand</em>]</p><p><strong>Greple</strong> print usage and exit with option <strong>&ndash;usage</strong>, or no valid
+parameter is not specified. In this case, module option is displayed
+with help information if available. If you want to see how they are
+expanded, supply something not empty to <strong>&ndash;usage</strong> option, like:</p><pre><code>  greple -Mmodule --usage=expand
+</code></pre></li><li><p><strong>&ndash;exit</strong>=<em>number</em></p><p>When <strong>greple</strong> executed normally, it exit with status 0 or 1 depending
+on something matched or not. Sometimes we want to get status 0 even
+if nothing matched. This option set the status code for normal
+execution. It still exits with non-zero status when error occurred.</p></li><li><p><strong>&ndash;man</strong>, <strong>&ndash;doc</strong></p><p>Show manual page.
+Display module&rsquo;s manual page when used with <strong>-M</strong> option.</p></li><li><p><strong>&ndash;show</strong>, <strong>&ndash;less</strong></p><p>Show module file contents. Use with <strong>-M</strong> option.</p></li><li><p><strong>&ndash;path</strong></p><p>Show module file path. Use with <strong>-M</strong> option.</p></li><li><p><strong>&ndash;norc</strong></p><p>Do not read startup file: <code>~/.greplerc</code>. This option have to be
+placed before any other options including <strong>-M</strong> module options.
+Setting <code>GREPLE_NORC</code> environment have same effect.</p></li><li><p><strong>&ndash;conceal</strong> <em>type</em>=<em>val</em></p><p>Use following <strong>&ndash;warn</strong> option in reverse context. This option
+remains for backward compatibility and will be deprecated in the near
+future.</p></li><li><p><strong>&ndash;persist</strong></p><p>Same as <strong>&ndash;error=retry</strong>. It may be deprecated in the future.</p></li><li><p><strong>&ndash;error</strong>=<em>action</em></p><p>As <strong>greple</strong> tries to read data as a character string, sometimes fails
+to convert them into internal representation, and the file is skipped
+without processing by default. This works fine to skip binary
+data. (<strong>skip</strong>)</p><p>Also sometimes encounters code mapping error due to character
+encoding. In this case, reading the file as a binary data helps to
+produce meaningful output. (<strong>retry</strong>)</p><p>This option specifies the action when data read error occurred.</p><ul><li><p><strong>skip</strong></p><p>Skip the file. Default.</p></li><li><p><strong>retry</strong></p><p>Retry reading the file as a binary data.</p></li><li><p><strong>fatal</strong></p><p>Abort the operation.</p></li><li><p><strong>ignore</strong></p><p>Ignore error and continue to read anyway.</p></li></ul><p>You may occasionally want to find text in binary data. Next command
+will work like <a href=http://man.he.net/man1/string>string(1)</a> command.</p><pre><code>  greple -o --re '(?a)\w{4,}' --error=retry --uc /bin/*
+</code></pre><p>If you want read all files as binary data, use <strong>&ndash;icode=binary</strong>
+instead.</p></li><li><p><strong>-w</strong>, <strong>&ndash;warn</strong> <em>type</em>=[<code>0</code>,<code>1</code>]</p><p>Control runtime message mainly about file operation related to
+<strong>&ndash;error</strong> option. Repeatable. Value is optional and 1 is assumed
+when omitted. So <strong>-wall</strong> option is same as <strong>-wall=1</strong> and enables
+all messages, and <strong>-wall=0</strong> disables all.</p><p>Types are:</p><ul><li><p><strong>read</strong></p><p>(Default 0) Errors occurred during file read. Mainly unicode related
+errors when reading binary or ambiguous text file.</p></li><li><p><strong>skip</strong></p><p>(Default 1) File skip message.</p></li><li><p><strong>retry</strong></p><p>(Default 0) File retry message.</p></li><li><p><strong>begin</strong></p><p>(Default 0) When <strong>&ndash;begin</strong> function died with <code>/^SKIP/i</code> message,
+the file is skipped without any notice. Enables this to see the dying
+message.</p></li><li><p><strong>all</strong></p><p>Set same value for all types.</p></li></ul></li><li><p><strong>&ndash;alert</strong> [ <em>size</em>=# | <em>time</em>=# ]</p><p>Set alert parameter for large file. <strong>Greple</strong> scans whole file
+content to know line borders, and it takes several seconds or more if
+it contains large number of lines.</p><p>By default, if the target file contains more than <strong>512 * 1024
+characters</strong> (<em>size</em>), <strong>2 seconds</strong> timer will start (<em>time</em>). Alert
+message is shown when the timer expired.</p><p>To disable this alert, set the size as zero:</p><pre><code>  --alert size=0
+</code></pre></li><li><p><strong>-Mdebug</strong>, <strong>-d</strong><em>x</em></p><p>Debug option is described in <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Adebug>App::Greple::debug</a> module.</p></li></ul><h2 id=environment-and-startup-file>ENVIRONMENT and STARTUP FILE</h2><ul><li><p><strong>GREPLEOPTS</strong></p><p>Environment variable GREPLEOPTS is used as a default options. They
+are inserted before command line options.</p></li><li><p><strong>GREPLE_NORC</strong></p><p>If set non-empty string, startup file <code>~/.greplerc</code> is not processed.</p></li><li><p><strong>DEBUG_GETOPT</strong></p><p>Enable <a href=https://metacpan.org/pod/Getopt%3A%3ALong>Getopt::Long</a> debug option.</p></li><li><p><strong>DEBUG_GETOPTEX</strong></p><p>Enable <a href=https://metacpan.org/pod/Getopt%3A%3AEX>Getopt::EX</a> debug option.</p></li><li><p><strong>NO_COLOR</strong></p><p>If true, all coloring capability with ANSI terminal sequence is
+disabled. See <a href=https://no-color.org/>https://no-color.org/</a>.</p></li></ul><p>Before starting execution, <strong>greple</strong> reads the file named <code>.greplerc</code>
+on user&rsquo;s home directory. Following directives can be used.</p><ul><li><p><strong>option</strong> <em>name</em> string</p><p>Argument <em>name</em> of <strong>option</strong> directive is user defined option name.
+The rest are processed by <code>shellwords</code> routine defined in
+Text::ParseWords module. Be sure that this module sometimes requires
+escape backslashes.</p><p>Any kind of string can be used for option name but it is not combined
+with other options.</p><pre><code>  option --fromcode --outside='(?s)\/\*.*?\*\/'
+  option --fromcomment --inside='(?s)\/\*.*?\*\/'
+</code></pre><p>If the option named <strong>default</strong> is defined, it will be used as a
+default option.</p><p>For the purpose to include following arguments within replaced
+strings, two special notations can be used in option definition.
+String <code>$&lt;n></code> is replaced by the _n_th argument after the
+substituted option, where <em>n</em> is number start from one. String
+<code>$&lt;shift></code> is replaced by following command line argument and
+the argument is removed from option list.</p><p>For example, when</p><pre><code>  option --line --le &amp;line=$&lt;shift&gt;
+</code></pre><p>is defined, command</p><pre><code>  greple --line 10,20-30,40
+</code></pre><p>will be evaluated as this:</p><pre><code>  greple --le &amp;line=10,20-30,40
+</code></pre></li><li><p><strong>expand</strong> <em>name</em> <em>string</em></p><p>Define local option <em>name</em>. Command <strong>expand</strong> is almost same as
+command <strong>option</strong> in terms of its function. However, option defined
+by this command is expanded in, and only in, the process of
+definition, while option definition is expanded when command arguments
+are processed.</p><p>This is similar to string macro defined by following <strong>define</strong>
+command. But macro expansion is done by simple string replacement, so
+you have to use <strong>expand</strong> to define option composed by multiple
+arguments.</p></li><li><p><strong>define</strong> <em>name</em> string</p><p>Define macro. This is similar to <strong>option</strong>, but argument is not
+processed by <em>shellwords</em> and treated just a simple text, so
+meta-characters can be included without escape. Macro expansion is
+done for option definition and other macro definition. Macro is not
+evaluated in command line option. Use option directive if you want to
+use in command line,</p><pre><code>  define (#kana) \p{InKatakana}
+  option --kanalist --nocolor -o --join --re '(#kana)+(\n(#kana)+)*'
+  help   --kanalist List up Katakana string
+</code></pre></li><li><p><strong>help</strong> <em>name</em></p><p>If <strong>help</strong> directive is used for same option name, it will be printed
+in usage message. If the help message is <code>ignore</code>, corresponding
+line won&rsquo;t show up in the usage.</p></li><li><p><strong>builtin</strong> <em>spec</em> <em>variable</em></p><p>Define built-in option which should be processed by option parser.
+Arguments are assumed to be <a href=https://metacpan.org/pod/Getopt%3A%3ALong>Getopt::Long</a> style spec, and
+<em>variable</em> is string start with <code>$</code>, <code>@</code> or <code>%</code>. They will be
+replaced by a reference to the object which the string represent.</p><p>See <strong>pgp</strong> module for example.</p></li><li><p><strong>autoload</strong> <em>module</em> <em>options</em> &mldr;</p><p>Define module which should be loaded automatically when specified
+option is found in the command arguments.</p><p>For example,</p><pre><code>  autoload -Mdig --dig --git
+</code></pre><p>replaces option &ldquo;<code>--dig</code>&rdquo; to &ldquo;<code>-Mdig --dig</code>&rdquo;, so that <strong>dig</strong> module
+is loaded before processing <code>--dig</code> option.</p></li></ul><p>Environment variable substitution is done for string specified by
+<code>option</code> and <code>define</code> directives. Use Perl syntax <strong>$ENV{NAME}</strong> for
+this purpose. You can use this to make a portable module.</p><p>When <strong>greple</strong> found <code>__PERL__</code> line in <code>.greplerc</code> file, the rest
+of the file is evaluated as a Perl program. You can define your own
+subroutines which can be used by <strong>&ndash;inside</strong>/<strong>outside</strong>,
+<strong>&ndash;include</strong>/<strong>exclude</strong>, <strong>&ndash;block</strong> options.</p><p>For those subroutines, file content will be provided by global
+variable <code>$_</code>. Expected response from the subroutine is the list of
+array references, which is made up by start and end offset pairs.</p><p>For example, suppose that the following function is defined in your
+<code>.greplerc</code> file. Start and end offset for each pattern match can be
+taken as array element <code>$-[0]</code> and <code>$+[0]</code>.</p><pre><code>__PERL__
+sub odd_line {
+    my @list;
+    my $i;
+    while (/.*\n/g) {
+        push(@list, [ $-[0], $+[0] ]) if ++$i % 2;
+    }
+    @list;
+}
+</code></pre><p>You can use next command to search pattern included in odd number
+lines.</p><pre><code>% greple --inside '&amp;odd_line' pattern files...
+</code></pre><h2 id=module>MODULE</h2><p>You can expand the <strong>greple</strong> command using module. Module files are
+placed at <code>App/Greple/</code> directory in Perl library, and therefor has
+<strong>App::Greple::module</strong> package name.</p><p>In the command line, module have to be specified preceding any other
+options in the form of <strong>-M</strong><em>module</em>. However, it also can be
+specified at the beginning of option expansion.</p><p>If the package name is declared properly, <code>__DATA__</code> section in the
+module file will be interpreted same as <code>.greplerc</code> file content. So
+you can declare the module specific options there. Functions declared
+in the module can be used from those options, it makes highly
+expandable option/programming interaction possible.</p><p>Using <strong>-M</strong> without module argument will print available module list.
+Option <strong>&ndash;man</strong> will display module document when used with <strong>-M</strong>
+option. Use <strong>&ndash;show</strong> option to see the module itself. Option
+<strong>&ndash;path</strong> will print the path of module file.</p><p>See this sample module code. This sample defines options to search
+from pod, comment and other segment in Perl script. Those capability
+can be implemented both in function and macro.</p><pre><code>package App::Greple::perl;
+
+use Exporter 'import';
+our @EXPORT      = qw(pod comment podcomment);
+our %EXPORT_TAGS = ( );
+our @EXPORT_OK   = qw();
+
+use App::Greple::Common;
+use App::Greple::Regions;
+
+my $pod_re = qr{^=\w+(?s:.*?)(?:\Z|^=cut\s*\n)}m;
+my $comment_re = qr{^(?:[ \t]*#.*\n)+}m;
+
+sub pod {
+    match_regions(pattern =&gt; $pod_re);
+}
+sub comment {
+    match_regions(pattern =&gt; $comment_re);
+}
+sub podcomment {
+    match_regions(pattern =&gt; qr/$pod_re|$comment_re/);
+}
+
+1;
+
+__DATA__
+
+define :comment: ^(\s*#.*\n)+
+define :pod: ^=(?s:.*?)(?:\Z|^=cut\s*\n)
+
+#option --pod --inside :pod:
+#option --comment --inside :comment:
+#option --code --outside :pod:|:comment:
+
+option --pod --inside '&amp;pod'
+option --comment --inside '&amp;comment'
+option --code --outside '&amp;podcomment'
+</code></pre><p>You can use the module like this:</p><pre><code>greple -Mperl --pod default greple
+
+greple -Mperl --colorful --code --comment --pod default greple
+</code></pre><p>If special subroutine <code>initialize()</code> and <code>finalize()</code> are defined in
+the module, they are called at the beginning with
+<a href=https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AModule>Getopt::EX::Module</a> object as a first argument. Second argument is
+the reference to <code>@ARGV</code>, and you can modify actual <code>@ARGV</code> using
+it. See <a href=https://metacpan.org/pod/App%3A%3AGreple%3A%3Afind>App::Greple::find</a> module as an example.</p><p>Calling sequence is like this. See <a href=https://metacpan.org/pod/Getopt%3A%3AEX%3A%3AModule>Getopt::EX::Module</a> for detail.</p><pre><code>1) Call initialize()
+2) Call function given in -Mmod::func() style
+3) Call finalize()
+</code></pre><h2 id=history>HISTORY</h2><p>Most capability of <strong>greple</strong> is derived from <strong>mg</strong> command, which has
+been developing from early 1990&rsquo;s by the same author. Because modern
+standard <strong>grep</strong> family command becomes to have similar capabilities,
+it is a time to clean up entire functionalities, totally remodel the
+option interfaces, and change the command name. (2013.11)</p><h2 id=see-also>SEE ALSO</h2><p><a href=http://man.he.net/man1/grep>grep(1)</a>, <a href=http://man.he.net/man1/perl>perl(1)</a></p><p><a href=https://metacpan.org/pod/App%3A%3AGreple>App::Greple</a>, <a href=https://github.com/kaz-utashiro/greple>https://github.com/kaz-utashiro/greple</a></p><p><a href=https://metacpan.org/pod/Getopt%3A%3AEX>Getopt::EX</a>, <a href=https://github.com/kaz-utashiro/Getopt-EX>https://github.com/kaz-utashiro/Getopt-EX</a></p><h2 id=author>AUTHOR</h2><p>Kazumasa Utashiro</p><h2 id=license>LICENSE</h2><p>Copyright 1991-2022 Kazumasa Utashiro</p><p>This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.</p><style>.feedback--answer{display:inline-block}.feedback--answer-no{margin-left:1em}.feedback--response{display:none;margin-top:1em}.feedback--response__visible{display:block}</style><div class=d-print-none><h2 class=feedback--title>Feedback</h2><p class=feedback--question>Was this page helpful?</p><button class="btn btn-primary mb-4 feedback--answer feedback--answer-yes">Yes</button>
+<button class="btn btn-primary mb-4 feedback--answer feedback--answer-no">No</button><p class="feedback--response feedback--response-yes">Glad to hear it! Please <a href=https://github.com/USERNAME/REPOSITORY/issues/new>tell us how we can improve</a>.</p><p class="feedback--response feedback--response-no">Sorry to hear that. Please <a href=https://github.com/USERNAME/REPOSITORY/issues/new>tell us how we can improve</a>.</p></div><script>const yesButton=document.querySelector(".feedback--answer-yes"),noButton=document.querySelector(".feedback--answer-no"),yesResponse=document.querySelector(".feedback--response-yes"),noResponse=document.querySelector(".feedback--response-no"),disableButtons=()=>{yesButton.disabled=!0,noButton.disabled=!0},sendFeedback=e=>{if(typeof ga!="function")return;const t={command:"send",hitType:"event",category:"Helpful",action:"click",label:window.location.pathname,value:e};ga(t.command,t.hitType,t.category,t.action,t.label,t.value)};yesButton.addEventListener("click",()=>{yesResponse.classList.add("feedback--response__visible"),disableButtons(),sendFeedback(1)}),noButton.addEventListener("click",()=>{noResponse.classList.add("feedback--response__visible"),disableButtons(),sendFeedback(0)})</script><br><div class="text-muted mt-5 pt-3 border-top">Last modified November 24, 2022: <a href=https://github.com/kaz-utashiro/Greple-Home/commit/ce39c51d860d083c92c1d405cbf6f0ee29eb2988>non-recursive checkout (ce39c51)</a></div></div></main></div></div><footer class="bg-dark py-5 row d-print-none"><div class="container-fluid mx-sm-5"><div class=row><div class="col-6 col-sm-4 text-xs-center order-sm-2"></div><div class="col-6 col-sm-4 text-right text-xs-center order-sm-3"><ul class="list-inline mb-0"><li class="list-inline-item mx-2 h3" data-toggle=tooltip data-placement=top title=GitHub aria-label=GitHub><a class=text-white target=_blank rel=noopener href=https://github.com/kaz-utashiro/Greple-Home aria-label=GitHub><i class="fab fa-github"></i></a></li></ul></div><div class="col-12 col-sm-4 text-center py-2 order-sm-2"><small class=text-white>&copy; 2022 tecolicom All Rights Reserved</small><p class=mt-2><a href=/Greple-Home/about/>About Greple</a></p></div></div></div></footer></div><script src=/Greple-Home/js/main.min.fb2d08e6ccf7e1121a948e82e87737c18e927c3d8e46581e79652bd8d76be6a2.js integrity="sha256-+y0I5sz34RIalI6C6Hc3wY6SfD2ORlgeeWUr2Ndr5qI=" crossorigin=anonymous></script>
+<script src=/Greple-Home/js/tabpane-persist.js></script></body></html>

@@ -1,0 +1,1332 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Greple Home – Tutorial</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/</link><description>Recent content in Tutorial on Greple Home</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Wed, 23 Nov 2022 00:00:00 +0000</lastBuildDate><atom:link href="http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/index.xml" rel="self" type="application/rss+xml"/><item><title>Docs: はじめに</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_01/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_01/</guid><description>
+&lt;h2 id="greple">greple&lt;/h2>
+&lt;p>greple は、作者が1990年初頭から開発を続けているコマンドです。名前の通り Unix コマンドの grep と同じように、テキストから文字列を検索するためのものです。le は lexical expression の意味ですが、それについてはこれからおいおい説明していきます。&lt;/p>
+&lt;h2 id="読み方">読み方&lt;/h2>
+&lt;p>読み方は特に決めていませんが、なんとなく「ぐれっぷる」と呼んでいます。アクセントは「れ」にあったり、今時の平板化した読み方だったりと、人によって様々です。英語的に発音すると「ぐれぽー」みたいになるんでしょうか。&lt;/p>
+&lt;p>「ぐれっぷ・えるいー」と読んでもいいけど、長いですね。アメリカ人、なんでも単語化しようとしますしね。SCSI が「すかじー」になるくらいで。昔、PCMCIA を無理やり読んでいる人がいて驚いたことがあります。&lt;/p>
+&lt;h2 id="特徴">特徴&lt;/h2>
+&lt;p>greple は、以下のような特徴を持っています。&lt;/p>
+&lt;ul>
+&lt;li>複数のキーワードを指定することができる&lt;/li>
+&lt;li>行だけではなく、検索対象ブロックを柔軟に指定することができる&lt;/li>
+&lt;li>検索対象の範囲や条件を指定することができる&lt;/li>
+&lt;li>複数行に渡るパターンを検索することができる&lt;/li>
+&lt;li>多彩な色指定が可能&lt;/li>
+&lt;li>設定ファイルやモジュールによるカスタマイズ／拡張が可能&lt;/li>
+&lt;li>検索だけではなく、文字列処理のフレームワークとして機能する&lt;/li>
+&lt;/ul>
+&lt;p>これらの特徴や使い方について、これから毎日少しずつ解説していこうと思います。&lt;/p>
+&lt;h2 id="想定される用途">想定される用途&lt;/h2>
+&lt;p>元々、文章の校正作業を楽にするために作ったもので、その後もまとまった翻訳の仕事が入る度に少しずつ拡張を続けてきました。そのため、それほど多くないテキストファイル（せいぜい書籍数冊分程度）に対して、様々な条件を科して検索やそれに類する処理を行うというのが想定される主な使い方です。&lt;/p>
+&lt;p>大量のデータを対象にするのであれば、それに適したツールが他にたくさんあるので、そういうものを使ってください。ちなみに、ripgrep というコマンドが高速かつ高機能です。&lt;/p>
+&lt;p>また、greple は、すべてのデータを読み込んでから処理するため、連続して生成されるデータを逐次処理していくような目的に使うことはできません。&lt;/p>
+&lt;h2 id="インストール">インストール&lt;/h2>
+&lt;p>greple は Perl で記述されていて、cpanminus (cpanm) を使ってインストールします。cpanminus の使い方や、Perl の環境設定については、他の記事を参照してください。cpan や cpanplus など、他のインストーラーでも正しく使えば問題ないはずですが、保証はできません。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ cpanm App::Greple
+or
+$ curl -sL http://cpanmin.us | perl - App::Greple
+&lt;/code>&lt;/pre>&lt;h2 id="リポジトリ">リポジトリ&lt;/h2>
+&lt;p>ソースコードは github で管理しています。cpan にも、ほぼ最新版が上がっているので、どちらからインストールしても同じです。&lt;code>cpanm&lt;/code> コマンドで、github の URL を指定してインストールすることもできます。&lt;/p>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple.git">https://github.com/kaz-utashiro/greple.git&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;h2 id="関連記事">関連記事&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/85add653a71a7e01c415">https://qiita.com/kaz-utashiro/items/85add653a71a7e01c415&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8f4878300043ce7b73e7">https://qiita.com/kaz-utashiro/items/8f4878300043ce7b73e7&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/cde2b0df8b59b3627411">https://qiita.com/kaz-utashiro/items/cde2b0df8b59b3627411&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 単純な検索</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_02/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_02/</guid><description>
+&lt;p>greple の最も単純な使い方は grep と同じです。&lt;/p>
+&lt;pre>&lt;code>greple pattern file
+&lt;/code>&lt;/pre>
+&lt;p>ファイルが指定されなければ、標準入力を対象にします。&lt;/p>
+&lt;p>grep と共通のオプションもあります。以下に挙げたものは、grep とほぼ同様の意味を持ちますが、挙動が若干違うものもあります。&lt;/p>
+&lt;ul>
+&lt;li>&lt;code>-n&lt;/code> 行番号を表示する&lt;/li>
+&lt;li>&lt;code>-i&lt;/code>: 大文字小文字を無視する&lt;/li>
+&lt;li>&lt;code>-A&lt;/code>, &lt;code>-B&lt;/code>, &lt;code>-C&lt;/code>: 前後の行を表示する&lt;/li>
+&lt;li>&lt;code>-o&lt;/code>: マッチした部分だけを表示する&lt;/li>
+&lt;li>&lt;code>-h&lt;/code>, &lt;code>-H&lt;/code>: ファイル名の表示を制御する&lt;/li>
+&lt;li>&lt;code>-l&lt;/code>: マッチしたファイル名のみを表示する&lt;/li>
+&lt;li>&lt;code>-c&lt;/code>: マッチした数を表示する&lt;/li>
+&lt;li>&lt;code>-m&lt;/code>: 表示数を制御する&lt;/li>
+&lt;/ul>
+&lt;h2 id="正規表現">正規表現&lt;/h2>
+&lt;p>greple は、特別なオプションを指定しなくても、パターンに Perl の正規表現をそのまま使うことができます。どのバージョンの正規表現が使えるかは、実行する処理系に依存します。&lt;/p>
+&lt;p>正規表現は、行単位ではなくファイル全体を対象としてマッチしますが、デフォルトで複数行マッチが有効になっていて、行頭・行末を示す &lt;code>^&lt;/code>・&lt;code>$&lt;/code> はすべての行にマッチします。&lt;/p>
+&lt;p>Perl 発祥の正規表現は PCRE (Perl Compatible Regular Expression) として、様々な言語やツールに組み込まれています。ripgrep の場合は、&amp;ndash;pcre2 オプションをつけることで利用可能です。&lt;/p>
+&lt;h2 id="実行例">実行例&lt;/h2>
+&lt;p>次のようなファイルを用意してみました。某寿司チェーンのメニューを参考に少しアレンジしましたが、この程度ならまさか盗用とは言われないでしょう。このファイルに対して greple コマンドを実行してみます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sushi.txt" data-lang="sushi.txt">&lt;span style="display:flex;">&lt;span>サービスセット 熟成まぐろ えび たまご いか サーモン いなり ねぎまぐろ サラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>お子様セット 熟成まぐろ えび たまご いなり ツナサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上セット 中とろ 熟成まぐろ 熟成真鯛 はまち 赤えび ほたて うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上極旨セット 中とろ はまち かに いくら 赤えび サーモン うなぎ うに
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>うどんセット 熟成まぐろ サーモン たまご えび うどん
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>サラダ軍艦セット えびマヨ ツナサラダ サラダ シーフードサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>人気セット 熟成まぐろ 漬けまぐろ サーモン びんちょう いか えび えびアボカド たまご
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>まぐろづくしセット 中とろ 熟成まぐろ ねぎまぐろ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>プレミアムセット 中とろ まぐろ サーモン 赤えび はまち うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>cat -n するとこうです。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/13af3c2c-d892-010a-f7a4-4d4435def5f6.png" alt="スクリーンショット 2021-12-02 17.56.02.png">&lt;/p>
+&lt;h3 id="greple">greple&lt;/h3>
+&lt;p>行番号を表示する -n オプションをつけて greple を実行してみます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/f151a6ce-28bb-d728-7285-2499f756f674.png" alt="スクリーンショット 2021-12-02 17.59.02.png">&lt;/p>
+&lt;p>greple は、このように、デフォルトで検索した文字列を色付きでハイライトして表示します。最近の検索系コマンドは大概カラー出力に対応しているので珍しくはありません。&lt;/p>
+&lt;h3 id="grep">grep&lt;/h3>
+&lt;p>grep は、&amp;ndash;color オプションをつけることでカラー出力ができます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/821fb8cb-7cc7-0a9d-dca4-27e4d3264611.png" alt="スクリーンショット 2021-12-02 18.02.03.png">&lt;/p>
+&lt;h3 id="ripgrep">ripgrep&lt;/h3>
+&lt;p>ripgrep は、デフォルトでハイライト出力します。行番号やファイル名には異なる色がつきます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/c48860a7-6b0c-259e-3d6f-b0fa67bfdaaf.png" alt="image.png">&lt;/p>
+&lt;h2 id="端末以外の出力">端末以外の出力&lt;/h2>
+&lt;p>これらのコマンドは、出力が端末でない場合には、色付き出力の機能を無効にします。パイプにも着色して出力するためには &lt;code>--color=always&lt;/code> オプションを指定します。&lt;code>--color&lt;/code> オプションの仕様は、どのコマンドもほぼ共通で、値として &lt;code>never&lt;/code>, &lt;code>auto&lt;/code>, &lt;code>always&lt;/code> を取ります。ただ、grep はデフォルトが &lt;code>never&lt;/code>、greple と ripgrep は &lt;code>auto&lt;/code> という違いがあります。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>単純な文字列を指定した検索について説明しました。もっとも、このような使い方であれば greple を使う必要はまったくないので別のツールを使った方がいいでしょう。実行速度に関しては、インタプリタ型の greple はかなり不利ですが、一般的な使い方であれば実用上問題になるようなことはありません。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 複数キーワードによる検索</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_03/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_03/</guid><description>
+&lt;h2 id="パターンオプション">パターンオプション&lt;/h2>
+&lt;p>greple には、パターンを指定するために以下のようなオプションがあります。オプション指定がない場合には、最初のコマンド引数がパターンとされ、これは &lt;code>-le&lt;/code> オプションで指定されたのと同様に扱われます。&lt;/p>
+&lt;pre>&lt;code> PATTERN
+pattern 'and +must -not ?alternative &amp;amp;function'
+-x, --le pattern lexical expression (same as bare pattern)
+-e, --and pattern pattern match across line boundary
+-r, --must pattern pattern cannot be compromised
+-v, --not pattern pattern not to be matched
+--or pattern alternative pattern group
+--re pattern regular expression
+--fe pattern fixed expression
+&lt;/code>&lt;/pre>
+&lt;h3 id="--le-オプションによる複数キーワード指定">&lt;code>--le&lt;/code> オプションによる複数キーワード指定&lt;/h3>
+&lt;p>&lt;code>--le&lt;/code> は lexical expression の略としていて greple の le もここから来ています。単なる文字列ではなくて、意味を持ったトークンの集まりというような意味合いですが、英語として通じるか実はちょっと不安です。とりあえず、ブラウザの検索欄と同じように考えてもらえばいいと思います。&lt;/p>
+&lt;p>検索エンジンの検索欄に空白で区切って複数の単語を並べると、そのすべての文字列にマッチするページを表示しようとしてくれます。greple の &lt;code>--le&lt;/code> オプションも同様で、空白で区切られた検索トークンのすべてが含まれる行を表示します。&lt;/p>
+&lt;p>前回の寿司セットを例にとってみます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sushi.txt" data-lang="sushi.txt">&lt;span style="display:flex;">&lt;span>サービスセット 熟成まぐろ えび たまご いか サーモン いなり ねぎまぐろ サラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>お子様セット 熟成まぐろ えび たまご いなり ツナサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上セット 中とろ 熟成まぐろ 熟成真鯛 はまち 赤えび ほたて うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上極旨セット 中とろ はまち かに いくら 赤えび サーモン うなぎ うに
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>うどんセット 熟成まぐろ サーモン たまご えび うどん
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>サラダ軍艦セット えびマヨ ツナサラダ サラダ シーフードサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>人気セット 熟成まぐろ 漬けまぐろ サーモン びんちょう いか えび えびアボカド たまご
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>まぐろづくしセット 中とろ 熟成まぐろ ねぎまぐろ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>プレミアムセット 中とろ まぐろ サーモン 赤えび はまち うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>前回は&lt;strong>まぐろ&lt;/strong>が入っているセットを検索しましたが、やっぱり&lt;strong>はまち&lt;/strong>も食べたいので、&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>が入っているセットを探します。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/ad06e218-f46b-9a13-b10f-6af4982ec99e.png" alt="image.png">&lt;/p>
+&lt;p>2つのセットがあることがわかります。&lt;/p>
+&lt;p>&lt;strong>ほたて&lt;/strong>も食べたいと探すと、&lt;strong>特上セット&lt;/strong>一択になりました。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/153569c0-f869-5950-3f60-e133616639ae.png" alt="image.png">&lt;/p>
+&lt;p>このように、greple のパターンに空白で区切って複数のキーワードを指定すると、その全てを含む行を表示します。&lt;/p>
+&lt;h2 id="grep-の場合">grep の場合&lt;/h2>
+&lt;p>grep も &lt;code>-e&lt;/code> オプションを繰り返し使用することで、複数のキーワードを指定することができます。同じように、&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>を探してみます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/d383062f-9095-4eab-05f2-2169820f6de3.png" alt="image.png">&lt;/p>
+&lt;p>grep の場合は、複数のパターンを指定すると、そのいずれかが含まれる行を表示します。&lt;/p>
+&lt;p>では、&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>の両方が入っているセットを検索するためにはどうするかというと、まず思いつくのはパイプでつなぐことです。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/f74a4749-5e64-365d-2c4e-1782c0b715d6.png" alt="image.png">&lt;/p>
+&lt;p>あるいは、&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>の両方が含まれるパターンを指定する方法もあります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/b1fc5af5-9f1d-8293-826e-6a4a0215a238.png" alt="image.png">&lt;/p>
+&lt;p>しかし、これでは&lt;strong>はまち&lt;/strong>の方が先に出てきた場合に対応することができません。どちらにも対応しようとするとこうなります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/81bb2831-0643-d499-87fa-bc6caac187e4.png" alt="image.png">&lt;/p>
+&lt;p>この例では grep ではなく egrep を使っています。grep で同じ結果を得るためには &lt;code>|&lt;/code> を &lt;code>\|&lt;/code> に置き換えます。&lt;/p>
+&lt;p>見てわかるように、&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>以外の部分もマッチしてしまうので、その部分に色をつけるためには、最後にもう一度 egrep を通します。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/e73e46c0-6ac1-f2c1-7285-c0677e2b06b0.png" alt="image.png">&lt;/p>
+&lt;p>これで grep でも、greple と同じ出力を得ることができました。ただ、これ以上キーワードが増えていくとちょっと大変なので、やはりパイプを使った方がよさそうです。&lt;/p>
+&lt;h2 id="両方を含む行にマッチする正規表現">両方を含む行にマッチする正規表現&lt;/h2>
+&lt;p>順序に関係なく&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>の両方を含む行にマッチさせる正規表現を作ることも可能です。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/b5cff79a-ac4c-fc86-a481-6b6de637218c.png" alt="image.png">&lt;/p>
+&lt;p>正規表現の先読み (look-ahead) の機能を使って、&lt;code>(?=.*まぐろ)&lt;/code> と &lt;code>(?=.*はまち)&lt;/code> の両方の条件を満たす行頭 (&lt;code>^&lt;/code>) を探しています。ripgrep 標準の正規表現は先読みをサポートしていないので &lt;code>--pcre2&lt;/code> オプションを使っています。&lt;/p>
+&lt;p>幅のない行頭にしかマッチしていないので、&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>はカラー出力されません。この &lt;code>^&lt;/code> はなくても同じ結果になりますが、正規表現エンジンの作りによっては非効率な動作になる可能性があるので、あった方がいいでしょう。&lt;/p>
+&lt;h2 id="マルチカラーハイライト">マルチカラーハイライト&lt;/h2>
+&lt;p>3種類の寿司ネタを探した例で、それぞれのネタが違う色で表示されていたことに気が付いたでしょうか。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/153569c0-f869-5950-3f60-e133616639ae.png" alt="image.png">&lt;/p>
+&lt;p>greple はこのように複数のキーワードが指定された場合、それぞれにマッチする部分を異なる色でハイライトして表示します。色に関するオプションについては、いずれ詳しく説明します。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>greple で複数のキーワードを指定して、そのすべてが含まれる行を出力する方法について説明しました。&lt;/p>
+&lt;p>まとまった文章の執筆や校正をしていると、場所は覚えていないけど、どこかにあったはずの説明を参照したくなることがあります。「TCP の再送とタイムアウトについて、どこに書いてあったっけ」というような状況です。この例であれば &amp;lsquo;&lt;strong>TCP&lt;/strong> &lt;strong>再送&lt;/strong> &lt;strong>タイムアウト&lt;/strong>&amp;rsquo; という3つのキーワードを含む部分を探せばいいわけです。&lt;/p>
+&lt;p>1行の中にすべてのキーワードが含まれているとは限らないじゃないか、と思われるでしょうか。その通りです。そのような場合についても、いずれ考えてみましょう。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 複数キーワード検索 OR</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_04/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_04/</guid><description>
+&lt;p>前回は、指定した複数のキーワードをすべて含む行を表示する方法について説明しました。今回は、A か B のどちらかが含まれればいいという条件を指定する方法について紹介します。&lt;/p>
+&lt;h2 id="--le-オプションの--指定">&lt;code>--le&lt;/code> オプションの &lt;code>?&lt;/code> 指定&lt;/h2>
+&lt;p>前回と同じ寿司セットの検索を考えます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sushi.txt" data-lang="sushi.txt">&lt;span style="display:flex;">&lt;span>サービスセット 熟成まぐろ えび たまご いか サーモン いなり ねぎまぐろ サラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>お子様セット 熟成まぐろ えび たまご いなり ツナサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上セット 中とろ 熟成まぐろ 熟成真鯛 はまち 赤えび ほたて うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上極旨セット 中とろ はまち かに いくら 赤えび サーモン うなぎ うに
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>うどんセット 熟成まぐろ サーモン たまご えび うどん
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>サラダ軍艦セット えびマヨ ツナサラダ サラダ シーフードサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>人気セット 熟成まぐろ 漬けまぐろ サーモン びんちょう いか えび えびアボカド たまご
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>まぐろづくしセット 中とろ 熟成まぐろ ねぎまぐろ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>プレミアムセット 中とろ まぐろ サーモン 赤えび はまち うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>前回は&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>の両方を含むセットを探しましたが、&lt;strong>はまち&lt;/strong>が入っているセットは少ないので選択肢が限られます。妥協して、代わりに&lt;strong>えび&lt;/strong>でもいいことにしましょう。&lt;/p>
+&lt;p>このような場合は、次のようにキーワードの先頭に &lt;code>?&lt;/code> マークを指定します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;まぐろ ?はまち ?えび&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/8f8ea7ce-3418-c0bf-d1bf-e87a2db26202.png" alt="image.png">&lt;/p>
+&lt;p>だいぶ選択肢が増えました。&lt;/p>
+&lt;h2 id="複数の---le-オプションを使う">複数の &lt;code>--le&lt;/code> オプションを使う&lt;/h2>
+&lt;p>選択肢が増えて気が大きくなってきたので、上の条件に加えて、&lt;strong>うに&lt;/strong>か&lt;strong>いくら&lt;/strong>も食べたくなりました。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;まぐろ ?はまち ?えび ?うに ?いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/930f4aae-e3d1-1f29-83e8-c9c7c27a5c7c.png" alt="image.png">&lt;/p>
+&lt;p>こうすると、はまち、えび、うに、いくら、のどれかが入っていればいいということになってしまって、期待した結果が得られません。&lt;/p>
+&lt;p>このような場合は &lt;code>--le&lt;/code> を複数回指定します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n --le &amp;#39;まぐろ ?はまち ?えび&amp;#39; --le &amp;#39;?うに ?いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/13f137fe-7683-0e82-cd0d-d431e2337bd7.png" alt="image.png">&lt;/p>
+&lt;p>OR キーワードは、それぞれの &lt;code>--le&lt;/code> オプション内でグループ化され、オプション同士は AND で評価されるため、全体としては次のような意味になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>まぐろ AND (はまち OR えび) AND (うに OR いくら)
+&lt;/code>&lt;/pre>&lt;p>結果は、それぞれの検索条件毎に色分けされて、見やすく表示されています。&lt;/p>
+&lt;p>上の例で、最初の &lt;code>--le&lt;/code> を省略することはできません。greple は、パターンオプションが指定されていない時のみ、最初の引数をパターンと解釈するので、この &lt;code>--le&lt;/code> を省略すると次の引数はファイル名として扱われてしまいます。&lt;/p>
+&lt;h2 id="正規表現を使う">正規表現を使う&lt;/h2>
+&lt;p>上の例は、正規表現の &lt;code>|&lt;/code> 記法を使って次のように書いても、まったく同じ意味になります。実は &lt;code>?&lt;/code> 記号がついたキーワードについては、内部的にこのような表現に変換して評価しています。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n --le &amp;#39;まぐろ はまち|えび&amp;#39; --le &amp;#39;うに|いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/da95128e-5670-d712-f85a-47b56356a2d1.png" alt="image.png">&lt;/p>
+&lt;p>さらには、この例では &lt;code>?&lt;/code> を使っていないので &lt;code>--le&lt;/code> オプションは1つにまとめてしまっても問題ないし、その場合は省略することもできます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;まぐろ はまち|えび うに|いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/965b2923-108c-503c-6605-970f23833d2e.png" alt="image.png">&lt;/p>
+&lt;p>慣れている人には、この方がわかりやすいかもしれません。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>&lt;code>--le&lt;/code> オプションに複数キーワードを指定する際に、OR 条件を指定する方法を紹介しました。&lt;/p>
+&lt;p>grep を使って同じことをやろうとすれば、やはりパイプを使うことになると思います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>grep -n まぐろ sushi.txt | egrep &amp;#39;はまち|えび&amp;#39; | egrep &amp;#39;うに|いくら
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/36fa36b7-05bd-54ba-857e-00d390dc07b2.png" alt="image.png">&lt;/p>
+&lt;p>このくらいになってくると、少し greple を使うメリットが感じられてくるでしょうか。条件が複雑になってくると、条件毎に色分けしてくれるのがありがたく感じられる局面も増えてきます。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 複数キーワード検索 NOT</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_05/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_05/</guid><description>
+&lt;p>これまでに、複数キーワードを使った AND と OR の組み合わせを紹介しました。AND、OR　とくれば、当然次は NOT です。&lt;/p>
+&lt;h2 id="実行例">実行例&lt;/h2>
+&lt;p>また寿司セットを使って考えてみます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sushi.txt" data-lang="sushi.txt">&lt;span style="display:flex;">&lt;span>サービスセット 熟成まぐろ えび たまご いか サーモン いなり ねぎまぐろ サラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>お子様セット 熟成まぐろ えび たまご いなり ツナサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上セット 中とろ 熟成まぐろ 熟成真鯛 はまち 赤えび ほたて うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上極旨セット 中とろ はまち かに いくら 赤えび サーモン うなぎ うに
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>うどんセット 熟成まぐろ サーモン たまご えび うどん
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>サラダ軍艦セット えびマヨ ツナサラダ サラダ シーフードサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>人気セット 熟成まぐろ 漬けまぐろ サーモン びんちょう いか えび えびアボカド たまご
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>まぐろづくしセット 中とろ 熟成まぐろ ねぎまぐろ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>プレミアムセット 中とろ まぐろ サーモン 赤えび はまち うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;strong>まぐろ&lt;/strong>は必ず食べたくて、&lt;strong>はまち&lt;/strong>か&lt;strong>えび&lt;/strong>のどちらかが入ったセットは、次のようにして探すことができました。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;まぐろ はまち|えび&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/8f8ea7ce-3418-c0bf-d1bf-e87a2db26202.png" alt="image.png">&lt;/p>
+&lt;p>でも、実は&lt;strong>いくら&lt;/strong>はアレルギーで食べられないことを思い出しました。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;まぐろ はまち|えび いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>とすれば、候補の中から&lt;strong>いくら&lt;/strong>を含む食べられないセットを表示することができます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/0d8e93bb-6c50-02cd-551d-6745e96c6d40.png" alt="image.png">&lt;/p>
+&lt;p>でも、本当に探したいのは&lt;strong>いくらを含まない&lt;/strong>セットです。そのような場合には、やはり検索エンジンと同じように、キーワードの先頭にマイナス記号 &lt;code>-&lt;/code> を付けます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;まぐろ はまち|えび -いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/0fc07065-b9c7-25ea-feb9-250b6f232e1e.png" alt="image.png">&lt;/p>
+&lt;p>これで、望みの結果を得ることができました。&lt;/p>
+&lt;h2 id="grep--v-との違い">grep -v との違い&lt;/h2>
+&lt;p>grep の &lt;code>-v&lt;/code> オプションは、全体から指定したパターンを含まない行を選び出すためのものです。それに対して、greple の NOT キーワードは、他のキーワードによって選ばれた選択肢から、指定したパターンを含むものを削除するためのものです。ですから NOT キーワードだけのパターンはエラーになります。&lt;/p>
+&lt;p>grep と同様に動作して欲しければ、どの行にも必ずマッチするパターン、たとえば行頭にマッチする &lt;code>^&lt;/code> を指定することで実現は可能です。ただ、そのために greple を使う必要性は、あまり感じられません。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/77853d57-05b9-347f-59b4-773b8c2aaa70.png" alt="image.png">&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>今回は、複数キーワードを使った検索について AND と OR に続いて NOT の使い方を紹介しました。使い方は簡単で、検索エンジンと同じように、除外したいパターンの先頭に &lt;code>-&lt;/code> を付けるだけです。&lt;/p>
+&lt;p>寿司セットの例は、数が少ないので&lt;strong>目grep&lt;/strong>でも望む情報は得られますが、もし数千行の情報から選び出すとすれば、ツールの力を借りた方が得策です。AND、OR、NOT を組み合わせて情報を絞り込んでいくことで、望みの結果に近づくことができます。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 複数キーワード検索 MUST</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_06/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_06/</guid><description>
+&lt;p>これまでに、複数キーワードを使った検索について AND、OR、NOT と紹介してきました。&lt;/p>
+&lt;p>今回は、ちょっと変わった MUST について紹介します。&lt;/p>
+&lt;h2 id="注目したいキーワード">注目したいキーワード&lt;/h2>
+&lt;p>前回は、以下のような寿司セットの中から、&lt;strong>まぐろ&lt;/strong>と&lt;strong>はまち&lt;/strong>か&lt;strong>えび&lt;/strong>を含んでいて、&lt;strong>いくら&lt;/strong>が入っていないものを探すという例を考えました。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sushi.txt" data-lang="sushi.txt">&lt;span style="display:flex;">&lt;span>サービスセット 熟成まぐろ えび たまご いか サーモン いなり ねぎまぐろ サラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>お子様セット 熟成まぐろ えび たまご いなり ツナサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上セット 中とろ 熟成まぐろ 熟成真鯛 はまち 赤えび ほたて うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>特上極旨セット 中とろ はまち かに いくら 赤えび サーモン うなぎ うに
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>うどんセット 熟成まぐろ サーモン たまご えび うどん
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>サラダ軍艦セット えびマヨ ツナサラダ サラダ シーフードサラダ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>人気セット 熟成まぐろ 漬けまぐろ サーモン びんちょう いか えび えびアボカド たまご
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>まぐろづくしセット 中とろ 熟成まぐろ ねぎまぐろ
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>プレミアムセット 中とろ まぐろ サーモン 赤えび はまち うなぎ かに いくら
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>そして、条件を満たすものは、次のようにして得られました。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;まぐろ はまち|えび -いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/0fc07065-b9c7-25ea-feb9-250b6f232e1e.png" alt="image.png">&lt;/p>
+&lt;p>しかし、どのセットに&lt;strong>いくら&lt;/strong>が入っていたかにも興味がないでしょうか。&lt;strong>いくら&lt;/strong>以外はいい内容だったら、誰かと交換してもいいかもしれません。もちろん &lt;code>-いくら&lt;/code> の指定を外せばいいのですが、そうするとどこに&lt;strong>いくら&lt;/strong>があるのかを自分の目で探さなければなりません。&lt;/p>
+&lt;p>このように「なければならない」「あってはいけない」だけではなく、「注目したい」ワードを指定したいことがあります。このような時に使えるのが MUST キーワードです。&lt;/p>
+&lt;h2 id="-による-must-指定">&lt;code>+&lt;/code> による MUST 指定&lt;/h2>
+&lt;p>これもまた検索エンジンと同様に、キーワードの先頭にプラス記号 &lt;code>+&lt;/code> を付けることで実現します。実際、検索エンジンに複数のキーワードを与えた時に、すべてのキーワードが含まれてはいない結果が表示されることがあります。その時に、絶対にあってほしいキーワードに対して &lt;code>+&lt;/code> をつけて検索します。&lt;/p>
+&lt;p>先の例であれば、このように使います。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n &amp;#39;+まぐろ +はまち|えび いくら&amp;#39; sushi.txt
+&lt;/code>&lt;/pre>&lt;p>MUST キーワードがあると、記号なしのキーワードはオプショナルに格下げされます。つまり、&lt;strong>いくら&lt;/strong>はあってもなくても構わないが、あれば色付きで表示されます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/5f0956f0-0fd6-6136-9b10-e7b418ae44c5.png" alt="image.png">&lt;/p>
+&lt;p>これも、ハイライトカラーが複数あることの効果が感じられる例です。試しに、単色での表示にしてみると、こんな風になります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/73a2f209-559c-5578-2af2-39f7fdaab239.png" alt="image.png">&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>今回は MUST キーワードについて説明しましたが、それによって新たに導入されるのは「オプショナルキーワード」であると言うこともできます。&lt;/p>
+&lt;p>最後に、以前の記事で紹介した実際の使用例を載せておきます。これは compromise という単語がどういう日本語に翻訳されているかを調べた時のものです。compromise のみを必須として、候補となる訳語を着色して表示しています。いずれ、詳しく説明できるかもしれません。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/9813b14d-aed6-381b-aead-49593ee36f55.png" alt="image.png">&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 複数キーワード検索 単独オプション</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_07/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_07/</guid><description>
+&lt;p>これまで &lt;code>--le&lt;/code> オプションを使って、複数のキーワードを指定する方法について紹介してきました。キーワードの前に記号を付けることで AND, OR, NOT, MUST の意味を持たせることができました。&lt;/p>
+&lt;h2 id="単独オプション">単独オプション&lt;/h2>
+&lt;p>実は &lt;code>--le&lt;/code> オプションで扱うそれぞれのキーワードは、個別の単独オプションで指定することもできます。一覧にすると、こうです。&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th style="text-align:center">記号&lt;/th>
+&lt;th style="text-align:center">意味&lt;/th>
+&lt;th style="text-align:center">単独オプション&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td style="text-align:center">なし&lt;/td>
+&lt;td style="text-align:center">AND or OPTIONAL&lt;/td>
+&lt;td style="text-align:center">-e, &amp;ndash;and&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">-&lt;/td>
+&lt;td style="text-align:center">NOT&lt;/td>
+&lt;td style="text-align:center">-v, &amp;ndash;not&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">?&lt;/td>
+&lt;td style="text-align:center">OR&lt;/td>
+&lt;td style="text-align:center">&amp;ndash;or&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td style="text-align:center">+&lt;/td>
+&lt;td style="text-align:center">MUST&lt;/td>
+&lt;td style="text-align:center">-r, &amp;ndash;must&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>このため、以下のコマンドは、どれも同じ意味になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple &amp;#39;まぐろ ?はまち ?えび -いくら&amp;#39; sushi.txt
+greple &amp;#39;まぐろ はまち|えび -いくら&amp;#39; sushi.txt
+greple -e まぐろ --or はまち --or えび -v いくら sushi.txt
+greple -e まぐろ -e &amp;#39;はまち|えび&amp;#39; -v いくら sushi.txt
+&lt;/code>&lt;/pre>&lt;p>機能的に違いはないので、どれでも使いやすい方法で指定すればいいと思います。&lt;code>--or&lt;/code> オプションに関しては、単独オプションで指定したものがグループ化されます。&lt;/p>
+&lt;h2 id="絞り込み検索">絞り込み検索&lt;/h2>
+&lt;p>単独オプションが便利なのは、次々にオプションを追加して、選択肢を絞り込んでいくような場合です。シェルのヒストリー機能を使って直前のコマンドを呼び出して、そのまま最後に追加していくことができます。&lt;/p>
+&lt;p>特に &lt;code>-v&lt;/code> オプションは検索ワードを指定するオプションとしては解釈されないので、裸の（オプション指定なしの）検索ワードがあっても、最後に追加するだけで検索結果を絞り込むことが可能です。オプション引数とそれ以外の引数は、このように混在させることができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n まぐろ sushi.txt
+greple -n まぐろ sushi.txt -v いくら
+greple -n まぐろ sushi.txt -v いくら -v いか
+greple -n まぐろ sushi.txt -v いくら -v いか -v サーモン
+&lt;/code>&lt;/pre>&lt;p>実行してみるとこのような結果になります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/b2efc8ec-8a80-7d09-5951-be7df0478eff.png" alt="image.png">&lt;/p>
+&lt;p>ちょうど、パイプで &lt;code>grep -v&lt;/code> コマンドをつないでいくのと同じ要領で絞り込んでいくことができます。&lt;/p>
+&lt;p>毎回&lt;strong>まぐろ&lt;/strong>の色が変わってしまっているのは実装上の都合です。この結果を見て、修正した方がいいのではないかと感じていますが、この場合むしろ見やすくなっていいですね。そのうち直します。&lt;/p>
+&lt;p>&lt;code>-v&lt;/code> オプションにも正規表現を使えるので、最後のコマンドは次のように書いても同じです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n まぐろ sushi.txt -v &amp;#39;いくら|うに|たまご&amp;#39;
+&lt;/code>&lt;/pre>&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>複数キーワードの AND, OR, NOT, MUST 指定を単独のオプションで行う方法について紹介しました。&lt;code>--le&lt;/code> オプションとどちらが適しているかは、好みや状況によって変わってくると思います。&lt;/p>
+&lt;p>grep 系のコマンドを使う状況では、最初に出た結果が多すぎて、どうやって絞り込んでいくか試行錯誤するようなことがよくあります。この場合、上で紹介した &lt;code>-v&lt;/code> オプションの使い方は有効です。&lt;/p>
+&lt;p>オプションを最後にまとめて、こんな風に使うやり方もいいかもしれません。この場合は、パターンが最初の引数ではないのでオプション指定が必要ですが、&lt;code>--le&lt;/code> の代わりに &lt;code>-x&lt;/code> を使うこともできます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple sushi.txt -x &amp;#39;まぐろ -いくら -いか -サーモン&amp;#39;
+&lt;/code>&lt;/pre>&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 検索範囲指定 --inside/--outside</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_08/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_08/</guid><description>
+&lt;p>これは&lt;a href="https://qiita.com/advent-calendar/2021/greple">grepleチュートリアル&lt;/a>の8日目です。これまでに、複数キーワードを使って、様々なロジックで対象データから文字列を検索する方法を紹介しました。今回は、検索する対象の範囲を指定する方法について紹介します。&lt;/p>
+&lt;h2 id="検索する場所を選びたい">検索する場所を選びたい&lt;/h2>
+&lt;p>今まで、寿司セットから好みのネタを探す方法について考えてきました。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/4ce529c9-9cb2-3d10-3b20-57e0315a8987.png" alt="image.png">&lt;/p>
+&lt;p>しかし、一点どうも気に入らない部分があります。おわかりでしょうか。寿司ネタを検索しているのに、「まぐろづくしセット」というセット名がマッチしてしまっている点です。&lt;/p>
+&lt;p>それくらい別にいいじゃないかというかもしれませんが、&lt;strong>まぐろづくし&lt;/strong>だからいいものの、これがもし&lt;strong>まぐろ嫌いセット&lt;/strong>だったらどうでしょうか。まぐろ好きは激おこです。&lt;/p>
+&lt;p>このように、検索対象データの内容は一様ではないのに、一般の検索コマンドはそれを無視して全体を検索対象にしてしまいます。解決するためにはデータベースを使うとか、専用の検索コマンドを用意するなどの必要があります。&lt;/p>
+&lt;h2 id="greple-による検索範囲指定">greple による検索範囲指定&lt;/h2>
+&lt;p>greple には、検索範囲を指定する機能があります。まず、寿司セット名範囲を表すパターンを考えてみましょう。セット名部分は &lt;code>^\S+&lt;/code> という正規表現でマッチすることができます。行頭から始まる空白以外の文字の連続という意味です。まずは、そのパターンを検索してみます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/a7bed838-89c5-0e2f-fdba-ff712973cbd6.png" alt="image.png">&lt;/p>
+&lt;p>うまく動いているようです。次に、この部分を &lt;code>--inside&lt;/code> オプションとして指定して、&lt;strong>まぐろ&lt;/strong>を検索します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple --inside &lt;span style="color:#4e9a06">&amp;#39;^\S+&amp;#39;&lt;/span> まぐろ sushi.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/3b712043-de61-604d-a28b-b9c9b89b32a7.png" alt="image.png">&lt;/p>
+&lt;p>意図した通りに、セット名に含まれる&lt;strong>まぐろ&lt;/strong>だけが検索されました。&lt;/p>
+&lt;p>でも、求めているのは&lt;strong>セット名に含まれないまぐろ&lt;/strong>です。ですから、今度は &lt;code>--inside&lt;/code>　ではなくて &lt;code>--outside&lt;/code> オプションとして指定します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple -n --outside &lt;span style="color:#4e9a06">&amp;#39;^\S+&amp;#39;&lt;/span> まぐろ sushi.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/7cd85a9d-a6c6-6846-db6a-1c071454e811.png" alt="image.png">&lt;/p>
+&lt;p>これで、セット名以外の範囲にある&lt;strong>まぐろ&lt;/strong>だけがハイライトされるようになりました。もちろん、セット名以外の部分に&lt;strong>まぐろ&lt;/strong>が含まれなければ、その行は表示されません。&lt;/p>
+&lt;h2 id="繰り返し指定">繰り返し指定&lt;/h2>
+&lt;p>&lt;code>--inside&lt;/code> と &lt;code>--outside&lt;/code> は、繰り返し指定することができます。その場合、それぞれの範囲の和集合が検索対象範囲となります。&lt;/p>
+&lt;p>&lt;code>--inside&lt;/code> と &lt;code>--outside&lt;/code> で同じ範囲を指定するとどうなるかというと、ある領域とその補集合の和になるので、当然全体になります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple --inside &lt;span style="color:#4e9a06">&amp;#39;^\S+&amp;#39;&lt;/span> --outside &lt;span style="color:#4e9a06">&amp;#39;^\S+&amp;#39;&lt;/span> まぐろ sushi.txt
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/0c5f7d2e-4f73-0227-a406-aa32f828e433.png" alt="image.png">&lt;/p>
+&lt;p>このように、何も指定しないのと同じ部分がマッチしていますが、寿司セット名とそれ以外の部分で色が変わっています。greple は、複数の検索範囲が指定され、検索ワードが1つしかなかった場合、検索範囲毎にハイライトカラーを変えて表示します。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>&lt;code>--inside&lt;/code> と &lt;code>--outside&lt;/code> オプションにパターンを指定することで、指定した領域の内側、あるいは外側だけに検索対象を限定する方法について紹介しました。&lt;/p>
+&lt;p>指定するパターンは、いくらでも複雑化することができます。たとえば、次のようにすれば、C のソースコードのコメント部分のみを対象にして検索することができます。&lt;code>/*&lt;/code> で始まって &lt;code>*/&lt;/code> で終わる最小範囲を指定しています。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple --inside &lt;span style="color:#4e9a06">&amp;#39;(?s)/\*.*?\*/&amp;#39;&lt;/span> pattern ...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>次の例は、メールの Subject 行と本文のみを対象にして検索しています。今回のチュートリアルの中では正規表現そのものについて詳しく説明はしません。ちょっとトリッキーな表現になっているので、どうして動作するのか考えてみてください。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple --inside &lt;span style="color:#4e9a06">&amp;#39;\A(.+\n)*\KSubject:.+&amp;#39;&lt;/span> --outside &lt;span style="color:#4e9a06">&amp;#39;\A(?s:.*?)\n\n&amp;#39;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 検索範囲指定 --include/--exclude</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_09/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_09/</guid><description>
+&lt;p>これは&lt;a href="https://qiita.com/advent-calendar/2021/greple">grepleチュートリアル&lt;/a>の9日目です。&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">前回&lt;/a>は &lt;code>--inside&lt;/code> と &lt;code>--outside&lt;/code> オプションを使って、検索する対象の範囲を指定する方法について紹介しました。今回は、その続きで &lt;code>--include&lt;/code> と &lt;code>--exclude&lt;/code> オプションについて紹介します。&lt;/p>
+&lt;h2 id="例外条件を指定したい">例外条件を指定したい&lt;/h2>
+&lt;p>&lt;code>--inside&lt;/code> と &lt;code>--outside&lt;/code> は、全体の中から、どこを検索対象にするかという観点で使いました。それに対して &lt;code>--include&lt;/code> と &lt;code>--exclude&lt;/code> は、どこを検索対象から外すかという観点で使います。&lt;/p>
+&lt;p>&lt;code>--outside&lt;/code> オプションを使って、寿司ネタ領域から&lt;strong>まぐろ&lt;/strong>を検索しています。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/7cd85a9d-a6c6-6846-db6a-1c071454e811.png" alt="image.png">&lt;/p>
+&lt;p>でも、まぐろは好物だけど、ヅケはあまり好きではなくて、ネギも勘弁して欲しいなあということで、&lt;strong>漬けまぐろ&lt;/strong>と&lt;strong>ねぎまぐろ&lt;/strong>を除外したいと思いました。&lt;/p>
+&lt;p>この場合 &lt;code>--exclude&lt;/code> オプションに除外したい文字列を与えることで、それに対するマッチを抑制することができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple -n --outside &lt;span style="color:#4e9a06">&amp;#39;^\S+&amp;#39;&lt;/span> まぐろ sushi.txt --exclude 漬けまぐろ --exclude ねぎまぐろ
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/05c5d572-68dd-8bbb-cfdf-419c32404f14.png" alt="image.png">&lt;/p>
+&lt;p>ヅケとネギはハイライトされなくなりました。でも、選択肢は変わりませんでした。&lt;/p>
+&lt;p>文字列には正規表現を使用することができるので &lt;code>--exclude '(漬け|ねぎ)まぐろ'&lt;/code> と書くこともできます。加えて、お子様セットも年齢制限があるので除外しましょう。この場合は単なる文字列ではなく、「お子様セット」ではじまる行全体を指定したいので &lt;code>^お子様セット.*&lt;/code> と指定します。&lt;/p>
+&lt;p>&lt;code>sh greple -n --outside '^\S+' まぐろ sushi.txt --exclude '(漬け|ねぎ)まぐろ' --exclude '^お子様セット.*' &lt;/code>
+&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/ae1d7430-d2f9-2562-3d29-5cf2be99fb07.png" alt="image.png">&lt;/p>
+&lt;p>お子様セットは候補に出てこなくなりました。&lt;/p>
+&lt;h2 id="--inside--outside-と---include--exclude-の使い分け">&amp;ndash;inside/&amp;ndash;outside と &amp;ndash;include/&amp;ndash;exclude の使い分け&lt;/h2>
+&lt;p>流れとしては &lt;code>--inside/--outside&lt;/code> で検索対象範囲を拾い出して、&lt;code>--include/--exclude&lt;/code> で絞り込むという使い方になります。&lt;/p>
+&lt;p>上の例で、&lt;code>--exclude&lt;/code> の代わりに &lt;code>--outside&lt;/code> を使うことはできません。前回書いたように &lt;code>--inside&lt;/code> と &lt;code>--outside&lt;/code> で指定した範囲は和集合として扱われるので、結果として全体に戻ってしまいます。&lt;/p>
+&lt;p>この例では、&lt;code>--outside&lt;/code> を一度しか使っていないので、そこを &lt;code>--exclude&lt;/code> にしても結果は変わりません。単独で使う場合は、どちらを使っても同じ結果になります。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>前回の &lt;code>--inside/outside&lt;/code> に加えて &lt;code>--include/exclude&lt;/code> オプションについて紹介しました。&lt;/p>
+&lt;p>TeX や roff など、マークアップを使った文書ファイルを校正しようとする場合、マークアップ命令やコメント部分は対象から外して、純粋に文章の部分だけを処理する必要があります。&lt;/p>
+&lt;p>また、原稿の中には自分で書いた文章以外に、引用文であったり、別の文書や書籍のタイトル、固有名詞など、ローカルなルールを適用すべきではない部分もあります。それらを例外として処理対象から外すことができないと実用的なツールとはなりません。greple の機能は、そのような経験から進化してきました。&lt;/p>
+&lt;p>greple のオプションは、なるべく grep に合わせるようにしているのですが、&lt;code>--include&lt;/code> と &lt;code>--excude&lt;/code> については、まったく違う意味になるので注意してください。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 検索ブロック指定</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_10/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_10/</guid><description>
+&lt;p>一般的に、grep 系のツールが検索の対象とするのは「行」です。しかし、扱いたい情報の単位は行とは限りません。greple は、検索対象とするデータの単位を柔軟に指定することができます。&lt;/p>
+&lt;h2 id="--all">&amp;ndash;all&lt;/h2>
+&lt;p>&lt;code>--all&lt;/code> は、ファイル全体を検索単位とするオプションです。&lt;/p>
+&lt;p>このオプションが有効なのは、当たり前ですが、ファイルの内容を全部見たい場合です。&lt;/p>
+&lt;p>寿司セットの中には魚介類以外のネタとして「サラダ」「アボカド」「うどん」があって、すべてを AND で指定すると、そのすべてを含むセットはありませんが &lt;code>--all&lt;/code> を指定すれば全体を眺めることができます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/33ceac6e-bed0-5bbc-2104-2a334af6292f.png" alt="image.png">&lt;/p>
+&lt;p>対象が原稿であれば、注目する部分をハイライトして、全体を眺めたいような場合に有効です。&lt;/p>
+&lt;p>ファイル名のみを表示する &lt;code>-l&lt;/code> オプションと組み合わせて使用すると、指定したワードをすべて含むファイルを探すことができます。検索エンジンと同じような使い方です。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/5d178d48-e17c-d0fc-148c-c763633a238d.png" alt="image.png">&lt;/p>
+&lt;h2 id="-p---paragraph">-p, &amp;ndash;paragraph&lt;/h2>
+&lt;p>&lt;code>-p&lt;/code> (&lt;code>--paragraph&lt;/code>) オプションを指定すると、行ではなく、空白行で区切られた&lt;strong>パラグラフ&lt;/strong>を単位として検索を行います。複数キーワードの処理も、行ではなくパラグラフ単位で行われるので、指定したワードは同一行に含まれる必要はありません。&lt;/p>
+&lt;p>次の例では AND, OR, NOT, MUST という単語がすべて含まれるパラグラフを検索しています。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/695f4be3-46e8-fd62-8a1b-1f8b0001b652.png" alt="image.png">&lt;/p>
+&lt;p>デフォルトでは、ファイル名は grep と同様にすべての行に表示されますが、&lt;code>--filestyle=once&lt;/code> というオプションを指定することで、最初に一度だけ表示しています。&lt;/p>
+&lt;h2 id="--block">&amp;ndash;block&lt;/h2>
+&lt;p>&lt;code>--block&lt;/code> オプションでパターンを指定すると、それにマッチする部分が検索単位となります。次の例では git のソースコードから、Cのコメント部分 (&lt;code>/*...*/&lt;/code>) をブロックとして指定して UTF, Unicode, BOM という単語がすべて含まれるブロックを検索しています。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple --border &lt;span style="color:#4e9a06">&amp;#39;(?s)/\*.*?\*/&amp;#39;&lt;/span> --fs&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>once -i &lt;span style="color:#4e9a06">&amp;#39;utf unicode bom&amp;#39;&lt;/span> *.h
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/074099d0-ba34-246f-88c3-a5567815a19b.png" alt="image.png">&lt;/p>
+&lt;p>この場合、検索対象のブロックは連続していません。ブロックに相当しない場所でのマッチは無視されます。&lt;/p>
+&lt;h2 id="--border">&amp;ndash;border&lt;/h2>
+&lt;p>&lt;code>--border&lt;/code> オプションには &lt;code>--block&lt;/code> と同じようにパターンを指定して、それを元にブロックを作りますが、&lt;code>--block&lt;/code> と違い、マッチの始点と終点を境界とする連続したブロックを作ります。&lt;/p>
+&lt;p>デフォルトの行単位での挙動は &lt;code>--border=^&lt;/code> を指定したのと同じで、パラグラフモードは連続する改行文字 &lt;code>--border='\n\n+'&lt;/code> を指定したのと同じです&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>次の例は、シャープ (#) で始まる行の行頭にブロック境界を設定します。つまり、# ではじまる行から次の行頭の # までの、マークダウン形式のパラグラフがブロックとなります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple --border &lt;span style="color:#4e9a06">&amp;#39;^(?=#)&amp;#39;&lt;/span> PCRE *.md --fs&lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span>once
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/da3374d7-399e-2fb7-0bd0-d55f4f7603e4.png" alt="image.png">&lt;/p>
+&lt;h2 id="-a--b--c">-A, -B, -C&lt;/h2>
+&lt;p>-A (after), -B (before), -C (context) オプションは、検索行の前後を同時に表示するためのもので、grep とほぼ同様に使うことができます。次の例は、マッチした前後1行ずつを表示しています。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n -e びんちょう sushi.txt -C1
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/c5a2df53-3674-8e6b-a030-f66ad6533ef5.png" alt="image.png">&lt;/p>
+&lt;p>この前後コンテキストも、指定したブロックに対して適用されます。ですから、パラグラフモードであれば、前後のパラグラフを一緒に表示します&lt;sup id="fnref:2">&lt;a href="#fn:2" class="footnote-ref" role="doc-noteref">2&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/c843918d-25a1-4b5f-42c4-bffd87e791bf.png" alt="image.png">&lt;/p>
+&lt;p>この時、検索ロジックもコンテキスト同様に拡張されます。次の例で、最初のコマンドでは&lt;strong>びんちょう&lt;/strong>と&lt;strong>サラダ&lt;/strong>を両方含むセットは見つかりませんが、次のコマンドは &lt;code>-C1&lt;/code> でコンテキストを前後に1行ずつ拡張することで、条件を満たすデータが発見されます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n -e びんちょう -e サラダ sushi.txt
+greple -n -e びんちょう -e サラダ sushi.txt -C1
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/7490bdf4-ad6c-b89f-a10d-f663434040b4.png" alt="image.png">&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>greple の検索単位を指定するブロック機能について紹介しました。テキストファイルであっても、行単位で情報が管理されていることはむしろ稀です。処理対象の情報単位を柔軟に設定することで、論理的に意味のあるデータブロックに対して検索等の操作をすることが可能になります。&lt;/p>
+&lt;p>今回紹介した単純なパターンマッチによる方法では処理できないような複雑なデータ形式もあります。そのような場合には、また別のアプローチがあります。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>簡略化して書いています。実際に使っているパターンは &lt;code>(?:\A|\R)\K\R+&lt;/code> というものです。&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;li id="fn:2">
+&lt;p>&lt;code>-C&lt;/code> オプションのデフォルトは2です。&lt;code>-p&lt;/code> オプションを使った場合、空白行の部分も1パラグラフを構成します。したがって、このように前後1パラグラフずつを表示しているように見えます。&amp;#160;&lt;a href="#fnref:2" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item><item><title>Docs: 拡張モジュールの使用法</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_11/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_11/</guid><description>
+&lt;p>greple の特徴の一つは、モジュールによって拡張可能なことです。今回は、モジュールの使い方について紹介します。&lt;/p>
+&lt;h2 id="利用可能なモジュールを表示する">利用可能なモジュールを表示する&lt;/h2>
+&lt;p>モジュールは &lt;code>-M&lt;/code> オプションで指定します。単独で使用すると、利用できるモジュールを表示します。この中には、greple に標準で含まれるものと、別パッケージからインストールしたもの、プライベートに作成したものが含まれます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>$ greple -M
+Use -M option at the beginning with module name.
+Available modules:
+dig
+find
+line
+perl
+pgp
+select
+subst
+autocolor
+i18n
+termcolor
+&lt;/code>&lt;/pre>&lt;p>greple の拡張モジュールは、&lt;code>App::Greple&lt;/code> の下にある小文字ではじまる Perl モジュールです。大文字ではじまるものは greple そのものを実装するためのものです。&lt;/p>
+&lt;p>greple の拡張モジュール機能は &lt;code>Getopt::EX&lt;/code> モジュールで実現されており、&lt;code>App::Greple&lt;/code> に加えて &lt;code>Getopt::EX&lt;/code> の下にある汎用のモジュールを使うこともできます。&lt;code>i18n&lt;/code>, &lt;code>termcolor&lt;/code> などは &lt;code>Getopt::EX&lt;/code> のモジュールです。&lt;/p>
+&lt;h2 id="モジュールを呼び出す">モジュールを呼び出す&lt;/h2>
+&lt;p>&lt;code>-M&lt;/code> オプションにモジュール名を指定することで、そのモジュールを呼び出すことができます。次の例は &lt;code>App::Greple::find&lt;/code> モジュールを使うことを指示していますが、greple の拡張モジュールとして使用する場合には、単に &lt;code>-Mfind&lt;/code> と指示します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -Mfind
+&lt;/code>&lt;/pre>&lt;h2 id="マニュアルを表示する">マニュアルを表示する&lt;/h2>
+&lt;p>モジュールオプションに続いて &lt;code>--help&lt;/code> オプションを指定することで、そのモジュールのマニュアルを表示することができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>$ greple -Mfind --man
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;pre tabindex="0">&lt;code>NAME
+find - Greple module to use find command
+SYNOPSIS
+greple -Mfind find-options -- greple-options ...
+DESCRIPTION
+Provide find command option with ending &amp;#39;--&amp;#39;.
+Greple will invoke find command with provided options and read its output
+from STDIN, with option --readlist. So
+greple -Mfind . -type f -- pattern
+is equivalent to:
+find . -type f | greple --readlist pattern
+If the first argument start with `!&amp;#39;, it is taken as a command name and
+executed in place of find. You can search git managed files like this:
+greple -Mfind !git ls-files -- pattern
+&lt;/code>&lt;/pre>&lt;p>ただ、実装上の都合で、別のモジュールのマニュアルが表示されてしまうことがあります。その場合は、&lt;code>man&lt;/code> コマンドや &lt;code>perldoc&lt;/code> で &lt;code>App::Greple&lt;/code> に続いてモジュール名を指定します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>man App::Greple::find
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>perldoc App::Greple::find
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>ちなみに、&lt;code>--man&lt;/code> の代わりに &lt;code>--show&lt;/code> を使うと、モジュールの内容を見ることができます。&lt;code>perldoc -m&lt;/code> としても同じです。&lt;/p>
+&lt;h2 id="モジュールを使う">モジュールを使う&lt;/h2>
+&lt;p>モジュールの使い方について &lt;code>find&lt;/code> と &lt;code>dig&lt;/code> モジュールを例に説明します。&lt;/p>
+&lt;p>greple には &lt;code>grep -r&lt;/code> のようにディレクトリの下を再起的に検索するオプションはありません。その代わりに &lt;code>--readist&lt;/code> というオプションがあって、標準入力から読んだファイル名を検索対象とします。find コマンドの出力を &lt;code>--readlist&lt;/code> オプションで読み込めば再起的な検索が可能です。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>find . -type f &lt;span style="color:#000;font-weight:bold">|&lt;/span> greple --readlist Copyright
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>find&lt;/code> モジュールを使うと、greple コマンドのオプションとして find オプションを指定することができるようになります。&lt;code>-Mfind&lt;/code> から &lt;code>--&lt;/code> までの間の引数を &lt;code>find&lt;/code> コマンドのオプションとして処理します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple -Mfind . -type f -- Copyright
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>find コマンドのオプションは非常に詳細な指定が可能ですが、使いこなすのにはちょっとコツが必要です。たとえば .git ディレクトリを検索対象から外すためには次のように指定します。あまり直感的ではなくて、&lt;code>-prune&lt;/code> オプションの使い方はいつもわからなくなります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>find . -name .git -prune -o -type f
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>git だけではなく様々なケースに対応しようとすると、オプションはさらに複雑化してきます。&lt;code>dig&lt;/code> モジュールは &lt;code>find&lt;/code> モジュールの面倒なオプションを自動的に設定して、必要のないリポジトリや画像ファイルなどをスキップするためのモジュールです。次のように使うことができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple -Mdig Copyright --dig .
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>このコマンドは、実際には次のようなオプションに展開されて実行されます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-sh" data-lang="sh">&lt;span style="display:flex;">&lt;span>greple -Mfind .
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -name .git -o -name .svn -o -name RCS -o -name CVS &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> -o &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -name .vscode &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> -o &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -name .build -o -name _build &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span> -prune -o -type f &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>! -name .* ! -name *,v ! &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -name *~ -o -name *.swp &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>! &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -iname *.jpg -o -iname *.jpeg -o -iname *.gif -o -iname *.png -o -iname *.ico -o -iname *.heic -o -iname *.heif -o -iname *.svg &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>! &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -iname *.tar -o -iname *.tar.gz -o -iname *.tbz -o -iname *.tgz -o -name *.a -o -name *.zip &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>! -iname *.pdf ! &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -name *.db -o -iname *.bdb &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>! &lt;span style="color:#ce5c00;font-weight:bold">(&lt;/span> -name *.bundle -o -name *.dylib -o -name *.o -o -name *.fits &lt;span style="color:#ce5c00;font-weight:bold">)&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>-print --
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>これを手で入力することを考えると気が遠くなりそうです。&lt;/p>
+&lt;p>&lt;code>dig&lt;/code> モジュールには &lt;code>--git&lt;/code> というオプションも定義されていて、&lt;code>git ls-files&lt;/code> の結果に対して検索をかけることができます。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>今回は greple のモジュール機能について、その使い方を紹介しました。greple には、これまで紹介していないオプションが数多くありますが、モジュールを使うことで、複雑なオプション指定を組み合わせてシンプルなインタフェースを提供することが可能になります。モジュールの作り方については、機会を改めて説明します。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 初期設定ファイル .greplerc</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_12/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_12/</guid><description>
+&lt;p>greple は、UNIX の他の多くのコマンドと同様に、ホームページに初期設定ファイル (~/.greplerc) を用意することで、起動時にそれを読み込むことができます。この中では、様々な設定が可能です。&lt;/p>
+&lt;h2 id="default-デフォルトオプション">default: デフォルトオプション&lt;/h2>
+&lt;p>&lt;code>option&lt;/code> 命令で新しいオプションを定義することができます。中でも &lt;code>default&lt;/code> という名前は特別で、実行時に自動的に付与するオプションを指定することができます。たとえば、次のように設定すると、ハイライトモードが常に有効になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>option default --color=always
+&lt;/code>&lt;/pre>&lt;p>さらに、行番号を表示させたければ、このようにします。default の定義が複数行あった場合には、最後の定義だけが有効になります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>option default --color=always -n
+&lt;/code>&lt;/pre>&lt;h2 id="option-オリジナルオプション">option: オリジナルオプション&lt;/h2>
+&lt;p>自分でオリジナルのオプションを定義することもできます。次のように設定しておけば &lt;code>--sushi&lt;/code> と書くだけで、そこに定義したオプション指定したことになります。&lt;/p>
+&lt;pre tabindex="0">&lt;code>option --sushi --outside &amp;#39;^\S+&amp;#39; --exclude &amp;#39;^お子様セット.*&amp;#39;
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/ee2dab7d-b5f1-6f21-580a-44be630fe7bf.png" alt="image.png">&lt;/p>
+&lt;p>&lt;code>-do&lt;/code> はデバッグ用のオプションで、最終的に実行されるオプションを表示します。&lt;/p>
+&lt;h2 id="define-マクロ定義">define: マクロ定義&lt;/h2>
+&lt;p>複雑なオプションを定義する際には、マクロによる文字列置換を使用することができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>define {base03} #002b36
+define {base02} #073642
+define {base01} #586e75
+define {base00} #657b83
+define {base0} #839496
+define {base1} #93a1a1
+define {base2} #eee8d5
+define {base3} #fdf6e3
+define {yellow} #b58900
+define {orange} #cb4b16
+define {red} #dc322f
+define {magenta} #d33682
+define {violet} #6c71c4
+define {blue} #268bd2
+define {cyan} #2aa198
+define {green} #859900
+option --solarized \
+--cm {yellow} \
+--cm {orange} \
+--cm {red} \
+--cm {magenta} \
+--cm {violet} \
+--cm {blue} \
+--cm {cyan} \
+--cm {green}
+&lt;/code>&lt;/pre>&lt;h2 id="autoload-モジュールの自動読み込み">autoload: モジュールの自動読み込み&lt;/h2>
+&lt;p>&lt;code>autoload&lt;/code> は、モジュールを自動的に読み込むための命令です。次の設定は &lt;code>--dig&lt;/code> および &lt;code>--git&lt;/code> オプションは &lt;code>dig&lt;/code> モジュールで定義されていることを指示します。&lt;code>--dig&lt;/code> オプションは &lt;code>-Mdig --dig&lt;/code> に展開され、&lt;code>dig&lt;/code> モジュールが自動的に読み込まれます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>autoload -Mdig --dig --git
+&lt;/code>&lt;/pre>&lt;h2 id="__perl__-任意コードの実行">&lt;code>__PERL__&lt;/code>: 任意コードの実行&lt;/h2>
+&lt;p>&lt;code>.greplerc&lt;/code> の中に &lt;code>__PERL__&lt;/code> という文字列があると、それより後の内容を Perl プログラムとして評価します。&lt;/p>
+&lt;p>greple のオプションの中には、任意の関数を呼び出すことができるものがあります。たとえば &lt;code>--begin&lt;/code> オプションを使うと、ファイルを検索する前にその内容に対して行う処理を指定することができます。&lt;/p>
+&lt;p>&lt;code>.greplerc&lt;/code> に次のようなコードを用意したとします。&lt;/p>
+&lt;pre tabindex="0">&lt;code>__PERL__
+sub remove_header {
+s/\A---\n(.+\n)+---\n\n*//;
+}
+&lt;/code>&lt;/pre>&lt;p>すると、次のようにして、マークダウンファイルを検索する前に、ヘッダ部分を削除することができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple --begin &amp;#39;&amp;amp;remove_header&amp;#39; *.md
+&lt;/code>&lt;/pre>&lt;p>他の言語にも対応できるように、このような形式にしていますが、今のところ対応しているのは　Perl だけです。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>greple の初期設定ファイル .greplerc について紹介しました。&lt;/p>
+&lt;p>オプションを組み合わせることで、様々なタイプのデータに対応する複雑な処理を実現することができますが、どうしてもコマンド行が複雑化してきます。.greplerc に自分でよく使うオリジナルオプションを定義することで、作業を効率化することができます。&lt;/p>
+&lt;p>デフォルトオプションについては、.greplerc に記述する以外に、&lt;code>GREPLEOPTS&lt;/code> という環境変数を設定する方法もあります。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af">https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: カラーオプション</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_13/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_13/</guid><description>
+&lt;p>greple は、複数のハイライトカラーを使って結果を表示することができます。これまで紹介したような、検索キーワードの色分け以外にも、様々な色の指定が可能です。今回は、色の指定方法について紹介します。&lt;/p>
+&lt;h2 id="カラーマップ">カラーマップ&lt;/h2>
+&lt;p>greple の色情報はカラーマップで管理され、その中にはインデックスリストと名前付きのリストという2種類の要素があります。つまり、リストとハッシュです。&lt;/p>
+&lt;p>&lt;code>-dc&lt;/code> というデバッグオプションを使うと、カラーマップ情報を見ることができます。デフォルトのカラーマップはこうです。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/03d5c09f-4f59-dc16-558b-ccf58a0c430e.png" alt="image.png">&lt;/p>
+&lt;p>最初に表示されているのが名前付きリストで、ファイル名 (&lt;code>FILE&lt;/code>) や行番号 (&lt;code>LINE&lt;/code>) の表示色に関する情報を保持しています。&lt;/p>
+&lt;p>次にあるのがインデックスリストで、検索した文字列をハイライトするために使われます。&lt;/p>
+&lt;h2 id="--colormap---cm-オプション">&amp;ndash;colormap, &amp;ndash;cm オプション&lt;/h2>
+&lt;p>カラーマップは &lt;code>--colormap&lt;/code> オプションで指定します。ちょっと長いので &lt;code>--cm&lt;/code> と省略することもできます。デフォルトのカラーマップは、次のように指定したのと同じです。&lt;/p>
+&lt;pre tabindex="0">&lt;code>--cm BLOCKEND=/WE,FILE=G,LINE=Y,PROGRESS=B,TEXT= \
+--cm 000D/544,000D/454,000D/445 \
+--cm 000D/455,000D/545,000D/554 \
+--cm 000D/543,000D/453,000D/435,000D/534,000D/354,000D/345 \
+--cm 000D/444,000D/433,000D/343,000D/334 \
+--cm 000D/344,000D/434,000D/443,000D/333
+&lt;/code>&lt;/pre>&lt;p>1行目の名前付きのリストは &lt;code>NAME=color&lt;/code> という形式、2行目以下のインデックスリストはラベルなしの &lt;code>color&lt;/code> だけです。複数の要素をカンマで区切って同時に指定することができます。&lt;code>--cm&lt;/code> オプションは繰り返し使うことができるので、上の例では分けて書いてありますが、1つにまとめてしまっても構いません。&lt;/p>
+&lt;p>簡単に説明すると、G (Green), Y (Yellow) などの基本の色、D (ボールド) のような効果、544 のように 0-5 の数字3桁で表された216色で指定されています。スラッシュ (&lt;code>/&lt;/code>) の左がフォアグラウンド、右側はバックグラウンドカラーです。&lt;/p>
+&lt;h2 id="色の指定">色の指定&lt;/h2>
+&lt;h3 id="基本-16色">基本 16色&lt;/h3>
+&lt;pre tabindex="0">&lt;code> R r Red
+G g Green
+B b Blue
+C c Cyan
+M m Magenta
+Y y Yellow
+K k Black
+W w White
+&lt;/code>&lt;/pre>&lt;p>大文字は、赤、緑、青、シアン、マジェンタ、黄、黒、白の基本の8色です。小文字は代替色を意味しますが、多くの端末では基本色よりも明るい色が指定されています。&lt;/p>
+&lt;h3 id="rgb-6x6x6-216色">RGB 6x6x6 216色&lt;/h3>
+&lt;pre tabindex="0">&lt;code> 000 .. 555 : 6x6x6 RGB 216 colors
+&lt;/code>&lt;/pre>&lt;p>RGB 値を0から5の数字で表した216色です。&lt;/p>
+&lt;p>慣れると案外わかりやすくて、555は白、R以外を0にして500なら原色の赤。GとBの値を増やすと白に近づいて544は淡い赤という具合です。RGB と CMY のポジションが対応していて、R　の部分を落とした055は、補色のシアン、Bを落として550なら黄色になります。1つだけ大きければ RGB、1つだけ小さければ CMY と憶えるとわかりやすいと思います。&lt;/p>
+&lt;p>基本のカラーマップは RGB に 543 のどれかを当てた組み合わせをバックグラウンドカラーとしています。&lt;/p>
+&lt;h3 id="グレースケール-24色">グレースケール 24色&lt;/h3>
+&lt;p>&lt;code>L01&lt;/code> から &lt;code>L24&lt;/code> は、24階調のグレースケールです。&lt;code>L00&lt;/code> は黒 (&lt;code>000&lt;/code>)、&lt;code>L25&lt;/code> は白 (&lt;code>555&lt;/code>) と同じです。&lt;code>W&lt;/code> や &lt;code>w&lt;/code> は、真っ白とは限りません。&lt;/p>
+&lt;pre tabindex="0">&lt;code> L00 .. L25 : Black (L00), 24 grey levels, White (L25)
+&lt;/code>&lt;/pre>&lt;h3 id="12ビット24ビット-rgb">12ビット/24ビット RGB&lt;/h3>
+&lt;p>RGB を10進や16進の、12ビット値あるいは24ビット値で指定することもできます。ただし、256色表示の端末では表示できないので、その場合は近似する216色に変換して表示します。&lt;/p>
+&lt;pre tabindex="0">&lt;code> (255,255,255) : 24bit decimal RGB colors
+#000000 .. #FFFFFF : 24bit hex RGB colors
+#000 .. #FFF : 12bit hex RGB 4096 colors
+&lt;/code>&lt;/pre>&lt;h3 id="名前">名前&lt;/h3>
+&lt;p>&lt;a href="https://en.wikipedia.org/wiki/X11_color_names">https://en.wikipedia.org/wiki/X11_color_names&lt;/a> で定義されている名前で色を指定することができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code> &amp;lt;red&amp;gt; &amp;lt;blue&amp;gt; &amp;lt;green&amp;gt; &amp;lt;cyan&amp;gt; &amp;lt;magenta&amp;gt; &amp;lt;yellow&amp;gt;
+&amp;lt;aliceblue&amp;gt; &amp;lt;honeydue&amp;gt; &amp;lt;hotpink&amp;gt; &amp;lt;mooccasin&amp;gt;
+&amp;lt;medium_aqua_marine&amp;gt;
+&lt;/code>&lt;/pre>&lt;h3 id="効果">効果&lt;/h3>
+&lt;p>色以外の効果を指定することもできます。よく使うのはボールド(&lt;code>D&lt;/code>)、イタリック(&lt;code>I&lt;/code>)、アンダーライン(&lt;code>U&lt;/code>)、反転(&lt;code>S&lt;/code>)あたりでしょうか。見えなくする &lt;code>H&lt;/code> や、見え消し線を引く &lt;code>X&lt;/code> はサポートされていない端末もありますが、使い方によっては効果的です。点滅(&lt;code>F&lt;/code>)は面白いけど、うるさいのであまり使いません。早い点滅 (Q) をサポートしている端末は見たことがありません。&lt;/p>
+&lt;pre tabindex="0">&lt;code> N None
+Z 0 Zero (reset)
+D 1 Double strike (boldface)
+P 2 Pale (dark)
+I 3 Italic
+U 4 Underline
+F 5 Flash (blink: slow)
+Q 6 Quick (blink: rapid)
+S 7 Stand out (reverse video)
+H 8 Hide (concealed)
+X 9 Cross out
+E Erase Line
+; No effect
+/ Toggle foreground/background
+^ Reset to foreground
+&lt;/code>&lt;/pre>&lt;p>行消去の &lt;code>E&lt;/code> は特殊で、文字の属性を定義するものではありません。これを指定すると、色設定のシークエンスと同時に、カーソルがある場所から行末までを消去するシークエンスを出力します。文字を消すのと同時に背景色で埋めるので、その色の線が引かれたように見えます。最初の例の &lt;code>BLOCKEND&lt;/code> で使われています。&lt;/p>
+&lt;h2 id="ansi-256色-ターミナルカラー">ANSI 256色 ターミナルカラー&lt;/h2>
+&lt;p>標準的な256色表示のANSI端末は、これまでに説明した基本の16色、6階調の RGB 216色、24階調のグレースケールを表示することができます。これは、次のコマンドで一覧することができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>perl -MGetopt::EX::Colormap=:all -E colortable
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/542cd6ad-e187-dca5-a9d0-91c934e7140c.png" alt="image.png">&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/1ee056a7-58fa-56df-4c40-ac813e644459.png" alt="image.png">&lt;/p>
+&lt;h2 id="フルカラーターミナル">フルカラーターミナル&lt;/h2>
+&lt;p>24ビットフルカラーに対応している端末では、フルカラーの指定をそのまま出力することができます。Apple の標準ターミナルは256色表示ですが、iTerm2 などはフルカラー表示が可能です。greple は、&lt;code>COLORTERM&lt;/code> という環境変数に &lt;code>truecolor&lt;/code> という値が設定されていると、フルカラー端末であると認識します。&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>greple は、複数の色を扱えることが特徴の１つです。しかし、色の指定が煩雑だと使いこなすのが難しいので、シンプルで統一的な方法で指定できるように工夫しています。現在は、色を管理する部分を切り出して &lt;code>Getopt::EX::Colormap&lt;/code> という独立したモジュールでリリースしています。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af">https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc">https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: カラーオプション（続き）</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_14/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_14/</guid><description>
+&lt;h2 id="色についてもっと色々">色についてもっと色々&lt;/h2>
+&lt;p>前回は、カラーマップを指定する &lt;code>--colormap&lt;/code> オプションと、色の指定の仕方について紹介しました。今回は、色を扱う様々なオプションについて紹介します。&lt;/p>
+&lt;h2 id="--colormap">&amp;ndash;colormap&lt;/h2>
+&lt;p>greple のカラーマップには、名前付きカラーと、インデックスカラーの2種類があり、どちらも &lt;code>--colormap&lt;/code> (&lt;code>--cm&lt;/code>) オプションで設定することができました。今回紹介するのは、マッチしたパターンをハイライトするために使用されるうインデックスカラーに関するものです。&lt;/p>
+&lt;h2 id="--regioncolor---ri">&amp;ndash;regioncolor, &amp;ndash;ri&lt;/h2>
+&lt;p>以前に、複数の検索範囲を指定すると、それぞれの領域に別の色が割り当てられる例を紹介しました。&lt;/p>
+&lt;pre>&lt;code>greple -n --inside '^\S+' --outside '^\S+' '[ー\p{Katakana}]+' sushi.txt
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/93d1783b-a8e0-59a4-4acf-9ab8e9276dae.png" alt="image.png">&lt;/p>
+&lt;!--
+greple -n --inside '^\S+' --outside '^\S+' まぐろ sushi.txt --all
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/0c5f7d2e-4f73-0227-a406-aa32f828e433.png)
+---
+しかし、複数の検索ワードが指定されている場合、次のようにそれぞれのパターンに別の色が割り当てられます。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/557e8274-601e-6534-1321-361100ff1fcb.png)
+`--regioncolor` (`--rc`) オプションは、領域による色分けを強制するものです。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/d4d002f3-3a9e-99de-74c5-5c0f25174f2b.png)
+## --uniqcolor, --uc
+次のようにすると、全部の寿しネタを抜き出すことができます。
+greple -n --outside '^\S+' '\S+' sushi.txt
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/393e6f17-197b-26f6-7551-119432374cd4.png)
+`--uniqcolor` (`--uc`) オプションを使うと、マッチした文字列に固有の色を割り当てて、わかりやすく表示することができます。
+greple -n --outside '^\S+' '\S+' sushi.txt --uc
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/5e9da2c6-fa56-cc28-9072-b8963458a3ee.png)
+## --colorindex, --ci
+`--colorindex` (`--ci`) は、インデックスカラーを適用するアルゴリズムを指定するオプションで、次のパラメータを取ります。
+|記号| 意味 |
+|:-:|:-----|
+| A |Ascend|
+| D |Descend|
+| R |Random|
+| B |Block |
+### Ascend (昇順)
+`--uc=A` オプションを指定すると、それぞれのマッチに順番に色を割り当てていきます。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/3b44f5f7-c266-ab6b-d9d2-412df1a64d28.png)
+`--cm` オプションで2つの色を指定して、それを交互に適用することもできます。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/37b8b814-b5bd-8e48-8e77-0282edbf94ce.png)
+### Ascend/Block (昇順/ブロック)
+`--uc=AB` のように `B` (ブロック)　を指定すると、各ブロック毎に順序をリセットするようにようになります。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/72ec69a4-3572-d235-57c1-02fb680b7b73.png)
+なんの役に立つのかと思うかもしれませんが、こんな使い方はいかがでしょう。
+sed /^#/d /etc/passwd | head | greple '[^:\n]+' --ci=AB
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/174a52de-3063-f4fd-f6e6-aa8fdb0780a7.png)
+### Descend (降順)
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/df0a616a-0d88-43cc-a34d-01979a6d6efe.png)
+### Random (ランダム)
+ランダムは、文字通りランダムに色を割り当てます。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/c877399b-b797-9597-01b7-70de8b55fc07.png)
+これも何の役に立つのかと言われると困るのですが、意匠的には面白い効果を得ることができます。
+![image.png](https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/2f4512ba-67ce-c23f-91b4-b4a1b0f14d23.png)
+## まとめ
+今回は、インデックスカラーの適用方法について説明しました。途中説明を省略していますが、`--face` というオプションはすべてのインデックスカラーに対して効果を適用するオプションです。行末まで背景色を適用する `E` と組み合わせると、面白い効果が得られます。
+## SEE ALSO
+https://qiita.com/advent-calendar/2021/greple
+1. https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5
+2. https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3
+3. https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1
+4. https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703
+5. https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069
+6. https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3
+7. https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771
+8. https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d
+9. https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64
+10. https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c
+11. https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af
+12. https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc
+13. https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414
+- https://github.com/kaz-utashiro/greple
+- https://metacpan.org/dist/App-Greple</description></item><item><title>Docs: カラーマップの切り替え</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_15/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_15/</guid><description>
+&lt;h2 id="端末の背景色によって色を選ぶ">端末の背景色によって色を選ぶ&lt;/h2>
+&lt;p>2回に渡り、カラーオプションについて紹介しました。しかし、人によって使用する端末は様々で、デフォルトの配色がすべての環境に適しているとは限りません。今回は、環境や好みに応じてカラーマップを切り替える方法を紹介します。&lt;/p>
+&lt;h2 id="黒いターミナル">黒いターミナル&lt;/h2>
+&lt;p>前回紹介した、寿司ネタを &lt;code>--uniqcolor&lt;/code> オプションで表示した例です。greple のデフォルトカラーは、白い背景色を前提にしていて、淡い基調の背景に黒い文字で設定してあります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/c21efd5f-0243-e050-e76d-b4bb0f3ebc06.png" alt="image.png">&lt;/p>
+&lt;p>エンジニアの中には黒い背景のターミナルを好む人は多いですし、最近はダークモード流行りでもあります。黒い背景の端末で同じコマンドを実行すると、このように見えます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/8787c0e7-5047-69ce-4b75-b497a39c786b.png" alt="image.png">&lt;/p>
+&lt;p>みにくいことはありませんが、明るさの変化が激しすぎてケバケバしい印象を受けます。まあ、なんというか、品がありません。&lt;/p>
+&lt;p>標準で添付されているモジュールには &lt;code>--light&lt;/code> と &lt;code>--dark&lt;/code> というオプションが設定されていて、&lt;code>--dark&lt;/code> を使うとこのようになります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/ed435ae2-0e81-ac33-3ad7-1883d68f5bec.png" alt="image.png">&lt;/p>
+&lt;p>背景色に合わせて、濃い基調の背景色に白い文字を組み合わせています。実際の設定はこのようなもので、&lt;code>--light&lt;/code> の背景色が 345 の組み合わせであるのに対して、&lt;code>--dark&lt;/code> では 012 の組み合わせになっています。若干 &lt;code>001&lt;/code> のブルーの背景が端末の黒と見分けづらい点を除けば、概ね良好ではないでしょうか。&lt;/p>
+&lt;pre tabindex="0">&lt;code>option --dark \
+--cm 555/100,555/010,555/001 \
+--cm 555/011,555/101,555/110 \
+--cm 555/021,555/201,555/210 \
+--cm 555/012,555/102,555/120 \
+--cm 555/111 \
+--cm 555/211,555/121,555/112 \
+--cm 555/122,555/212,555/221 \
+--cm 555/222
+&lt;/code>&lt;/pre>&lt;p>&lt;code>--light&lt;/code> と &lt;code>--dark&lt;/code> を両方指定して、カラーバリエーションを増やすこともできます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/44599e3b-e32f-5eba-4d4e-40daac2ce5c4.png" alt="image.png">&lt;/p>
+&lt;p>いつも &lt;code>--dark&lt;/code> オプション付きで実行したければ、&lt;code>~/.greplerc&lt;/code> を次のように設定することで、ダーク端末用のカラーパレットを適用することができます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-:~/.greplerc" data-lang=":~/.greplerc">option default --dark
+autoload -Mcolors --dark --solarized
+&lt;/code>&lt;/pre>&lt;h2 id="solarized">solarized&lt;/h2>
+&lt;p>&lt;a href="https://ethanschoonover.com/solarized/">Solarized&lt;/a> というカラーパレットをご存知でしょうか。こんなのです。様々な環境で気持ちよく見えように計算された配色で、多くの端末やエディタなどに採用されています。&lt;/p>
+&lt;p>&lt;img src="https://raw.githubusercontent.com/altercation/solarized/master/img/solarized-yinyang.png" alt="">&lt;/p>
+&lt;p>&lt;code>colors&lt;/code> モジュールには &lt;code>--solarized&lt;/code> というオプションが定義されています。&lt;/p>
+&lt;pre tabindex="0">&lt;code>define {yellow} #b58900
+define {orange} #cb4b16
+define {red} #dc322f
+define {magenta} #d33682
+define {violet} #6c71c4
+define {blue} #268bd2
+define {cyan} #2aa198
+define {green} #859900
+option --solarized \
+--cm {yellow} \
+--cm {orange} \
+--cm {red} \
+--cm {magenta} \
+--cm {violet} \
+--cm {blue} \
+--cm {cyan} \
+--cm {green}
+&lt;/code>&lt;/pre>&lt;p>これを使って寿司ネタを表示すると、こうなります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/f5075a7d-7853-38b2-fb0e-fc5ea1ec5447.png" alt="image.png">&lt;/p>
+&lt;p>ただ、これは Apple Terminal の近似色で表示されています。フルカラー表示の iTerm では下のようになります。違いがわかるでしょうか。iTerm の方が微妙な色の違いが表現されてはいますが、逆に「えび」(orange)、「たまご」(red)、「いか」(magenta)」の違いは曖昧で、どちがが見やすいかと一概には言えないような気もします。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/2be927cd-6710-16df-a104-3f5f4dfb4173.png" alt="image.png">&lt;/p>
+&lt;p>次の例は、同じコマンドを iTerm のダークターミナルで表示したものです。Solarized カラーパレットは、このように明るい背景色でも、暗い背景色でも違和感を感じない配色になっています。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/95985ddf-569d-cb68-f503-39f1eb05a137.png" alt="image.png">&lt;/p>
+&lt;h2 id="termcolor-モジュール">termcolor モジュール&lt;/h2>
+&lt;p>使うターミナルの背景色がいつも同じであれば、それを設定しておけばいいのですが、異なる背景色を使い分ける人もいるでしょう。そのような場合に、使用している背景色に応じて適したオプションを自動的に設定するのが &lt;code>termcolor&lt;/code> モジュールです。&lt;/p>
+&lt;p>&lt;code>termcolor&lt;/code> モジュールは greple ではなく、greple が使用する &lt;code>Getopt::EX&lt;/code> 用の汎用モジュールです。次のように使うと、使用しているターミナルの背景の明るさに応じて &lt;code>--light&lt;/code> あるいは &lt;code>--dark&lt;/code> というオプションを自動的にセットします。Apple_Terminal、iTerm あるいは xterm 互換ターミナルであれば自動的に背景色を判定できますが、できなかった場合には最大値の 100 を使用します。&lt;/p>
+&lt;pre>&lt;code>-Mtermcolor::bg(default=100,light=--light,dark=--dark)
+&lt;/code>&lt;/pre>
+&lt;p>次の例は、デバッグオプションを使って、オプションが展開される様子を示しています。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/d743c042-fdba-0dcd-7654-28a8bdc2ead6.png" alt="image.png">&lt;/p>
+&lt;p>&lt;code>~/.greplerc&lt;/code> を次のように指定しておくと、常に適用されます。&lt;/p>
+&lt;pre tabindex="0">&lt;code class="language-:~/.greplerc" data-lang=":~/.greplerc">option default --autocolor
+option --autocolor -Mtermcolor::bg(default=100,light=--light,dark=--dark)
+&lt;/code>&lt;/pre>&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>端末の背景色によって、カラーマップを切り替える方法について紹介しました。最後の &lt;code>termcolor&lt;/code> モジュールを使った方法は便利ですが、対応していない端末では使えなかったり、自動取得のためのオーバーヘッドがかかるなどの問題もあります。&lt;code>TERM_BGCOLOR&lt;/code> という環境変数を設定しておくと、それを背景色として使うようになるので、興味のある方は&lt;a href="https://github.com/kaz-utashiro/Getopt-EX-termcolor#readme">マニュアル&lt;/a>を読んで工夫してみてください。未対応端末をサポートしてくれるのは大歓迎です。&lt;/p>
+&lt;p>&lt;code>colors&lt;/code> モジュールをベースに、自分で好きな配色を作ってみても面白いと思います。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>colors: &lt;a href="https://github.com/kaz-utashiro/greple/blob/master/lib/App/Greple/colors.pm">https://github.com/kaz-utashiro/greple/blob/master/lib/App/Greple/colors.pm&lt;/a>&lt;/p>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af">https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc">https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414">https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0">https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 入出力フィルター</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_16/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_16/</guid><description>
+&lt;h2 id="入出力フィルターを使う">入出力フィルターを使う&lt;/h2>
+&lt;p>greple には、データの入力時と出力時にフィルターを設定する機能があります。普通に使う時にはパイプを使えばいいだけなので、それほど必要性はないのですが、モジュールと組み合わせることで威力を発揮します。&lt;/p>
+&lt;h2 id="入力フィルター---if">入力フィルター: &amp;ndash;if&lt;/h2>
+&lt;p>入力フィルターを指定します。&lt;/p>
+&lt;p>単純な形式は &lt;code>--if=filter&lt;/code> です。たとえば、&lt;/p>
+&lt;pre>&lt;code>greple --if='cat -n' ^ sushi.txt
+&lt;/code>&lt;/pre>
+&lt;p>のように実行すると、&lt;code>cat -n&lt;/code> の結果を検索します。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/9a107079-e7de-28f4-d4be-b954f35a2aa5.png" alt="image.png">&lt;/p>
+&lt;p>フィルターオプションが &lt;code>--if=exp:filter&lt;/code> のような形式の場合 &lt;code>exp&lt;/code> を Perl の式として評価して、結果が真あれば、そのフィルターを適用します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>greple -n --if=&amp;#39;s/\.gz$//:gunzip -c&amp;#39; まぐろ sushi.txt.gz
+&lt;/code>&lt;/pre>&lt;p>式を評価する時には、ファイル名が &lt;code>$_&lt;/code> 変数に設定されています。上の例では、ファイル名が &lt;code>.gz&lt;/code> で終わっていたら &lt;code>gunzip -c&lt;/code> コマンドを使って圧縮を解いたテキストを検索します。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/51902ea0-e4f7-8640-df4d-bbdf1e7a34d7.png" alt="image.png">&lt;/p>
+&lt;p>実は greple には、これに相当するフィルタがデフォルトで含まれているので、何も指定しなくても圧縮ファイルを検索することが可能です。フィルタの形式とは少し違いますが、これがデフォルトのフィルタルールです。圧縮ファイル以外に、 PDF や暗号化されたファイルも検索することができます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#4e9a06">s/\.Z$//&lt;/span> &lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;zcat&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#4e9a06">s/\.g?z$//&lt;/span> &lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;gunzip -c&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#4e9a06">m/\.pdf$/i&lt;/span> &lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;pdftotext -nopgbrk - -&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span> &lt;span style="color:#4e9a06">s/\.gpg$//&lt;/span> &lt;span style="color:#000;font-weight:bold">},&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;gpg --quiet --no-mdc-warning --decrypt&amp;#39;&lt;/span> &lt;span style="color:#000;font-weight:bold">],&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>入力フィルターを使えば、テキストファイルではないデータからテキストを抽出して検索することもできます。次の例では、画像ファイルのメタ情報を検索しています。&lt;/p>
+&lt;pre>&lt;code>greple --if 'exif /dev/stdin' --cm=U --or Lens --or Exposure --or Speed IMG.jpg
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/da59a769-78ec-a054-63c2-7a3aef65b0c9.png" alt="image.png">&lt;/p>
+&lt;h2 id="出力フィルター---of">出力フィルター: &amp;ndash;of&lt;/h2>
+&lt;p>出力フィルター形式は &lt;code>--of=filter&lt;/code> です。たとえば、&lt;/p>
+&lt;pre>&lt;code>greple --of 'cat -n' まぐろ sushi.txt
+&lt;/code>&lt;/pre>
+&lt;p>のように実行すると、検索した結果が &lt;code>cat -n&lt;/code> を通して表示されます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/e9c90a61-7ce1-6ae0-d8da-66bd4cb5dd2f.png" alt="image.png">&lt;/p>
+&lt;p>&lt;code>--if&lt;/code> と比べて、行番号が変わっているのがわかります。&lt;/p>
+&lt;h2 id="プロセスフィルター---pf">プロセスフィルター: &amp;ndash;pf&lt;/h2>
+&lt;p>&lt;code>--of&lt;/code> で指定されたフィルターは、それぞれのファイル毎に実行されます。それに対して &lt;code>--pf&lt;/code> で指定されたフィルターは greple プロセスの出力に対して1回だけ実行されます。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/a30a6fd0-c2d2-4f78-ccb2-8b8c80f00a6d.png" alt="image.png">&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>入出力フィルターをコマンドオプションとして使うことは稀で、何らかの目的で作られたモジュールの中で使われた時に有効に機能します。次の例は実際のモジュールから抜き出したものですが、複数行のデータをソートして出力するためのものです。ブロック内の改行文字をキャリッジリターンに置き換えて、最後にフィルターを通してソートしてから元に戻しています。&lt;/p>
+&lt;pre>&lt;code>--pf 'sort | tr \\015 \\012'
+&lt;/code>&lt;/pre>
+&lt;p>今回紹介したフィルターは、複数回指定して多段で適用することもできます。また、今回は紹介していませんが、外部コマンドではなくて、モジュール内で定義した任意のプログラムをフィルターとして指定することも可能です。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af">https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc">https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414">https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0">https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380">https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 関数インタフェース</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_17/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_17/</guid><description>
+&lt;h2 id="ランタイム関数">ランタイム関数&lt;/h2>
+&lt;p>greple には、関数を指定することができるオプションがいくつもあります。プログラムから抜き出してみると、これだけありました。&lt;/p>
+&lt;blockquote>
+&lt;p>&lt;code>--begin&lt;/code>, &lt;code>--end&lt;/code>, &lt;code>--prologue&lt;/code>, &lt;code>--epilogue&lt;/code>
+&lt;code>--print&lt;/code>, &lt;code>--callback&lt;/code>, &lt;code>--uniqsub&lt;/code>
+&lt;code>--block&lt;/code>, &lt;code>--inside&lt;/code>, &lt;code>--outside&lt;/code>, &lt;code>--include&lt;/code>, &lt;code>--exclude&lt;/code>
+&lt;code>--if&lt;/code>, &lt;code>--of&lt;/code>, &lt;code>--pf&lt;/code>
+&lt;code>--colormap&lt;/code>
+&lt;code>--le&lt;/code>&lt;/p>
+&lt;/blockquote>
+&lt;p>ずいぶんとたくさんあります。中には &lt;code>--inside/outside&lt;/code>、&lt;code>--include/exclude&lt;/code>、&lt;code>--block&lt;/code> など、今までに説明してきたものも含まれています。今回は、これらのオプションで使われている関数の定義と利用方法について紹介します。&lt;/p>
+&lt;h2 id="関数の使い方">関数の使い方&lt;/h2>
+&lt;p>ここで言う関数とは、Perl のサブルーチンのことです。greple は Perl で実装されていて、モジュールや初期設定ファイルの中に Perl のコードを記述することができます。そこで定義された関数をコマンド行から呼び出すことを可能にするのがこれらのオプションです。&lt;/p>
+&lt;h3 id="関数の定義">関数の定義&lt;/h3>
+&lt;p>関数は一般的に次のような形式で定義します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000">hello&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">%arg&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">@_&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$filename&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87">delete&lt;/span> &lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">FILELABEL&lt;/span>&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">say&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Hello $filename&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>パラメータがある場合には配列 &lt;code>@_&lt;/code> に key-value 形式で渡されるので、連想配列 &lt;code>%arg&lt;/code> に代入すると、ラベルでアクセスできるようになります。&lt;code>FILELABEL&lt;/code> というラベルは特別で、ファイル名を渡すために使われます。扱うファイルが存在しない場合には、この項目はありません。ファイル名やパラメータを扱う必要がなければ、最初の2行は必要ないので、何もすることはありません。&lt;/p>
+&lt;h3 id="関数の呼び出し">関数の呼び出し&lt;/h3>
+&lt;p>上で定義した関数は、コマンドラインから次のように呼び出すことができます。&lt;/p>
+&lt;pre>&lt;code>greple --begin hello ...
+&lt;/code>&lt;/pre>
+&lt;p>ただ、関数名を指定するだけです。&lt;/p>
+&lt;p>パラメータを渡す場合は、次のように &lt;code>key&lt;/code> あるいは &lt;code>key=value&lt;/code> の形式で与えます。&lt;/p>
+&lt;pre>&lt;code>greple --begin 'hello(debug,message=こんにちは,count=2)' ...
+&lt;/code>&lt;/pre>
+&lt;p>括弧が含まれていると、シェルの解釈を防ぐためにクォートしなければならないので、次のような呼び出し形式も可能です。&lt;/p>
+&lt;pre>&lt;code>greple --begin hello=debug,message=こんにちは,count=2
+&lt;/code>&lt;/pre>
+&lt;p>パラメータに値が指定されていなければ 1 が渡されるので、この場合、関数 &lt;code>hello&lt;/code> には、&lt;/p>
+&lt;pre>&lt;code>( &amp;quot;debug&amp;quot;, 1, &amp;quot;message&amp;quot;, &amp;quot;こんにちは&amp;quot;, &amp;quot;count&amp;quot;, &amp;quot;2&amp;quot; )
+&lt;/code>&lt;/pre>
+&lt;p>というリストが渡されます。&lt;/p>
+&lt;h2 id="実行例">実行例&lt;/h2>
+&lt;p>ファイルを処理する前に実行する関数を指定するオプション &lt;code>--begin&lt;/code> を例にとって実際に実行してみます。&lt;/p>
+&lt;p>上の関数を &lt;code>~/.greplerc&lt;/code> 内で定義しておくと、次のように使うことができます。最初に &lt;code>Hello sushi.txt&lt;/code> というメッセージが表示されています。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/4cb19ddc-f8d5-e44c-e10b-61550a268ad4.png" alt="image.png">&lt;/p>
+&lt;p>関数の定義をもう少し複雑にして、渡されたパラメータを使用するようにしてみましょう。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000">hello&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">%arg&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span> &lt;span style="color:#000">message&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&amp;gt;&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;Hello&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">count&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&amp;gt;&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000">@_&lt;/span> &lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$filename&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87">delete&lt;/span> &lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">FILELABEL&lt;/span>&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">say&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;debug mode&amp;#34;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">debug&lt;/span>&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">say&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;$arg{message} $filename&amp;#34;&lt;/span> &lt;span style="color:#204a87;font-weight:bold">for&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">1&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">..&lt;/span> &lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">count&lt;/span>&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>パラメータを指定して実行すると、次のような結果になります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/e9b379b7-e80b-0efe-116a-90d5f4dff104.png" alt="image.png">&lt;/p>
+&lt;h3 id="データへのアクセス">データへのアクセス&lt;/h3>
+&lt;p>関数が呼ばれる時、ファイルに含まれるデータ全体が、変数 &lt;code>$_&lt;/code> に保持されています。内容を参照するだけでなく、変数の値を変更すると、その結果に対して処理が行われます。&lt;/p>
+&lt;p>寿司メニューを処理する&lt;code>寿司&lt;/code>関数を定義してみます。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000;font-weight:bold">寿司 {&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">%arg&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">@_&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$filename&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87">delete&lt;/span> &lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">FILELABEL&lt;/span>&lt;span style="color:#000;font-weight:bold">};&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">逆順&lt;/span>&lt;span style="color:#000;font-weight:bold">})&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">$_&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87">join&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#204a87">reverse&lt;/span> &lt;span style="color:#4e9a06">/.*\n/g&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#000">入れ替え&lt;/span>&lt;span style="color:#000;font-weight:bold">})&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">use&lt;/span> &lt;span style="color:#000">List::Util&lt;/span> &lt;span style="color:#4e9a06">qw(shuffle)&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$寿司&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#4e9a06">qr/(?&amp;lt;= )\S+/&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">@寿司&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">shuffle&lt;/span> &lt;span style="color:#4e9a06">/$寿司/g&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#4e9a06">s/$寿司/pop @寿司/ge&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>何もしなければこうです。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/d080f19c-7841-1e7e-4aa1-af6c9fde3d46.png" alt="image.png">&lt;/p>
+&lt;p>&lt;code>--begin 寿司=逆順&lt;/code> を指定するとこのようになります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/3378dd58-27a0-8d68-5f0f-5e9e7d401cc0.png" alt="image.png">&lt;/p>
+&lt;p>&lt;code>--begin 寿司=入れ替え&lt;/code> を指定するとこうなりました。うどんセットにうどんが入ってません。困ります。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/9a31378d-2df7-501d-9ea1-a57d7a3cecf0.png" alt="image.png">&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>&lt;code>--begin&lt;/code> オプションを例にとって、関数の定義と利用の仕方について紹介しました。このように、利用者やモジュールの開発者が作成した関数をコマンド行から自由に呼び出すことで、様々な機能を柔軟に利用することが可能になります。&lt;/p>
+&lt;p>このコマンドオプションと関数のインタフェースは、元々 greple を実装するために作られたものですが、その後 &lt;code>Getopt::EX&lt;/code> という独立したモジュールとして実装されていて、他の Perl スクリプトからも利用することができます。それに含まれる &lt;code>Getopt::EX::Long&lt;/code> は、広く使われている &lt;code>Getopt::Long&lt;/code> と互換性があるため、単にモジュール宣言を置き換えるだけで利用可能です。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af">https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc">https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414">https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0">https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380">https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c">https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: 関数オプション</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_18/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_18/</guid><description>
+&lt;h1 id="関数オプションについて">関数オプションについて&lt;/h1>
+&lt;p>前回は、greple で関数を定義する方法と、それをコマンドオプションから使う方法について説明しました。今回は、関数オプションの種類について説明します。&lt;/p>
+&lt;h2 id="事前事後処理を指定するオプション">事前・事後処理を指定するオプション&lt;/h2>
+&lt;h3 id="--begin---end">&amp;ndash;begin, &amp;ndash;end&lt;/h3>
+&lt;p>ファイルを処理する前と、処理した後に呼ばれる関数です。&lt;code>--begin&lt;/code> を使った例を前回紹介しました。&lt;code>$_&lt;/code> にはファイルの内容が保持されていて、データを変更することもできます。&lt;/p>
+&lt;h3 id="--prologue---epilogue">&amp;ndash;prologue, &amp;ndash;epilogue&lt;/h3>
+&lt;p>一連の検索処理を始める前と、終了した後に呼ばれる関数です。ファイルはオープンされていないので、&lt;code>FILELABEL&lt;/code> 引数は渡されません。&lt;/p>
+&lt;h2 id="出力に関わるオプション">出力に関わるオプション&lt;/h2>
+&lt;h3 id="--colormap">&amp;ndash;colormap&lt;/h3>
+&lt;p>カラーマップに関数を指定すると、彩色する代わりに関数の結果に置き換えて出力します。ここでは &lt;code>&amp;amp;func&lt;/code> のように指定する以外に、Perl の無名関数を直接記述することもできます。次の例では &lt;code>sub{&amp;quot;[$_]&amp;quot;}&lt;/code>という関数を指定して、マッチした文字列を括弧で囲んで表示しています。このように &lt;code>--colormap&lt;/code> で指定された関数には、表示しようとする文字列が &lt;code>$_&lt;/code> として渡され、関数の結果によって置き換えられます。&lt;/p>
+&lt;pre>&lt;code>greple -n --outside '^\S+' はまち --cm 'sub{&amp;quot;[$_]&amp;quot;}' sushi.txt
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/090119a7-3c8a-ca49-a2e7-cdbb5ac124ea.png" alt="image.png">&lt;/p>
+&lt;h3 id="--print">&amp;ndash;print&lt;/h3>
+&lt;p>検索結果のブロックを表示する時に呼ばれる関数を指定します。&lt;code>--colormap&lt;/code> の方が便利なので、あまり利用する機会はありません。&lt;/p>
+&lt;h2 id="--uniqsub">&amp;ndash;uniqsub&lt;/h2>
+&lt;p>&lt;code>--uniqcolor&lt;/code> オプションで、マッチした文字列に対して固有の色を割り当てられることについては、すでに説明しました。&lt;code>--uniqsub&lt;/code> は、その判定の際に使われる同一性を定義するオプションです。&lt;/p>
+&lt;p>たとえば、次のようにすると、寿司ネタをその名前の文字数で色分けします。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/7b0ac395-c5c5-6de8-cf54-6e19cdcdaa51.png" alt="image.png">&lt;/p>
+&lt;h2 id="--callback">&amp;ndash;callback&lt;/h2>
+&lt;p>これは、簡単に説明するのは無理なので、興味がある方はマニュアルを読んでください。callback インタフェースは、以下の記事で紹介している &lt;code>subst&lt;/code> モジュールで使用しています。&lt;/p>
+&lt;p>&lt;a href="https://qiita.com/kaz-utashiro/items/85add653a71a7e01c415">https://qiita.com/kaz-utashiro/items/85add653a71a7e01c415&lt;/a>&lt;/p>
+&lt;h2 id="リージョンを指定するオプション">リージョンを指定するオプション&lt;/h2>
+&lt;p>以下のオプションは、どれもリージョン（範囲）を返すことが期待されています。リージョンは、ファイル内でのデータのオフセットを表す &lt;code>[start, end]&lt;/code> のリストです。&lt;/p>
+&lt;h3 id="--block">&amp;ndash;block&lt;/h3>
+&lt;h3 id="--inside---outside---include---exclude">&amp;ndash;inside, &amp;ndash;outside, &amp;ndash;include, &amp;ndash;exclude&lt;/h3>
+&lt;h3 id="--le">&amp;ndash;le&lt;/h3>
+&lt;p>これらについては、すでに今までに紹介し、その時にはパターンを指定して使用しました。&lt;/p>
+&lt;p>以下の関数 &lt;code>match&lt;/code> は、&lt;code>pattern&lt;/code> で与えられた文字列を検索して、それに対応するリージョンを返します。これらのオプションは、この関数を呼ぶのとほぼ同じ動作をします。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000">match&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">%arg&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">@_&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">@match&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">while&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#4e9a06">/$arg{pattern}/g&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">push&lt;/span> &lt;span style="color:#000">@match&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#000;font-weight:bold">[&lt;/span> &lt;span style="color:#000">$-&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">],&lt;/span> &lt;span style="color:#000">$+&lt;/span>&lt;span style="color:#000;font-weight:bold">[&lt;/span>&lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">]&lt;/span> &lt;span style="color:#000;font-weight:bold">];&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">@match&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>以下のコマンドはまったく同じように動作し、連続する3行をブロックとして検索を実行します。&lt;/p>
+&lt;pre>&lt;code>greple -n --block '(.+\n){3}' サラダ sushi.txt
+greple -n --block '&amp;amp;match(pattern=(.+\n){3})' サラダ sushi.txt
+&lt;/code>&lt;/pre>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/1f27414a-8525-5970-0de7-95f2d65a8fe1.png" alt="image.png">&lt;/p>
+&lt;p>簡単な例を作るのは難しいので、実際に使っている様子をお見せします。下の画面は、以前翻訳した書籍の原稿を greple の機能を使って表示したものです。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/15312e3b-2fde-7a4a-5c40-ea2b6de468f5.png" alt="image.png">&lt;/p>
+&lt;p>この原稿は以下のリージョンで構成されています。greple の機能を使うことで「対訳：日本語部」分のみを検索対象にするなどが可能になります。これらのリージョンを単純なパターンマッチで生成するのは難しいため、スクリプトで実装してあります。&lt;/p>
+&lt;ul>
+&lt;li>マクロ&lt;/li>
+&lt;li>コメント&lt;/li>
+&lt;li>原文&lt;/li>
+&lt;li>訳文
+&lt;ul>
+&lt;li>対訳：英語&lt;/li>
+&lt;li>対訳：日本語&lt;/li>
+&lt;/ul>
+&lt;/li>
+&lt;/ul>
+&lt;h2 id="フィルター">フィルター&lt;/h2>
+&lt;h3 id="--if---of---pf">&amp;ndash;if, &amp;ndash;of, &amp;ndash;pf&lt;/h3>
+&lt;p>フィルターオプションにも関数を指定することができます。ちょっと説明が難しいので、&lt;code>pgp&lt;/code> モジュールの一部を載せておきます。雰囲気だけ見てください。&lt;/p>
+&lt;p>最後の&lt;/p>
+&lt;pre>&lt;code>option default --if s/\\.(pgp|gpg|asc)$//:&amp;amp;__PACKAGE__::filter
+&lt;/code>&lt;/pre>
+&lt;p>で、デフォルトオプションを設定しています。これによって &lt;code>.pgp&lt;/code> などで終わるファイルを処理しようとすると、ここで定義している &lt;code>filter&lt;/code> 関数が入力フィルターとして実行されます。関数は内部で fork して、サブプロセスとして復号処理を実行し、親プロセスはサブプロセスからの出力を標準入力として処理します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl:pgp.pm" data-lang="perl:pgp.pm">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000">filter&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">activate&lt;/span> &lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#204a87;font-weight:bold">not&lt;/span> &lt;span style="color:#204a87">defined&lt;/span> &lt;span style="color:#000">$pgp&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">$pgp&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span>&lt;span style="color:#204a87;font-weight:bold">reset&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$pid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87">open&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#3465a4">STDIN&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;-|&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#4e9a06">//&lt;/span> &lt;span style="color:#000">croak&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;process fork failed&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">$pid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">==&lt;/span> &lt;span style="color:#0000cf;font-weight:bold">0&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">exec&lt;/span> &lt;span style="color:#000">$pgp&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">-&amp;gt;&lt;/span>&lt;span style="color:#000">decrypt_command&lt;/span> &lt;span style="color:#204a87;font-weight:bold">or&lt;/span> &lt;span style="color:#204a87">die&lt;/span> &lt;span style="color:#000">$!&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000">$pid&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#3465a4">__DATA__&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000">option&lt;/span> &lt;span style="color:#000">default&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">--&lt;/span>&lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#4e9a06">s/\\.(pgp|gpg|asc)$//&lt;/span>&lt;span style="color:#000;font-weight:bold">:&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">__PACKAGE__::&lt;/span>&lt;span style="color:#000">filter&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>greple の関数オプションについて簡単に紹介しました。これらは単独ではなく、他の様々な機能と組み合わせて利用することで効力を発揮します。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af">https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc">https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414">https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0">https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380">https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c">https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/09a5f5cf08ce314e2add">https://qiita.com/kaz-utashiro/items/09a5f5cf08ce314e2add&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: モジュールの作り方 (1)</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_19/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_19/</guid><description>
+&lt;h2 id="宣言だけのモジュール">宣言だけのモジュール&lt;/h2>
+&lt;p>最も単純なモジュールは、&lt;code>.greplerc&lt;/code> と同じように、オプションの定義だけでできたものです。&lt;/p>
+&lt;h2 id="モジュールの宣言">モジュールの宣言&lt;/h2>
+&lt;p>しかし、greple のモジュールは Perl のモジュールでもあるので、最低限の作法に従わなければなりません。&lt;/p>
+&lt;p>標準モジュールの &lt;code>colors&lt;/code> は、先頭で次のように宣言しています。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">App::Greple::colors&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#3465a4">__DATA__&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;code>App::Greple::colors&lt;/code> という Perl のパッケージだということを宣言して、呼び出されると真の値である 1 を返すだけです。greple から使用する際には、自動的に &lt;code>App::Greple&lt;/code> が付加されるので &lt;code>-Mcolors&lt;/code> のように呼び出すことができます。&lt;/p>
+&lt;p>宣言の後に &lt;code>__DATA__&lt;/code> というキーワードが続きます。これは、これ以降にはプログラムで扱うデータが含まれているという意味です。何も書くことがなければ、必要ありませんが、そうするとこのモジュールは何もしなくなります。&lt;/p>
+&lt;p>この3行だけが必要で、その後に含まれるデータは greple モジュール定義として解釈されます。実際には、ドキュメントも含まれていることが普通ですが、なくても問題ありません。&lt;/p>
+&lt;h2 id="モジュール本体">モジュール本体&lt;/h2>
+&lt;p>greple は、&lt;code>__DATA__&lt;/code> 部分に含まれる内容を &lt;code>.greplerc&lt;/code> と同じように処理します。&lt;/p>
+&lt;pre tabindex="0">&lt;code>option --light \
+--cm K/544,K/454,K/445 \
+--cm K/455,K/545,K/554 \
+--cm K/543,K/453,K/435 \
+--cm K/534,K/354,K/345 \
+--cm K/444 \
+--cm K/433,K/343,K/334 \
+--cm K/344,K/434,K/443 \
+--cm K/333
+option --dark \
+--cm 555/100,555/010,555/001 \
+--cm 555/011,555/101,555/110 \
+--cm 555/021,555/201,555/210 \
+--cm 555/012,555/102,555/120 \
+--cm 555/111 \
+--cm 555/211,555/121,555/112 \
+--cm 555/122,555/212,555/221 \
+--cm 555/222
+&lt;/code>&lt;/pre>&lt;p>これで、&lt;code>greple -Mcolors&lt;/code> という形式でモジュールを呼び出すと &lt;code>--light&lt;/code> と &lt;code>--dark&lt;/code> という2つのオプションが利用できるようになります。&lt;/p>
+&lt;p>実際に実行すると、次のようになります。デバッグオプション &lt;code>-do&lt;/code> を使って、実際に適用されるオプションを表示しています。&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/bdf310f1-0522-7b99-ba47-5d9f87cadf50.png" alt="image.png">&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/00e65164-9bd9-3f4a-0dbd-cbd28ea6c4d0.png" alt="image.png">&lt;/p>
+&lt;h2 id="マクロ展開">マクロ展開&lt;/h2>
+&lt;p>前にも紹介したように、この中ではマクロを使うことができて、&lt;code>--solarized&lt;/code> オプションは次のように定義されています。&lt;/p>
+&lt;pre tabindex="0">&lt;code>define {base03} #002b36
+define {base02} #073642
+define {base01} #586e75
+define {base00} #657b83
+define {base0} #839496
+define {base1} #93a1a1
+define {base2} #eee8d5
+define {base3} #fdf6e3
+define {yellow} #b58900
+define {orange} #cb4b16
+define {red} #dc322f
+define {magenta} #d33682
+define {violet} #6c71c4
+define {blue} #268bd2
+define {cyan} #2aa198
+define {green} #859900
+option --solarized --solarized-fg
+option --solarized-fg \
+--cm {yellow} \
+--cm {orange} \
+--cm {red} \
+--cm {magenta} \
+--cm {violet} \
+--cm {blue} \
+--cm {cyan} \
+--cm {green}
+&lt;/code>&lt;/pre>&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/22337a0e-ecc2-fa82-376c-a719ea423b58.png" alt="image.png">&lt;/p>
+&lt;p>&lt;img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/36551/13df1b41-989b-c321-32e1-448e6de1ad2c.png" alt="image.png">&lt;/p>
+&lt;h2 id="まとめ">まとめ&lt;/h2>
+&lt;p>&lt;code>.greplerc&lt;/code> を使うと、日常的に使うオプションを定義しておくことができます。しかし、様々な目的のオプションが混在してくるとファイルの内容が煩雑になってきますし、滅多に使うことがないようなものをいつも処理しなければならなくなります。&lt;/p>
+&lt;p>モジュールとしてまとめることで、特定の目的のためのオプションを1箇所で管理し、モジュール間で矛盾が起きることを気にする必要もなくなります。また、関係者の間で共有したり、オープンソースとしてリリースすることも可能になります。&lt;/p>
+&lt;h2 id="see-also">SEE ALSO&lt;/h2>
+&lt;p>&lt;a href="https://qiita.com/advent-calendar/2021/greple">https://qiita.com/advent-calendar/2021/greple&lt;/a>&lt;/p>
+&lt;ol>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5">https://qiita.com/kaz-utashiro/items/5b6bcbe54891b3bd9db5&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3">https://qiita.com/kaz-utashiro/items/eb8c7067e6de34842fe3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1">https://qiita.com/kaz-utashiro/items/165e744d4250adedc4c1&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703">https://qiita.com/kaz-utashiro/items/439e6abcecf36c520703&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069">https://qiita.com/kaz-utashiro/items/24ac0b8fdd30b598e069&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3">https://qiita.com/kaz-utashiro/items/a1ba4e3d07cf37dc25e3&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771">https://qiita.com/kaz-utashiro/items/0c8c944c17a72724b771&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d">https://qiita.com/kaz-utashiro/items/8783c2fd0cc4315b9a3d&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64">https://qiita.com/kaz-utashiro/items/84f5a6be6bf996076c64&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c">https://qiita.com/kaz-utashiro/items/ebc7ea99f800cfc8c90c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af">https://qiita.com/kaz-utashiro/items/25a14e75380c39b5e0af&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc">https://qiita.com/kaz-utashiro/items/ebbeb8a5538a15ff04fc&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414">https://qiita.com/kaz-utashiro/items/b265deef9c9b1953a414&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0">https://qiita.com/kaz-utashiro/items/2b20e0226cffde213ce0&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380">https://qiita.com/kaz-utashiro/items/16b5142ef7a89aa35380&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c">https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/09a5f5cf08ce314e2add">https://qiita.com/kaz-utashiro/items/09a5f5cf08ce314e2add&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://qiita.com/kaz-utashiro/items/6e4b1f51455e587ef743">https://qiita.com/kaz-utashiro/items/6e4b1f51455e587ef743&lt;/a>&lt;/li>
+&lt;/ol>
+&lt;ul>
+&lt;li>&lt;a href="https://github.com/kaz-utashiro/greple">https://github.com/kaz-utashiro/greple&lt;/a>&lt;/li>
+&lt;li>&lt;a href="https://metacpan.org/dist/App-Greple">https://metacpan.org/dist/App-Greple&lt;/a>&lt;/li>
+&lt;/ul></description></item><item><title>Docs: モジュールの作り方 (2)</title><link>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_20/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>http://kaz-utashiro.github.io/Greple-Home/docs/tutorial/tut_20/</guid><description>
+&lt;h2 id="モジュール内で関数を定義する">モジュール内で関数を定義する&lt;/h2>
+&lt;p>前回は、単純な宣言のみのモジュールの作り方について説明しました。今回は、モジュール内で定義関数をオプションから呼び出す方法を紹介します。&lt;/p>
+&lt;h2 id="入出力フィルター">入出力フィルター&lt;/h2>
+&lt;p>greple の入出力フィルターについては以前の記事で紹介しました。&lt;/p>
+&lt;p>&lt;a href="https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c">https://qiita.com/kaz-utashiro/items/d19fe5ee859f31ce172c&lt;/a>&lt;/p>
+&lt;p>フィルターには &lt;code>--if&lt;/code>, &lt;code>--of&lt;/code>, &lt;code>--pf&lt;/code> の3種類があって、入力や出力に対して適用するフィルターコマンドを指定することができます。今回紹介するのは、コマンドではなく、モジュール内で定義した関数をフィルターとして利用する方法です。&lt;/p>
+&lt;h2 id="-mmsdoc-モジュール">-Mmsdoc モジュール&lt;/h2>
+&lt;p>greple の &lt;code>msdoc&lt;/code> モジュールは、MicroSoft Office のファイルからテキストを抜き出して検索対象にするものです。&lt;/p>
+&lt;h3 id="オプション指定">オプション指定&lt;/h3>
+&lt;p>まず、オプションの定義方法を見てみます。&lt;/p>
+&lt;pre tabindex="0">&lt;code>__DATA__
+option default --if &amp;#39;/\.(doc|ppt|xls)[xm]$/:&amp;amp;__PACKAGE__::extract_content&amp;#39;
+&lt;/code>&lt;/pre>&lt;p>ここでは、default オプションとして &lt;code>--if&lt;/code> を指定しています。つまり、このモジュールを指定すると、常にこのフィルターが適用されることになります。&lt;/p>
+&lt;p>まず、ファイル名が &lt;code>/\.(doc|ppt|xls)[xm]$/&lt;/code> にマッチするかどうかをチェックします。つまり docx, docm, pptx, pptm, xlsx, xlsm のいずれかの拡張子を持っているかをチェックして、この条件に当てはまると、その後で指定されている入力フィルターが適用されます。&lt;/p>
+&lt;p>以前コマンドを指定していた部分に &lt;code>&amp;amp;__PACKAGE__::extract_content&lt;/code> と書かれています。このようにコマンド部分が &lt;code>&amp;amp;&lt;/code> で始まると、コマンドではなく関数が実行されます。&lt;code>__PACKAGE__&lt;/code> は、モジュールのパッケージに展開されるので、この場合は &lt;code>App::Greple::msdoc&lt;/code> と書いたのと同じ意味です&lt;sup id="fnref:1">&lt;a href="#fn:1" class="footnote-ref" role="doc-noteref">1&lt;/a>&lt;/sup>。&lt;/p>
+&lt;p>結果として、docx 等のファイルを開くと &lt;code>App::Greple::msdoc::export_content&lt;/code> という関数が実行されるようになります。&lt;/p>
+&lt;h3 id="関数定義">関数定義&lt;/h3>
+&lt;p>内容を簡略化すると、このようになります。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">package&lt;/span> &lt;span style="color:#000">App::Greple::msdoc&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">use&lt;/span> &lt;span style="color:#000">App::optex::textconv::msdoc&lt;/span> &lt;span style="color:#4e9a06">qw(to_text get_list)&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">sub&lt;/span> &lt;span style="color:#000">extract_content&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">%arg&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">@_&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$file&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#000">$arg&lt;/span>&lt;span style="color:#000;font-weight:bold">{&lt;/span>&lt;span style="color:#ce5c00;font-weight:bold">&amp;amp;&lt;/span>&lt;span style="color:#000">FILELABEL&lt;/span>&lt;span style="color:#000;font-weight:bold">}&lt;/span> &lt;span style="color:#204a87;font-weight:bold">or&lt;/span> &lt;span style="color:#204a87">die&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$pid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87">open&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#3465a4">STDIN&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;-|&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#4e9a06">//&lt;/span> &lt;span style="color:#000">croak&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;process fork failed: $!&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">binmode&lt;/span> &lt;span style="color:#3465a4">STDIN&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;:encoding(utf8)&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">$pid&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#000">$pid&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">print&lt;/span> &lt;span style="color:#000">to_text&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">$file&lt;/span>&lt;span style="color:#000;font-weight:bold">);&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87">exit&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#0000cf;font-weight:bold">1&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>&lt;a href="2021-12-20_grep_greple_09a5f5cf08ce314e2add.md">greple #17 関数インタフェース&lt;/a>で説明したように、ファイル名は &lt;code>FILELABEL&lt;/code> という名前付きパラメータとして渡されます。&lt;/p>
+&lt;p>フィルター関数は、プロセス管理を行うことが期待されています。つまり、入力フィルタであれば、フィルター自体は別プロセスとして動作し、元のプロセスは標準入力からデータを読み込みます。これを行っているのが以下の部分です。親プロセスは、何もせずに return します。&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-perl" data-lang="perl">&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">my&lt;/span> &lt;span style="color:#000">$pid&lt;/span> &lt;span style="color:#ce5c00;font-weight:bold">=&lt;/span> &lt;span style="color:#204a87">open&lt;/span>&lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#3465a4">STDIN&lt;/span>&lt;span style="color:#000;font-weight:bold">,&lt;/span> &lt;span style="color:#4e9a06">&amp;#39;-|&amp;#39;&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#4e9a06">//&lt;/span> &lt;span style="color:#000">croak&lt;/span> &lt;span style="color:#4e9a06">&amp;#34;process fork failed: $!&amp;#34;&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#204a87;font-weight:bold">if&lt;/span> &lt;span style="color:#000;font-weight:bold">(&lt;/span>&lt;span style="color:#000">$pid&lt;/span>&lt;span style="color:#000;font-weight:bold">)&lt;/span> &lt;span style="color:#000;font-weight:bold">{&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> &lt;span style="color:#204a87;font-weight:bold">return&lt;/span> &lt;span style="color:#000">$pid&lt;/span>&lt;span style="color:#000;font-weight:bold">;&lt;/span>
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>&lt;span style="color:#000;font-weight:bold">}&lt;/span>
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>子プロセスは、受け取ったファイルの内容をテキストに変換して、標準出力に書き出します。&lt;/p>
+&lt;p>実際の変換処理は &lt;code>App::optex::textconv::msdoc&lt;/code> という別モジュールを利用しています。このモジュールで定義される &lt;code>to_text&lt;/code> という関数を渡すと、その内容がテキストとして得られます。内容を書き出したら、子プロセスは &lt;code>exit&lt;/code> します。&lt;/p>
+&lt;div class="footnotes" role="doc-endnotes">
+&lt;hr>
+&lt;ol>
+&lt;li id="fn:1">
+&lt;p>main パッケージに export すればパッケージを指定する必要はありません。&amp;#160;&lt;a href="#fnref:1" class="footnote-backref" role="doc-backlink">&amp;#x21a9;&amp;#xfe0e;&lt;/a>&lt;/p>
+&lt;/li>
+&lt;/ol>
+&lt;/div></description></item></channel></rss>
