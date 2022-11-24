@@ -30,7 +30,7 @@ for d in ${public[*]}
 do
     echo $d
     base=$(git rev-parse --show-toplevel)
-    readme="$base/$d/README.md"
+    readme="$base/public/$d/README.md"
     index="$d/index.md"
     if [ -f $readme ]
     then

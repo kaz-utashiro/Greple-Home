@@ -1,63 +1,63 @@
 [submodule "subst"]
-	path = subst
+	path = public/subst
 	url = git@github.com:kaz-utashiro/greple-subst.git
 [submodule "wordle"]
-	path = wordle
+	path = public/wordle
 	url = git@github.com:kaz-utashiro/greple-wordle.git
 [submodule "ical"]
-	path = ical
+	path = public/ical
 	url = git@github.com:kaz-utashiro/greple-ical.git
 [submodule "sccc2"]
-	path = sccc2
+	path = public/sccc2
 	url = git@github.com:kaz-utashiro/greple-sccc2.git
 [submodule "frame"]
-	path = frame
+	path = public/frame
 	url = git@github.com:kaz-utashiro/greple-frame.git
 [submodule "greple"]
-	path = greple
+	path = public/greple
 	url = git@github.com:kaz-utashiro/greple.git
 [submodule "pw"]
-	path = pw
+	path = public/pw
 	url = git@github.com:kaz-utashiro/greple-pw
 [submodule "aozora"]
-	path = aozora
+	path = public/aozora
 	url = git@github.com:kaz-utashiro/greple-aozora
 [submodule "ppi"]
-	path = ppi
+	path = public/ppi
 	url = github.com:kaz-utashiro/greple-ppi.git
 [submodule "subst-desumasu"]
-	path = subst-desumasu
+	path = public/subst-desumasu
 	url = git@github.com:kaz-utashiro/greple-subst-desumasu.git
 [submodule "jq"]
-	path = jq
+	path = public/jq
 	url = git@github.com:kaz-utashiro/greple-jq.git
 [submodule "xp"]
-	path = xp
+	path = public/xp
 	url = git@github.com:kaz-utashiro/greple-xp.git
 [submodule "git"]
-	path = git
+	path = public/git
 	url = git@github.com:kaz-utashiro/greple-git.git
 [submodule "daemon3"]
-	path = daemon3
+	path = public/daemon3
 	url = git@github.com:kaz-utashiro/greple-daemon3.git
 [submodule "mecab"]
-	path = mecab
+	path = public/mecab
 	url = git@github.com:kaz-utashiro/greple-mecab.git
 [submodule "tel"]
-	path = tel
+	path = private/tel
 	url = git@github.com:kaz-utashiro/greple-tel.git
 [submodule "msdoc"]
-	path = msdoc
+	path = public/msdoc
 	url = git@github.com:kaz-utashiro/greple-msdoc.git
 [submodule "p5-script-runner"]
-	path = p5-script-runner
+	path = public/p5-script-runner
 	url = git@github.com:kaz-utashiro/p5-script-runner.git
 [submodule "type"]
-	path = type
+	path = public/type
 	url = git@github.com:kaz-utashiro/greple-type.git
 [submodule "cm"]
-	path = cm
+	path = public/cm
 	url = git@github.com:kaz-utashiro/greple-cm.git
 [submodule "update"]
-	path = update
+	path = public/update
 	url = git@github.com:kaz-utashiro/greple-update.git

@@ -34,13 +34,10 @@ jobs:
             ${{ runner.os }}-hugomod-
 
       - uses: tecolicom/actions-install-node-modules@v1
-      - run: |
-          cd _docs
-          hugo version
-          hugo --minify
+      - run:  cd docs && hugo --minify
       - uses: actions/upload-pages-artifact@v1
         with:
-          path: ./_docs/public/
+          path: ./docs/public/
 
   deploy:
     environment:
