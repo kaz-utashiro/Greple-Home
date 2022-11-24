@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mwordle
-weight: 20
+weight: 18
 description: wordle module for greple
 ---
 

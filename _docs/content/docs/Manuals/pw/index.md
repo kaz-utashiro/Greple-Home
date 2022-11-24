@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mpw
-weight: 13
+weight: 12
 description: Module to get password from file
 ---
 

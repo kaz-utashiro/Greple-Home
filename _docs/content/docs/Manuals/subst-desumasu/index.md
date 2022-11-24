@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Msubst-desumasu
-weight: 16
+weight: 15
 description: Japanese DESU/MASU dictionary for App::Greple::subst
 ---
 

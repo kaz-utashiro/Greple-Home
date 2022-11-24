@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mjq
-weight: 9
+weight: 8
 description: greple module to search JSON data with jq
 ---
 

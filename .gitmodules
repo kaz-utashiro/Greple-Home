@@ -40,9 +40,6 @@
 [submodule "daemon3"]
 	path = daemon3
 	url = git@github.com:kaz-utashiro/greple-daemon3.git
-[submodule "fbsd2"]
-	path = fbsd2
-	url = git@github.com:kaz-utashiro/greple-fbsd2.git
 [submodule "mecab"]
 	path = mecab
 	url = git@github.com:kaz-utashiro/greple-mecab.git

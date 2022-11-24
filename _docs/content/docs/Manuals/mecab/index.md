@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mmecab
-weight: 10
+weight: 9
 description: Greple module to produce result by mecab
 ---
 

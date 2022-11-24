@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mgit
-weight: 7
+weight: 6
 description: Greple git module
 ---
 

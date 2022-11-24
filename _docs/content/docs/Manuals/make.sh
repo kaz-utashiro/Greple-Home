@@ -1,29 +1,32 @@
 #!/bin/bash
 
 set -e
-weight=1
-for d in \
-    greple \
-    aozora \
-    cm \
-    daemon3 \
-    fbsd2 \
-    frame \
-    git \
-    ical \
-    jq \
-    mecab \
-    msdoc \
-    ppi \
-    pw \
-    sccc2 \
-    subst \
-    subst-desumasu \
-    tel \
-    type \
-    update \
-    wordle \
+public=(
+    greple
+    aozora
+    cm
+    daemon3
+    frame
+    git
+    ical
+    jq
+    mecab
+    msdoc
+    ppi
+    pw
+    sccc2
+    subst
+    subst-desumasu
+    type
+    update
+    wordle
     xp
+)
+private=(
+    tel
+)
+weight=1
+for d in ${public[*]}
 do
     echo $d
     base=$(git rev-parse --show-toplevel)
@@ -33,7 +36,7 @@ do
     then
 	[ -d $d ] || mkdir $d
 	[ $d = greple ] && title=$d || title="greple -M$d"
-	desc=$(sed '/^$/d' < $readme | grep -A1 '# NAME' | sed -e 1d -e 's/^.*- //')
+	desc=$(sed '/^$/d' < $readme | grep -m1 -A1 '^# NAME' | sed -e 1d -e 's/^.*- //')
 	(
 	sed $'s/^[ \t]*//' <<- END
 	---

@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Msccc2
-weight: 14
+weight: 13
 description: Greple module for Secure Coding in C and C++ (2nd Edition)
 ---
 

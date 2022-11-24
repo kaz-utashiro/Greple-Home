@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mmsdoc
-weight: 11
+weight: 10
 description: Greple module for access MS office docx/pptx/xlsx documents
 ---
 
