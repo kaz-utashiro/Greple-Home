@@ -21,26 +21,17 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
+      - uses: tecolicom/actions-use-apt-tools@v1
         with:
-          hugo-version: latest
-          extended: true
-      - uses: actions/cache@v3
-        with:
-          path: /tmp/hugo_cache
-          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-hugomod-
+          tools: hugo
       - uses: tecolicom/actions-install-node-modules@v1
       - name: Build
-        run: cd _docs; hugo --minify
+        run: cd _docs; hugo version; hugo --minify
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: ./_docs/public/
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages
