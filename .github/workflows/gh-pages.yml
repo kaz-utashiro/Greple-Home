@@ -21,20 +21,7 @@ jobs:
       group: ${{ github.workflow }}-${{ github.ref }}
     steps:
       - uses: actions/checkout@v3
-
-      - uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: latest
-          extended: true
-      - uses: actions/cache@v3
-        with:
-          path: /tmp/hugo_cache
-          key: ${{ runner.os }}-hugomod-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-hugomod-
-
-      - uses: tecolicom/actions-install-node-modules@v1
-      - run:  cd docs && hugo --minify
+      - run:  docker run --rm -v $(pwd):/src klakegg/hugo:ext-alpine build -s docs --minify
       - uses: actions/upload-pages-artifact@v1
         with:
           path: ./docs/public/
