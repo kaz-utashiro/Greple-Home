@@ -1,0 +1,9 @@
+RCS
+tmp
+
+*.bak
+*.old
+*~
+*.swp
+*.o
+*.obj
