@@ -9,8 +9,7 @@ author: Kaz Utashiro
 Hugo と Docsy テーマを使って Greple コマンドのホームページを作りました。
 まだ、デフォルトのまますぎるので、ぼちぼちカスタマイズして行きましょう。
 
-{{< figure src="greple-home.png" link="http://kaz-utashiro.github.io/Greple-Home/" >}}
+{{< figure src="greple-home.png" link="http://tecolicom.github.io/Greple/" >}}
 
 カバー写真はこちらから。
 - [https://pixabay.com/images/id-2037286/](https://pixabay.com/images/id-2037286/)
-
