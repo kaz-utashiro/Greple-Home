@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mtype
-weight: 16
+weight: 14
 description: file type filter module for greple
 ---
 

@@ -4,6 +4,11 @@ set -e
 public=(
     greple
     greple@v8
+    greple/lib/App/Greple/debug.pm
+    greple/lib/App/Greple/colors.pm
+    greple/lib/App/Greple/find.pm
+    greple/lib/App/Greple/dig.pm
+    greple/lib/App/Greple/select.pm
     xp
     git
     frame
@@ -28,39 +33,50 @@ private=(
 )
 base=$(git rev-parse --show-toplevel)
 weight=1
-for d in ${public[*]}
+for target in ${public[*]}
 do
-    echo $d
-    read repo rev < <(echo $d | sed 's/@/ /g')
-    subdir="$base/public/$repo"
-    readme="$subdir/README.md"
-    index="$d/index.md"
-    if [ -f $readme ]
+    echo $target
+    read repo rev < <(echo $target | sed 's/@/ /g')
+
+    path=$base/public/$repo
+    basename=$(basename $path)
+    dirname=$(dirname $path)
+    if [[ $path =~ .(pm|pod)$ ]]
     then
-	[ -d $d ] || mkdir $d
-	[[ "$d" =~ ^greple ]] && title=$d || title="greple -M$d"
+	md=$(pod2markdown $path)
+	label=${basename/.pm/}
+	title="greple -M$label"
+    elif [ -d $path ]
+    then
+	readme="$path/README.md"
+	[[ "$repo" =~ ^greple ]] && title=$target || title="greple -M$target"
 	if [ "$rev" != "" ]
 	then
-	    md=$( cd $subdir; git show $rev:README.md )
+	    md=$( cd $path; git show $rev:README.md )
 	else
-	    md=$(< $readme)
+	    md=$(< $path/README.md)
 	fi
-	desc=$(\
-	    sed '/^$/d' <<< "$md" | grep -m1 -A1 '^# NAME' | sed -e 1d -e 's/^.*- //' \
-	)
-#	desc=$(sed '/^$/d' < $readme | grep -m1 -A1 '^# NAME' | sed -e 1d -e 's/^.*- //')
-	(
-	sed $'s/^[ \t]*//' <<- END
-	---
-	layout: page
-	title:  $title
-	weight: $weight
-	description: $desc
-	---
-	
-	END
-	sed 's/^#/##/' <<< "$md"
-	) > $index
-	(( weight++ ))
+	label=$target
+    else
+	echo ERROR: $target
+	continue
     fi
+    [ -d $label ] || mkdir $label
+    index="$label/index.md"
+    desc=$(\
+	sed '/^$/d' <<< "$md" | grep -m1 -A1 '^# NAME' | sed -e 1d -e 's/^.*- //' \
+    )
+    (
+    sed $'s/^[ \t]*//' << END
+    ---
+    layout: page
+    title:  $title
+    weight: $weight
+    description: $desc
+    ---
+    
+END
+    sed 's/^#/##/' <<< "$md"
+    ) > $index
+    (( weight++ ))
 done

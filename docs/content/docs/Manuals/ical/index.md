@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mical
-weight: 7
+weight: 20
 description: Module to support Apple macOS Calendar data
 ---
 

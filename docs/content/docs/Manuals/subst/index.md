@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Msubst
-weight: 14
+weight: 12
 description: Greple module for text search and substitution
 ---
 

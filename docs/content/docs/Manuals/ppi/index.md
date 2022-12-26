@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mppi
-weight: 11
+weight: 23
 description: Greple module to use Perl PPI module
 ---
 

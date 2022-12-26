@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Mcm
-weight: 3
+weight: 18
 description: Greple module to load colormap file
 ---
 

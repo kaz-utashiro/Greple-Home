@@ -1,7 +1,7 @@
 ---
 layout: page
 title:  greple -Maozora
-weight: 2
+weight: 17
 description: Greple module for aozora-bunko proofreading
 ---
 
