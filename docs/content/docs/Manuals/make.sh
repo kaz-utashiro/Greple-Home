@@ -3,40 +3,52 @@
 set -e
 public=(
     greple
-    aozora
-    cm
-    daemon3
-    frame
+    greple@v8
+    xp
     git
-    ical
-    jq
-    mecab
-    msdoc
-    ppi
-    pw
-    sccc2
+    frame
+    update
     subst
     subst-desumasu
     type
-    update
+    msdoc
     wordle
-    xp
+    aozora
+    cm
+    daemon3
+    ical
+    jq
+    mecab
+    ppi
+    pw
+    sccc2
 )
 private=(
     tel
 )
+base=$(git rev-parse --show-toplevel)
 weight=1
 for d in ${public[*]}
 do
     echo $d
-    base=$(git rev-parse --show-toplevel)
-    readme="$base/public/$d/README.md"
+    read repo rev < <(echo $d | sed 's/@/ /g')
+    subdir="$base/public/$repo"
+    readme="$subdir/README.md"
     index="$d/index.md"
     if [ -f $readme ]
     then
 	[ -d $d ] || mkdir $d
-	[ $d = greple ] && title=$d || title="greple -M$d"
-	desc=$(sed '/^$/d' < $readme | grep -m1 -A1 '^# NAME' | sed -e 1d -e 's/^.*- //')
+	[[ "$d" =~ ^greple ]] && title=$d || title="greple -M$d"
+	if [ "$rev" != "" ]
+	then
+	    md=$( cd $subdir; git show $rev:README.md )
+	else
+	    md=$(< $readme)
+	fi
+	desc=$(\
+	    sed '/^$/d' <<< "$md" | grep -m1 -A1 '^# NAME' | sed -e 1d -e 's/^.*- //' \
+	)
+#	desc=$(sed '/^$/d' < $readme | grep -m1 -A1 '^# NAME' | sed -e 1d -e 's/^.*- //')
 	(
 	sed $'s/^[ \t]*//' <<- END
 	---
@@ -47,7 +59,7 @@ do
 	---
 	
 	END
-	sed 's/^#/##/' $readme
+	sed 's/^#/##/' <<< "$md"
 	) > $index
 	(( weight++ ))
     fi
