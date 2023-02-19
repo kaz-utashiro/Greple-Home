@@ -64,3 +64,6 @@
 [submodule "public/tee"]
 	path = public/tee
 	url = https://github.com/kaz-utashiro/App-Greple-tee.git
+[submodule "public/xlate"]
+	path = public/xlate
+	url = https://github.com/kaz-utashiro/App-Greple-xlate.git
