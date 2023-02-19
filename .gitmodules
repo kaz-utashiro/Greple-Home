@@ -61,3 +61,6 @@
 [submodule "update"]
 	path = public/update
 	url = git@github.com:kaz-utashiro/greple-update.git
+[submodule "public/tee"]
+	path = public/tee
+	url = https://github.com/kaz-utashiro/App-Greple-tee.git
