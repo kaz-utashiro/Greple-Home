@@ -67,3 +67,6 @@
 [submodule "public/xlate"]
 	path = public/xlate
 	url = https://github.com/kaz-utashiro/App-Greple-xlate.git
+[submodule "public/stripe"]
+	path = public/stripe
+	url = https://github.com/kaz-utashiro/greple-stiripe.git
